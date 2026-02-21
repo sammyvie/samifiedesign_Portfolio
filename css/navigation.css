@@ -1,0 +1,128 @@
+/* ==========================================
+   FLOATING PILL NAVIGATION (FULL CLEANUP)
+   ========================================== */
+
+/* 1. THE MAIN WRAPPER 
+   - We keep this transparent so it doesn't block your "PORTFOLIO" text.
+*/
+.header-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: transparent !important; /* Removes the full-width bar */
+    padding: 25px 0; 
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 2. THE FLOATING PILL 
+   - This is the only part with a background.
+*/
+.nav-inner-container {
+    max-width: 1150px; /* Adjust this to control how wide the pill is */
+    width: 92%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 35px;
+    background: rgba(30, 1, 1, 0.5); /* Semi-transparent dark burgundy */
+    backdrop-filter: blur(15px); /* Glassmorphism effect */
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.4s ease;
+}
+
+/* SCROLL EFFECT - Pill shrinks and gets darker */
+.header-nav.scrolled {
+    padding: 15px 0;
+}
+
+.header-nav.scrolled .nav-inner-container {
+    background: rgba(20, 1, 1, 0.95);
+    width: 88%;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* 3. LAYOUT ZONES (Prevents overlapping) */
+.nav-brand {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.nav-central {
+    flex: 2; /* Gives more room for the Home/About/Project links */
+    display: flex;
+    justify-content: center;
+}
+
+.nav-socials {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 18px;
+}
+
+/* 4. ELEMENT STYLING */
+
+/* Logo */
+.nav-brand .logo-img {
+    height: 42px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.nav-brand .logo-img:hover {
+    transform: scale(1.05);
+}
+
+/* Links */
+.nav-links {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+/* Social Icons */
+.nav-socials img {
+    width: 18px;
+    height: 18px;
+    filter: brightness(0) invert(1); /* Makes all icons white to match text */
+    opacity: 0.5;
+    transition: 0.3s ease;
+}
+
+.nav-socials a:hover img {
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+/* 5. MOBILE RESPONSIVENESS */
+@media (max-width: 992px) {
+    .nav-central {
+        display: none; /* Hides central links on mobile to prevent clutter */
+    }
+    .nav-inner-container {
+        padding: 10px 20px;
+    }
+}

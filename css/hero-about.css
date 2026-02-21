@@ -1,0 +1,438 @@
+/* ==========================================
+   2. HEADER & NAVIGATION (FIXED OVERLAP)
+   ========================================== */
+   .header-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 2.5rem 4rem;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.4s ease;
+}
+
+.header-nav.scrolled {
+    background: rgba(26, 1, 1, 0.95); 
+    padding: 1.2rem 4rem;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.logo-img {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+.nav-links a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.social-icons .address-link img {
+    width: 1.25rem;
+    height: 1.25rem;
+    filter: invert(1) brightness(2); 
+    opacity: 0.7;
+    transition: 0.3s ease;
+}
+
+.address-link:hover img {
+    opacity: 1;
+    transform: translateY(-2px);
+    filter: invert(1) brightness(10);
+}
+
+/* ==========================================
+   3. HERO & NEON TITLE SECTION
+   ========================================== */
+.hero-gradient {
+    background: linear-gradient(180deg, #1a0101 0%, #4a0404 45%, #2b0101 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-content {
+    text-align: center;
+    width: 100%;
+}
+
+.name-label {
+    text-transform: uppercase;
+    letter-spacing: 0.8em;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 2rem;
+    padding-top: 9rem;
+    display: flex;
+    justify-content: center;
+}
+
+.name-label span {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 1px solid rgba(255, 255, 255, 0.5);
+    width: 0;
+    animation: typing 3s steps(30, end) forwards, blink 0.8s infinite;
+}
+
+/* Typing Animations */
+@keyframes typing { from { width: 0; } to { width: 30%; } }
+@keyframes blink { 50% { border-color: transparent; } }
+
+.title-container {
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    padding: 4rem 0;
+    margin: 0 auto;
+    width: 85%;
+}
+
+.portfolio-title {
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    font-size: clamp(4rem, 14vw, 10.5rem);
+    line-height: 1;
+    display: inline-block;
+    
+    /* Apply BOTH animations here */
+    animation: floatTitle 6s ease-in-out infinite, 
+               flickerNeon 4s linear infinite;
+}
+
+/* THE FLOATING EFFECT */
+@keyframes floatTitle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* THE NEON FLICKER EFFECT */
+@keyframes flickerNeon {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        /* The "ON" state with layered glow */
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                     0 0 20px rgba(255, 255, 255, 0.4),
+                     0 0 40px rgba(139, 0, 0, 0.6),
+                     0 0 80px rgba(139, 0, 0, 0.4);
+        opacity: 1;
+    }
+    20%, 24%, 55% {
+        /* The "OFF" flicker state */
+        text-shadow: none;
+        opacity: 0.7;
+    }
+}
+
+.tagline {
+    max-width: 800px;
+    margin: 3rem auto;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 2;
+    letter-spacing: 0.08em;
+    font-weight: 300;
+    padding: 0 20px;
+}
+/* ==========================================
+   4. CTA BUTTON
+   ========================================== */
+.cta-wrapper {
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.cta-button {
+    background-color: white;
+    color: #300202;
+    padding: 20px 60px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 2px;
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.cta-button:hover {
+    transform: translateY(-8px);
+    letter-spacing: 4px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+}
+/* ==========================================
+   ABOUT SECTION: CREAM & BURGUNDY (STUDENT EDITION)
+   ========================================== */
+
+   .about-section {
+    background-color: #fdf7f2; /* Light cream background */
+    padding: 120px 0;
+    color: #1a0101; /* Deep dark text for contrast */
+    overflow: hidden;
+}
+
+.about-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+/* 1. HERO AREA (Image & Bio) */
+.about-hero {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    margin-bottom: 100px;
+}
+
+.profile-frame {
+    position: relative;
+    width: 350px;
+    height: 450px;
+    flex-shrink: 0;
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 20px 20px 60px rgba(74, 4, 4, 0.05); /* Soft burgundy shadow */
+}
+
+.frame-accent {
+    position: absolute;
+    top: 15px;
+    left: -15px;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #8b0000; /* Branding burgundy */
+    border-radius: 10px;
+    z-index: 1;
+}
+
+/* 2. TEXT & TYPOGRAPHY */
+.section-subtitle {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: #8b0000;
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.about-heading {
+    font-size: 3.5rem;
+    font-weight: 900;
+    font-style: italic;
+    line-height: 1;
+    margin-bottom: 25px;
+    color: #4a0404; /* Deep dark burgundy */
+}
+
+.thin-text { 
+    font-weight: 300; 
+    color: #8b0000; 
+    font-style: normal; 
+    opacity: 0.8;
+}
+
+.about-para {
+    color: #444; 
+    line-height: 1.8;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+    max-width: 600px;
+}
+
+/* 3. STUDENT STATS (BSIT Friendly) */
+.about-stats {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 35px;
+}
+
+.stat-item strong {
+    display: block;
+    font-size: 1.6rem; 
+    color: #4a0404;
+    line-height: 1.2;
+    font-weight: 900;
+}
+
+.stat-item span {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #8b0000;
+    font-weight: 700;
+}
+
+/* 4. SKILLS CARD AREA */
+.skills-glass-card {
+    background: #fffcf9; /* Brighter than section bg for depth */
+    border: 1px solid rgba(139, 0, 0, 0.1);
+    padding: 60px;
+    border-radius: 30px;
+    box-shadow: 0 20px 40px rgba(74, 4, 4, 0.03);
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 60px;
+}
+
+.center-line { 
+    background: rgba(139, 0, 0, 0.1); 
+}
+
+.skills-title {
+    font-size: 1.4rem;
+    font-weight: 900;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+    color: #4a0404;
+    text-transform: uppercase;
+}
+
+/* 5. PROGRESS BARS (Visible Tracks) */
+.skill-row {
+    margin-bottom: 30px;
+}
+
+.label-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 10px;
+}
+
+.label-group label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: #4a0404;
+}
+
+.percentage {
+    font-size: 12px;
+    color: #8b0000;
+    font-weight: 800;
+    font-family: serif;
+    font-style: italic;
+}
+
+.bar-bg {
+    width: 100%;
+    height: 4px; 
+    background: #eee4dc; /* Visible beige track */
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    width: 0; /* Animated by script.js */
+    background: #8b0000;
+    border-radius: 10px;
+    transition: width 1.5s cubic-bezier(0.1, 0, 0.2, 1);
+}
+
+/* 6. BUTTON STYLE - SAMIFIED SHINE VERSION */
+.about-cta {
+    display: inline-block;
+    padding: 14px 35px;
+    background: #4a0404;
+    color: #fdf7f2;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    
+    /* Required for Shine */
+    position: relative;
+    overflow: hidden;
+}
+
+/* The Shine Glint */
+.about-cta::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right, 
+        rgba(255, 255, 255, 0) 0%, 
+        rgba(255, 255, 255, 0.3) 50%, 
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg);
+    transition: none;
+}
+
+.about-cta:hover {
+    background: #8b0000;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(74, 4, 4, 0.15);
+}
+
+/* Trigger Shine on Hover */
+.about-cta:hover::after {
+    left: 150%;
+    transition: left 0.7s ease-in-out;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 992px) {
+    .about-hero { flex-direction: column; gap: 40px; text-align: center; }
+    .about-para { margin: 0 auto 30px; }
+    .about-stats { justify-content: center; }
+    .skills-grid { grid-template-columns: 1fr; gap: 40px; }
+    .center-line { display: none; }
+}

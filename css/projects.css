@@ -1,0 +1,377 @@
+
+/* ==========================================
+   PORTFOLIO SECTION - REFINED
+   ========================================== */
+.project-section {
+    background-color: #fdf7f2;
+    padding: 100px 0;
+}
+
+.project-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.portfolio-header-box {
+    border: 2px solid #8b0000;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.portfolio-main-title {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #8b0000;
+    font-style: italic;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.portfolio-subtitle {
+    font-size: 15px;
+    color: #4a0404;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+    letter-spacing: 0.3px;
+}
+
+/* Grid & Cards */
+.project-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+}
+
+/* THE HORIZONTAL CENTERING FIX */
+.project-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+
+.project-card-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #8b0000;
+    margin-bottom: 22px;
+    font-style: italic;
+    letter-spacing: -0.2px;
+}
+
+/* ENHANCED DESCRIPTION STYLING - NO LONGER PLAIN */
+.project-desc {
+    font-size: 14.5px;
+    color: #5a4a42; /* Warmer, premium brown-grey */
+    margin: 25px auto 30px auto;
+    line-height: 1.8; /* Editorial spacing */
+    flex-grow: 1; 
+    max-width: 88%; 
+    display: block; 
+    font-weight: 500;
+    letter-spacing: 0.1px;
+    font-family: inherit;
+}
+
+/* Centered Button Fix - Light Section */
+.project-card .about-cta {
+    margin: auto auto 0 auto;
+    display: inline-block;
+    width: fit-content;
+    align-self: center;
+    background-color: #4a0404;
+    color: white;
+    padding: 14px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(74, 4, 4, 0.15);
+}
+
+.project-card .about-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(74, 4, 4, 0.25);
+}
+
+/* THE LAPTOP BOX */
+.laptop-main-display {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    width: 100%; 
+}
+
+.laptop-main-display:hover {
+    transform: translateY(-12px) scale(1.02);
+}
+
+.laptop-static-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* SHARED HOVER LOGIC */
+.hover-overlay, .hover-overlay-mobile {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(74, 4, 4, 0.82); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
+
+.laptop-main-display:hover .hover-overlay,
+.phone-main-display:hover .hover-overlay-mobile {
+    opacity: 1 !important;
+}
+
+.hover-overlay span, .hover-overlay-mobile span {
+    color: white !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: 1.5px solid white;
+    padding: 12px 24px;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+/* ==========================================
+   MOBILE DESIGN (PHONE SECTION)
+   ========================================== */
+.phone-main-display {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+    width: 100%;
+    max-width: 260px; 
+    margin: 0 auto 20px;
+}
+
+.phone-main-display:hover {
+    transform: translateY(-10px) rotate(2deg); 
+}
+
+.phone-static-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15));
+}
+
+.hover-overlay-mobile {
+    background: rgba(139, 0, 0, 0.85); 
+    border-radius: 35px; 
+}
+/* ==========================================
+   DARK SECTION (RED ROW) - FULL WIDTH FIX
+   ========================================== */
+   .dark-project-row {
+    background-color: #4a0404 !important; 
+    padding: 100px 0;
+    margin-top: 60px;
+    
+    /* THE FULL WIDTH MAGIC */
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    display: block; 
+}
+
+/* Ensure content stays aligned with the rest of the site */
+.dark-project-row .project-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.dark-project-row .project-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    text-align: center;
+    height: 100%;
+}
+
+.dark-project-row .project-card-title {
+    color: white !important;
+    font-style: italic;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* RED ROW DESCRIPTION ENHANCEMENT - DESIGN RETAINED */
+.dark-project-row .project-desc {
+    color: #fdf7f2 !important; 
+    opacity: 0.9;
+    flex-grow: 1;    
+    font-weight: 300;
+    border-left: 1px solid rgba(253, 247, 242, 0.3); 
+    padding-left: 20px;
+    text-align: left; 
+    max-width: 80%;
+}
+
+.dark-project-row .light-btn {
+    background-color: white !important;
+    color: #4a0404 !important;
+    border: none;
+    padding: 14px 35px;
+    border-radius: 50px; 
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: inline-block;
+    width: fit-content;
+    margin: 30px auto 0 auto; 
+    transition: all 0.3s ease;
+}
+
+.dark-project-row .light-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+/* ==========================================
+   PHONE MODAL & LIVE ZOOM FIX
+   ========================================== */
+.phone-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(12px);
+    justify-content: center;
+    align-items: center;
+}
+
+.phone-frame {
+    width: 310px;
+    height: 630px;
+    background: #111;
+    border: 12px solid #222;
+    border-radius: 45px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+}
+
+.simulator-wrapper iframe {
+    width: 125% !important; 
+    height: 125% !important; 
+    border: none;
+    position: absolute;
+    top: 0; left: 0;
+    transform: scale(0.8);
+    transform-origin: top left; 
+}
+
+#phoneModal[style*="display: flex"] .close-phone {
+    display: block !important;
+    position: fixed;
+    top: 35px;
+    right: 45px;
+    color: white;
+    font-size: 55px;
+    font-weight: 200;
+    z-index: 99999;
+    cursor: pointer;
+}
+/* ==========================================
+   LAPTOP MODAL POP-UP (ADDED TO DESIGN)
+   ========================================== */
+   .laptop-modal-overlay {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(12px);
+    justify-content: center;
+    align-items: center;
+}
+
+.laptop-modal-content {
+    width: 85%;
+    max-width: 1100px;
+    height: 80vh;
+    background: #1a1a1a; /* Sleek dark laptop frame */
+    border: 12px solid #333;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+}
+
+/* This is the window that makes the "proper view" scrollable */
+.laptop-screen-window {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto; 
+    background: white;
+}
+
+.laptop-screen-window img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.close-laptop {
+    position: fixed;
+    top: 30px;
+    right: 45px;
+    color: white;
+    font-size: 55px;
+    font-weight: 200;
+    cursor: pointer;
+    z-index: 10001;
+}
+/* Keeps the button floating inside the modal without breaking the image scroll */
+.modal-action-bar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 11000; /* Higher than everything else */
+    pointer-events: auto;
+}
+
+/* Ensure the modal doesn't break the rest of the page */
+.laptop-modal-overlay {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+}
+
+/* Custom Red Scrollbar for the Pop-up */
+.laptop-screen-window::-webkit-scrollbar {
+    width: 8px;
+}
+.laptop-screen-window::-webkit-scrollbar-thumb {
+    background: #8b0000;
+    border-radius: 10px;
+}

@@ -1,0 +1,675 @@
+
+/* ==========================================
+   SAMIFIED RESUME SECTION (MODERN DESIGN)
+   ========================================== */
+   .resume-section {
+    background-color: #fdf7f2 !important; /* Soft cream background */
+    padding: 100px 0;
+}
+
+/* 1. CREATIVE HEADER STYLES */
+.creative-header-wrapper {
+    position: relative;
+    padding-bottom: 60px;
+    z-index: 1;
+}
+
+.header-watermark {
+    position: absolute;
+    top: -20px;
+    left: -10px;
+    font-size: 10rem;
+    font-weight: 900;
+    color: rgba(74, 4, 4, 0.03); /* Extremely faint branding */
+    z-index: -1;
+    user-select: none;
+    line-height: 1;
+}
+
+.resume-main-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #1a0101;
+    letter-spacing: -1px;
+    margin-bottom: 0;
+}
+
+.accent-red-creative {
+    color: #4a0404;
+    font-weight: 900;
+}
+
+.brand-badge {
+    background: #1a0101;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.brand-badge::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: #ff4d4d;
+    border-radius: 50%;
+}
+
+.header-line-animated {
+    width: 0;
+    height: 4px;
+    background: #4a0404;
+    margin: 20px 0;
+    border-radius: 2px;
+    transition: width 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.reveal-left.active .header-line-animated {
+    width: 80px;
+}
+
+.resume-tagline {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 500px;
+}
+
+/* 1. DOWNLOAD CV BUTTON */
+.btn-download-cv {
+    background-color: #4a0404 !important;
+    color: white !important;
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    position: relative; /* Required for shine */
+    overflow: hidden;    /* Clips the shine */
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 4px 15px rgba(74, 4, 4, 0.2);
+}
+
+/* 2. PROJECT CTA (Light Section) */
+.project-card .about-cta {
+    margin: auto auto 0 auto;
+    display: inline-block;
+    background-color: #4a0404;
+    color: white;
+    padding: 14px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    position: relative; /* Required for shine */
+    overflow: hidden;    /* Clips the shine */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(74, 4, 4, 0.15);
+}
+
+/* 3. LIGHT BTN (Dark Red Row) */
+.dark-project-row .light-btn {
+    background-color: white !important;
+    color: #4a0404 !important; /* Your signature dark red */
+    border: none;
+    padding: 14px 35px;
+    border-radius: 50px; 
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: inline-block;
+    width: fit-content;
+    margin: 30px auto 0 auto; 
+    
+    /* Required for the shine effect */
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* The White Shine Layer */
+.dark-project-row .light-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right, 
+        rgba(74, 4, 4, 0) 0%, 
+        rgba(74, 4, 4, 0.1) 50%, 
+        rgba(74, 4, 4, 0) 100%
+    );
+    transform: skewX(-25deg);
+    transition: none;
+}
+
+/* Hover Actions */
+.dark-project-row .light-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.dark-project-row .light-btn:hover::after {
+    left: 150%;
+    transition: left 0.7s ease-in-out;
+}
+
+/* THE SHINE ANIMATION LOGIC (Shared) */
+.btn-download-cv::after, 
+.about-cta::after, 
+.light-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right, 
+        rgba(255, 255, 255, 0) 0%, 
+        rgba(255, 255, 255, 0.4) 50%, 
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg);
+    transition: none;
+}
+
+/* HOVER TRIGGERS */
+.btn-download-cv:hover, 
+.about-cta:hover, 
+.light-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+.btn-download-cv:hover::after, 
+.about-cta:hover::after, 
+.light-btn:hover::after {
+    left: 150%;
+    transition: left 0.7s ease-in-out;
+}
+
+/* DOWNLOAD ICON SPECIFIC */
+.btn-icon {
+    margin-left: 15px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2; /* Keeps icon above the shine */
+}
+
+/* 3. SECTION LABELS & TITLES */
+.sub-section-title {
+    font-weight: 800;
+    letter-spacing: 5px;
+    color: #4a0404;
+    margin: 80px 0 40px;
+    position: relative;
+    text-transform: uppercase;
+}
+
+/* 4. WORK EXPERIENCE (MODERN ALTERNATING DESIGN) */
+.experience-container {
+    display: flex;
+    flex-direction: column;
+    gap: 60px; /* More breathing room */
+    position: relative;
+    padding: 20px 0;
+}
+
+/* The vertical timeline line */
+.experience-container::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(74, 4, 4, 0.1);
+    transform: translateX(-50%);
+}
+
+.experience-wide-card {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 30px;
+    overflow: visible; /* Allows image to "float" */
+    border: 1px solid rgba(74, 4, 4, 0.05);
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    z-index: 1;
+}
+
+/* Alternating Layout Logic */
+.experience-wide-card:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.experience-wide-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(74, 4, 4, 0.08);
+    border-color: rgba(74, 4, 4, 0.2);
+}
+
+.exp-visual {
+    flex: 0 0 45%;
+    height: 320px;
+    padding: 20px; /* Creates the "floating" inset look */
+}
+
+.exp-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transition: transform 0.6s ease;
+}
+
+.experience-wide-card:hover .exp-visual img {
+    transform: scale(1.05) rotate(-1deg);
+}
+
+.exp-info {
+    flex: 1;
+    padding: 50px;
+}
+/* --- Work Experience Button Styling --- */
+.exp-info .about-cta {
+    margin-top: 20px;
+    padding: 10px 25px;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    background-color: #4a0404;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.exp-info .about-cta:hover {
+    background-color: #1a0101;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 4, 4, 0.2);
+}
+
+.exp-tag {
+    font-size: 0.65rem;
+    font-weight: 900;
+    color: #4a0404;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: rgba(74, 4, 4, 0.05);
+    padding: 5px 15px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.exp-title {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #1a0101;
+    margin-bottom: 10px;
+}
+
+.exp-company {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #4a0404;
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+.exp-bullets {
+    padding-left: 0;
+    list-style: none;
+}
+
+.exp-bullets li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Custom Red Dot Bullet */
+.exp-bullets li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #4a0404;
+    font-weight: bold;
+}
+
+/* Responsive Fix */
+@media (max-width: 992px) {
+    .experience-container::before { left: 20px; }
+    .experience-wide-card, .experience-wide-card:nth-child(even) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .exp-visual { flex: 0 0 100%; width: 100%; height: 250px; }
+    .exp-info { padding: 30px; }
+}
+
+/* 5. EDUCATION CARDS */
+.resume-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px;
+    height: 100%;
+    position: relative;
+    border: 1px solid rgba(74, 4, 4, 0.05);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.resume-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+    border-color: #4a0404;
+}
+
+.card-dot {
+    position: absolute;
+    top: 40px;
+    left: -10px;
+    width: 20px;
+    height: 20px;
+    background: #4a0404;
+    border: 4px solid #fdf7f2;
+    border-radius: 50%;
+}
+
+.card-degree { font-weight: 800; color: #1a0101; }
+.card-school { font-weight: 700; color: #4a0404; letter-spacing: 1px; margin-top: 15px; }
+
+/* 6. CAROUSEL STYLING */
+#certCarousel {
+    background: #fff;
+    border-radius: 30px;
+    padding: 60px 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+}
+
+.cert-box img {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.cert-box h4 { color: #1a0101; font-weight: 800; margin-top: 20px; }
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: #4a0404;
+    border-radius: 50%;
+    padding: 20px;
+    background-size: 50%;
+}
+
+/* 7. ANIMATION CLASSES */
+.reveal, .reveal-left, .reveal-right {
+    opacity: 0;
+    transition: all 0.8s ease-out;
+}
+
+.reveal { transform: translateY(30px); }
+.reveal-left { transform: translateX(-50px); }
+.reveal-right { transform: translateX(50px); }
+
+.reveal.active, .reveal-left.active, .reveal-right.active {
+    opacity: 1;
+    transform: translate(0);
+}
+
+/* RESPONSIVE FIXES */
+@media (max-width: 768px) {
+    .header-watermark { display: none; }
+    .experience-wide-card { flex-direction: column; }
+    .exp-visual { height: 200px; }
+    .resume-main-title { font-size: 2.5rem; }
+}
+
+/* --- Creative Section Headers --- */
+.section-header-wrap {
+    position: relative;
+    margin-bottom: 50px;
+    padding-top: 20px;
+    overflow: hidden;
+}
+
+/* The large background "Watermark" text */
+.bg-watermark {
+    position: absolute;
+    top: 0;
+    left: -5px;
+    font-size: 5rem;
+    font-weight: 900;
+    color: rgba(74, 4, 4, 0.04); /* Very subtle */
+    text-transform: uppercase;
+    line-height: 1;
+    z-index: 0;
+    user-select: none;
+}
+
+/* The actual foreground title */
+.fg-title {
+    position: relative;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #4a0404;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 1;
+}
+
+/* The creative line accent */
+.fg-title::after {
+    content: '';
+    flex-grow: 1;
+    height: 2px;
+    background: linear-gradient(to right, rgba(74, 4, 4, 0.2), transparent);
+}
+
+/* Special dot for the start of the title */
+.fg-title::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: #4a0404;
+    border-radius: 50%;
+}/* ==========================================
+   UNIFIED CERTIFICATES STYLING (FIXED ARROWS)
+   ========================================== */
+.certificates-section {
+    padding: 100px 0;
+    background-color: #fdf7f2;
+}
+
+.cert-fan-container {
+    max-width: 1000px;
+    margin: 40px auto 0;
+    position: relative;
+}
+
+.cert-stack {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 380px;
+    perspective: 1000px;
+}
+
+.cert-main {
+    width: 500px;
+    z-index: 5;
+    box-shadow: 0 15px 40px rgba(74, 4, 4, 0.15);
+    border: 6px solid #fff;
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+}
+
+.cert-side {
+    width: 350px;
+    position: absolute;
+    z-index: 1;
+    opacity: 0.4;
+    filter: blur(1px);
+    border: 4px solid #fff;
+    border-radius: 4px;
+}
+
+.cert-side.left { left: 5%; transform: scale(0.85) rotateY(15deg); }
+.cert-side.right { right: 5%; transform: scale(0.85) rotateY(-15deg); }
+
+/* Caption Styling */
+.cert-caption {
+    text-align: center;
+    margin-top: 40px;
+    padding: 0 15%;
+}
+
+.cert-caption h4 {
+    font-size: 24px;
+    color: #1a0101;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.cert-caption h4 span { color: #8b0000; font-style: italic; }
+
+.caption-line {
+    width: 100%;
+    height: 1px;
+    background: rgba(139, 0, 0, 0.2);
+    margin: 15px 0;
+}
+
+.cert-caption p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Fixed Arrow Positioning */
+.carousel-controls-container {
+    position: absolute;
+    top: 80%; /* Adjust this to move the arrows up or down */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15%;
+    pointer-events: none; /* Allows clicking through to caption if needed */
+}
+
+.control-btn {
+    pointer-events: auto; /* Re-enables clicking on the buttons */
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.custom-arrow {
+    width: 45px;
+    height: 45px;
+    border: 1px solid #8b0000;
+    border-radius: 50%;
+    color: #8b0000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    background-color: transparent;
+}
+
+.custom-arrow:hover {
+    background-color: #8b0000;
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .cert-main { width: 90%; }
+    .cert-side, .carousel-controls-container { display: none; }
+}
+
+/* ==========================================
+   SAMIFIED DOWNLOAD BUTTON
+   ========================================== */
+   .btn-download-cv {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #4a0404; /* Your signature dark red */
+    color: white !important;
+    padding: 14px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 8px 20px rgba(74, 4, 4, 0.15);
+    border: 1.5px solid transparent;
+    cursor: pointer;
+}
+
+/* Hover Effect: Turns white with a red border */
+.btn-download-cv:hover {
+    transform: translateY(-5px);
+    background-color: white !important;
+    color: #4a0404 !important;
+    border-color: #4a0404;
+    box-shadow: 0 15px 30px rgba(74, 4, 4, 0.25);
+}
+
+/* Icon Animation: The arrow moves down slightly on hover */
+.btn-icon {
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.btn-download-cv:hover .btn-icon {
+    transform: translateY(3px);
+}
+
+/* Responsive adjustment for the column */
+.text-md-end {
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+    .text-md-end {
+        justify-content: center;
+        margin-top: 20px;
+    }
+}

@@ -1,0 +1,269 @@
+/* ==========================================
+   CONTACT SECTION 
+   ========================================== */
+   .contact-section {
+    padding: 100px 0;
+    background-color: #fdf7f2; /* Matches About/Resume */
+
+}
+
+.contact-wrapper {
+    background: white;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    max-width: 1000px;
+    margin: 50px auto 0;
+}
+
+/* Info Panel Styling */
+.contact-info-panel {
+    background: #4a0404;
+    color: white;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact-info-panel h3 {
+    font-weight: 900;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.info-links {
+    margin-top: 40px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 25px;
+    transition: 0.3s;
+}
+
+.info-item i {
+    font-size: 1.2rem;
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.info-item:hover i {
+    background: white;
+    color: #4a0404;
+}
+
+.info-item span {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+/* Form Styling */
+.form-control, .form-select {
+    border: none !important;
+    border-bottom: 2px solid #eee !important;
+    border-radius: 0 !important;
+    padding-left: 0 !important;
+    background-color: transparent !important;
+}
+
+.form-control:focus, .form-select:focus {
+    box-shadow: none !important;
+    border-color: #4a0404 !important;
+}
+
+.form-floating label {
+    padding-left: 0;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #888;
+}
+
+.send-btn {
+    background: #4a0404;
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: 0.4s;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.send-btn:hover {
+    background: #2a0202;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================================
+   ULTRA-ELEGANT EDITORIAL FOOTER
+   ========================================== */
+.footer-section {
+    background-color: #1a0101; 
+    color: white;
+    padding: 140px 0 60px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    position: relative; /* Isolates the footer container */
+}
+
+.footer-main-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 120px;
+    flex-wrap: wrap;
+    gap: 60px;
+}
+
+/* Typography Refinement */
+.footer-big-text {
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    font-weight: 900;
+    font-style: italic;
+    line-height: 0.8;
+    letter-spacing: -4px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.neon-text {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+    transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.footer-statement:hover .neon-text {
+    color: white;
+    -webkit-text-stroke: 1px white;
+    text-shadow: 0 0 40px rgba(139, 0, 0, 0.7);
+}
+
+.footer-email {
+    font-size: 1rem;
+    letter-spacing: 6px;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+/* Grid & Links */
+.footer-grid {
+    display: flex;
+    gap: 120px;
+}
+
+.footer-label {
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 6px;
+    color: #8b0000;
+    margin-bottom: 40px;
+    font-weight: 800;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 15px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.3;
+    transition: all 0.5s ease;
+}
+
+.footer-links a:hover {
+    opacity: 1;
+    letter-spacing: 4px;
+    color: white;
+}
+
+/* The Bottom Bar - "Glassmorphism" Style */
+.footer-bottom-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 40px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-mini-logo {
+    height: 25px;
+    opacity: 0.6;
+    filter: grayscale(1) brightness(2);
+}
+
+.copyright {
+    font-size: 9px;
+    letter-spacing: 4px;
+    opacity: 0.4;
+    margin: 0;
+}
+
+.back-to-top {
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.back-to-top:hover {
+    color: #8b0000;
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+   MODAL CLOSE BUTTONS (THE "X" FIX)
+   ========================================== */
+.close-phone, .close-laptop {
+    position: fixed; /* Fixed prevents it from staying in the footer flow */
+    top: 30px;
+    right: 40px;
+    font-size: 40px;
+    color: white;
+    z-index: 9999; /* Higher than footer */
+    cursor: pointer;
+    line-height: 1;
+    display: none; /* Controlled by JS open/close */
+}
+
+/* GHOST PREVENTION */
+footer::before, footer::after {
+    content: none !important;
+}
+
+.footer-section {
+    display: block;
+    unicode-bidi: isolate; 
+}
