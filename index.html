@@ -4,10 +4,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Gonzales, Samantha Wayne | Portfolio</title>
-        
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         
         <link rel="stylesheet" href="style.css"> 
         <link rel="stylesheet" href="./css/navigation.css">
@@ -42,8 +42,8 @@
                 <a href="https://github.com" target="_blank">
                     <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
                 </a>
-                <a href="mailto:gonzalessamdt@gmail.com">
-                    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email">
+                <a href="mailto:gonzalessamdt@gmail.com" class="address-link">
+                    <img src="https://cdn-icons-png.flaticon.com/512/542/542689.png" alt="Email" class="email-icon">
                 </a>
             </div>
         </div>
@@ -51,41 +51,49 @@
 
     <main id="home" class="hero-gradient">
         <div class="hero-content">
-            <p class="name-label"><span>Gonzales, Samantha Wayne</span></p>
+            <p class="name-label"><span>GONZALES, SAMANTHA WAYNE</span></p>
+            
             <div class="title-container">
-                <h1 class="portfolio-title">Portfolio</h1>
+                <h1 class="portfolio-title">PORTFOLIO</h1>
             </div>
-            <p class="tagline">
-                I design user-centered websites with clean and responsive layouts. I focus on creating visually balanced and easy-to-use interfaces. My work blends creativity with purposeful structure.
+    
+            <p class="tagline reveal">
+                I design user-centered websites with clean and responsive layouts. 
+                I focus on creating visually balanced and easy-to-use interfaces. 
+                My work blends creativity with purposeful structure. 
+                I am always eager to learn and refine my front-end skills.
             </p>
-            <div class="cta-wrapper">
-                <a href="#project" class="cta-button">View My Work</a>
+    
+            <div class="cta-wrapper reveal">
+                <a href="#projects" class="cta-button">View My Work</a>
             </div>
         </div>
     </main>
 
+    <!-- ABOUT SECTION -->
     <section id="about" class="about-section">
         <div class="about-container">
-            <div class="about-hero">
+            <div class="about-hero"> 
                 <div class="profile-frame">
                     <img src="./assets/Profile.png" alt="Samantha" class="profile-img">
                     <div class="frame-accent"></div>
                 </div>
                 <div class="about-content">
-                    <h6 class="section-subtitle">A STUDENT'S JOURNEY</h6>
                     <h2 class="about-heading">ABOUT <span class="thin-text">Samifiedesign</span></h2>
                     <p class="about-para">
-                        I'm Samantha, a dedicated student and the creator behind samifiedesign. I’m currently refining my skills in front-end development with a passion for clean UI and responsive layouts. My goal is to transform classroom logic into intuitive, visually calm digital experiences.
+                        I'm Samantha, the creator behind samifiedesign—a growing front-end developer passionate 
+                        about clean UI, responsive layouts, and meaningful digital experiences. I enjoy 
+                        transforming ideas into designs that feel organized, intuitive, and visually calm, 
+                        with careful attention to spacing, typography, and visual hierarchy. I'm continuously 
+                        improving my skills in web design, modern front-end practices, and user experience, 
+                        while staying open to learning new tools and techniques that enhance both design quality 
+                        and functionality. My goal is to create interfaces that are not only visually appealing 
+                        but also practical, accessible, and easy to navigate across different devices.
                     </p>
                     <div class="about-stats">
-                        <div class="stat-item">
-                            <strong>BSIT</strong> 
-                            <span>3rd Year Student</span>
-                        </div>
-                        <div class="stat-item">
-                            <strong>CLEAN</strong> 
-                            <span>UI Philosophy</span>
-                        </div>
+                        <div class="stat-item"><strong>BSIT</strong><span>3rd Year Student</span></div>
+                        <div class="stat-item"><strong>CLEAN</strong><span>UI Philosophy</span></div>
+                        <div class="stat-item"><strong>CREATIVE</strong><span>Problem Solver</span></div>
                     </div>
                     <a href="#project" class="about-cta">EXPLORE MY WORKS</a>
                 </div>
@@ -190,22 +198,33 @@
             
             <div class="project-grid">
                 <div class="project-card">
-                    <h3 class="project-card-title">Paya Street Cafe Website</h3>
+                    <h3 class="project-card-title">Paya Street Cafe</h3>
                     <div class="laptop-main-display" onclick="openLaptopModal('./assets/paya_street.png')">
                         <img src="./assets/laptop_paya.png" alt="Paya Cafe" class="laptop-static-img">
                         <div class="hover-overlay"><span>Click to view properly</span></div>
                     </div>
-                    <p class="project-desc">A group website project for Paya Street Coffee featuring Vue.js development.</p>
+                    
+                    <p class="project-desc project-desc-accent">
+                        This collaborative effort focused on building a <strong>highly reactive front-end</strong> for a 
+                        local coffee brand. Utilizing the Vue.js framework, we engineered a dynamic digital menu 
+                        that balances fast load times with a clean, high-contrast aesthetic.
+                    </p>
                     
                     <a href="https://paya-street-website.netlify.app/" target="_blank" class="about-cta">EXPLORE CREATION</a>
                 </div>
+            
                 <div class="project-card">
-                    <h3 class="project-card-title">Callista Website</h3>
+                    <h3 class="project-card-title">Callista Art Gallery</h3>
                     <div class="laptop-main-display" onclick="openLaptopModal('./assets/callista.png')">
                         <img src="./assets/laptop_callista.png" alt="Callista" class="laptop-static-img">
                         <div class="hover-overlay"><span>Click to view properly</span></div>
                     </div>
-                    <p class="project-desc">A real client art portfolio and commission website built with HTML, CSS, and JS. [cite: 45, 46]</p>
+                    
+                    <p class="project-desc project-desc-accent">
+                        Bridging the gap between <strong>Fine Art and Web Design</strong>, this freelance commission 
+                        required a custom-built digital gallery. I translated the client’s minimalist brand identity 
+                        into a functional portfolio that prioritizes visual storytelling and professional commission management.
+                    </p>
                     
                     <a href="https://sammyvie.github.io/Callistaa/" target="_blank" class="about-cta">EXPLORE CREATION</a>
                 </div>
@@ -220,9 +239,15 @@
                                 <img src="./assets/laptop_arc.png" alt="ARC SPACE" class="laptop-static-img">
                                 <div class="hover-overlay"><span>Click to view properly</span></div>
                             </div>
-                            <p class="project-desc">A professional architectural landing page focused on modern blueprints and structural design.</p>
                             
-                            <a href="https://www.figma.com/design/vuYmpd9ErWISzXRj1wHoLE/ARC-SPACE-Landing-page?t=S1R1GRmHzA6obL6e-1" target="_blank" class="about-cta light-btn">VIEW MY WORK</a>
+                            <p class="project-desc project-desc-accent">
+                                Defined by <strong>architectural precision</strong>, this landing page design focuses on 
+                                the intersection of modern structural blueprints and digital minimalism. It prioritizes 
+                                spatial hierarchy to showcase large-scale professional portfolios with a high-end, 
+                                corporate feel.
+                            </p>
+                            
+                            <a href="https://www.figma.com/design/vuYmpd9ErWISzXRj1wHoLE/ARC-SPACE-Landing-page?t=S1R1GRmHzA6obL6e-1" target="_blank" class="about-cta light-btn">VIEW FIGMA DESIGN</a>
                         </div>
                     
                         <div class="project-card dark-card">
@@ -231,39 +256,54 @@
                                 <img src="./assets/laptop_lia.png" alt="Lila Aesthetics" class="laptop-static-img">
                                 <div class="hover-overlay"><span>Click to view properly</span></div>
                             </div>
-                            <p class="project-desc">An e-commerce beauty platform featuring skincare routines and holistic wellness aesthetics.</p>
+            
+                            <p class="project-desc project-desc-accent">
+                                This holistic e-commerce concept explores <strong>sensory web design</strong> for the 
+                                beauty industry. I engineered a curated skincare experience that balances soft, 
+                                editorial typography with a functional shopping interface tailored for modern wellness brands.
+                            </p>
                             
-                            <a href="https://www.figma.com/design/VvyCshQZakqz96Tgdx350z/Lila-Aesthetic?node-id=0-1&t=SffJbBudIL5PrkH5-1" target="_blank" class="about-cta light-btn">VIEW MY WORK</a>
+                            <a href="https://www.figma.com/design/VvyCshQZakqz96Tgdx350z/Lila-Aesthetic?node-id=0-1&t=SffJbBudIL5PrkH5-1" target="_blank" class="about-cta light-btn">VIEW FIGMA DESIGN</a>
                         </div>
                     </div>
                 </div>
             </div>
-
-        <!--PORTFOLIO  MOBILE IMAGES -->
-        <div class="project-container" style="padding-top: 80px;">
-            <div class="project-grid">
-                <div class="project-card">
-                    <h3 class="project-card-title">Heavenly Bites</h3>
-                    <div class="phone-main-display" onclick="openPhoneModal('static', './assets/heavenly_bites_full.png')">
-                        <img src="./assets/bakery-Photoroom.png" alt="Heavenly Bites" class="phone-static-img">
-                        <div class="hover-overlay-mobile"><span>Click to view properly</span></div>
+            <!--PORTFOLIO  MOBILE IMAGES -->
+            <div class="project-container" style="padding-top: 80px;">
+                <div class="project-grid">
+                    <div class="project-card">
+                        <h3 class="project-card-title">Heavenly Bites</h3>
+                        <div class="phone-main-display" onclick="openPhoneModal('static', './assets/Bakery_Home.png')">
+                            <img src="./assets/bakery-Photoroom.png" alt="Heavenly Bites" class="phone-static-img">
+                            <div class="hover-overlay-mobile"><span>Click to view properly</span></div>
+                        </div>
+                        
+                        <p class="project-desc project-desc-accent">
+                            <strong>Experience-first design</strong> was the priority for this boutique bakery concept. By blending 
+                            appetite-appealing visuals with a streamlined 1-click checkout flow, I created a high-fidelity 
+                            mobile prototype that turns casual browsing into a seamless shopping journey.
+                        </p>
+                        
+                        <a href="https://www.figma.com/design/aAR9HdSy0lmmMXgFrRiyxy/Bakery?node-id=0-1&t=S1R1GRmHzA6obL6e-1" target="_blank" class="about-cta">VIEW FIGMA PROTOTYPE</a>
                     </div>
-                    <p class="project-desc">A charming bakery interface design focused on sweet aesthetics and seamless product browsing.</p>
-                    
-                    <a href="https://www.figma.com/design/aAR9HdSy0lmmMXgFrRiyxy/Bakery?node-id=0-1&t=S1R1GRmHzA6obL6e-1" target="_blank" class="about-cta">EXPLORE CREATION</a>
-                </div>
-                <div class="project-card">
-                    <h3 class="project-card-title">House Cafe</h3>
-                    <div class="phone-main-display" onclick="openPhoneModal('live', 'https://peppy-gnome-62ee78.netlify.app')">
-                        <img src="./assets/Coffee-Photoroom.png" alt="House Cafe" class="phone-static-img">
-                        <div class="hover-overlay-mobile"><span>Click to view properly</span></div>
+            
+                    <div class="project-card">
+                        <h3 class="project-card-title">House Cafe</h3>
+                        <div class="phone-main-display" onclick="openPhoneModal('live', 'https://peppy-gnome-62ee78.netlify.app')">
+                            <img src="./assets/Coffee-Photoroom.png" alt="House Cafe" class="phone-static-img">
+                            <div class="hover-overlay-mobile"><span>Click to view properly</span></div>
+                        </div>
+            
+                        <p class="project-desc project-desc-accent">
+                            Developed as a deep dive into <strong>Cross-Platform Engineering</strong>, this Flutter application 
+                            demonstrates high-performance state management. The architecture supports real-time menu 
+                            interactions and smooth, gesture-based navigation tailored for modern mobile users.
+                        </p>
+                        
+                        <a href="https://peppy-gnome-62ee78.netlify.app" target="_blank" class="about-cta">VISIT LIVE APP</a>
                     </div>
-                    <p class="project-desc">A high-fidelity mobile prototype developed as my first Flutter project, featuring real-time menu updates and intuitive user navigation.</p>
-                    
-                    <a href="https://peppy-gnome-62ee78.netlify.app" target="_blank" class="about-cta">EXPLORE CREATION</a>
                 </div>
             </div>
-        </div>
     </section>
    
     <!--RESUME -->
@@ -283,7 +323,7 @@
                         </div>
                         <div class="col-md-4 text-md-end reveal-right">
                             <a href="./assets/Gonzales_Samantha.pdf" class="btn-download-cv" download="Samantha_Gonzales_Resume.pdf">
-                                <span>DOWNLOAD CV</span>
+                                <span>DOWNLOAD RESUME</span>
                                 <div class="btn-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
                                 </div>
@@ -334,12 +374,13 @@
                         <h4 class="exp-title">UI/UX & Front-End Developer</h4>
                         <p class="exp-company">Art Portfolio & Commission Website (2023)</p>
                         <ul class="exp-bullets">
-                            <li>Built an art portfolio website using HTML, CSS, and JS.</li>
-                            <li>Collaborated with a real client for a user-centered design.</li>
+                            <li>Designed and engineered a custom digital gallery to showcase fine art and manage client commissions.</li>
+                            <li>Translated the artist's brand identity into a clean, minimalist UI using HTML5, CSS3, and JavaScript.</li>
+                            <li>Conducted stakeholder interviews to align the site’s functionality with the client's creative workflow.</li>
                         </ul>
-                        <button class="about-cta" onclick="openLaptopModal('./assets/callista_full_scroll.png')">
-                            EXPLORE CREATION
-                        </button>
+                        <a href="https://sammyvie.github.io/Callistaa/" target="_blank" class="about-cta" style="text-decoration: none; display: inline-block;">
+                            VIEW FIGMA DESIGN
+                        </a>
                     </div>
                 </div>
             
@@ -349,15 +390,16 @@
                     </div>
                     <div class="exp-info">
                         <div class="exp-tag">ACADEMIC PROJECT</div>
-                        <h4 class="exp-title">Project Manager</h4>
-                        <p class="exp-company">System Design (SSAD) — Photography Business (2024)</p>
+                        <h4 class="exp-title">Project Manager & WordPress Developer</h4>
+                        <p class="exp-company">Web Systems & Engineering (WSEA) — Bossrich Photo (2024)</p>
                         <ul class="exp-bullets">
-                            <li>Led group project designing a business management system.</li>
-                            <li>Managed workflows, documentation, and team coordination.</li>
+                            <li>Transitioned theoretical System Analysis (SSAD) into a live Web Systems (WSEA) implementation.</li>
+                            <li>Deployed a fully functional business management and portfolio site using <strong>WordPress</strong>.</li>
+                            <li>Managed the end-to-end lifecycle, from system documentation to final web deployment.</li>
                         </ul>
-                        <button class="about-cta" onclick="openLaptopModal('./assets/ssad_full_scroll.png')">
-                            EXPLORE CREATION
-                        </button>
+                        <a href="https://bossrichphoto.pro" target="_blank" class="about-cta" style="text-decoration: none; display: inline-block;">
+                            VISIT LIVE WEBSITE
+                        </a>
                     </div>
                 </div>
             </div>
@@ -470,55 +512,63 @@
                 <div class="carousel-item active">
                     <div class="testimonial-card">
                         <div class="quote-icon">“</div>
-                        <p class="testi-text">Samantha is a true design wizard! She transformed our vision into a sleek, professional website. Her attention to detail and creative eye are unmatched.</p>
+                        <p class="testi-text">
+                            Working with Sam for the <strong>Calista Art</strong> project was amazing. 
+                            She took my messy vision and turned it into a sleek, professional site that I'm actually 
+                            proud to show off. She has a serious eye for detail!
+                        </p>
                         <div class="testi-author">
                             <div class="author-info">
-                                <h5>MARC CANLAS</h5>
-                                <span>Lead Developer</span>
+                                <h5>CAIZEL JADE GONZALES</h5>
+                                <span class="client-tag">Project: Calista Art & Commission</span>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="carousel-item">
                     <div class="testimonial-card">
                         <div class="quote-icon">“</div>
-                        <p class="testi-text">Working with Sam was a breeze. She has a way of making complex layouts look calm and organized. Highly recommended for any UI/UX needs!</p>
+                        <p class="testi-text">
+                            Handling the backend is much easier when you have a UI/UX lead like Sam. She provides clean, organized layouts that make the integration process seamless. She has a talent for making even the most complex data structures look intuitive for the user.
+                        </p>
                         <div class="testi-author">
                             <div class="author-info">
                                 <h5>AIMEE PANGAN</h5>
-                                <span>Project Manager</span>
+                                <span class="client-tag">Backend Developer & Collaborator</span>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="carousel-item">
                     <div class="testimonial-card">
                         <div class="quote-icon">“</div>
-                        <p class="testi-text">The website Sam built for us is not only beautiful but also incredibly fast and responsive. She really understands user behavior.</p>
+                        <p class="testi-text">
+                            As a fellow frontend dev, I’ve learned so much from Sam’s eye for detail. Her designs aren't just aesthetically pleasing; they are technically sound and fully responsive. She bridges the gap between creative vision and functional code perfectly.
+                        </p>
                         <div class="testi-author">
                             <div class="author-info">
                                 <h5>JOYZE MAGAT</h5>
-                                <span>Client</span>
+                                <span class="client-tag">Frontend Developer & Peer</span>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="carousel-item">
                     <div class="testimonial-card">
                         <div class="quote-icon">“</div>
-                        <p class="testi-text">Exceptional work ethic and creativity. Samifyedesign brought a fresh perspective to our branding that we absolutely love.</p>
+                        <p class="testi-text">
+                            Sam is a powerhouse when it comes to UI/UX and Frontend. She leads the creative direction of our projects with clarity and precision. Her ability to craft unique user experiences while maintaining clean code standards is impressive.
+                        </p>
                         <div class="testi-author">
                             <div class="author-info">
-                                <h5>AYLENE GONZALES</h5>
-                                <span>Marketing Director</span>
+                                <h5>MARC CANLAS</h5>
+                                <span class="client-tag">Frontend Developer & Collaborator</span>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
             
             <div class="carousel-indicators-custom">
@@ -592,8 +642,9 @@
                                     <select class="form-select" id="projectType">
                                         <option selected disabled>Select Service</option>
                                         <option value="web-design">Web Design</option>
-                                        <option value="web-dev">Web Development</option>
+                                        <option value="web-dev">Front-End Development</option>
                                         <option value="ui-ux">UI/UX Design</option>
+                                        <option value="Graphic Design">Graphic Design</option>
                                         <option value="others">Others</option>
                                     </select>
                                     <label for="projectType">PROJECT TYPE</label>
@@ -619,18 +670,15 @@
     </div>
 </section>
 
-   <div id="phoneModal" class="phone-modal">
+<div id="phoneModal" class="phone-modal-overlay">
     <span class="close-phone" onclick="closePhoneModal()">&times;</span>
     
-    <div class="phone-frame">
-        <div class="phone-screen">
-            <div class="phone-camera-hole"></div>
-            <div id="simulatorContainer" class="simulator-wrapper"></div>
-            <div id="staticPhoneScroll" class="phone-scroll-area" style="display:none;">
-                <img src="" id="phoneScrollImg">
-            </div>
+    <div class="phone-modal-content">
+        <div id="phoneImgWrapper" class="phone-screen-window">
+            <img id="phoneScrollImg" src="" alt="Mobile Preview">
         </div>
-        <div class="phone-nav-bar"><div class="nav-dot"></div></div>
+        
+        <div id="simulatorContainer" style="width:100%; height:100%; display:none;"></div>
     </div>
 </div>
         
@@ -679,13 +727,14 @@
                 <div class="footer-logo-box">
                     <img src="./assets/Logo.png" alt="Logo" class="footer-mini-logo">
                 </div>
-                <p class="copyright">© 2025 SAMANTHA GONZALES • ARCHIVING CREATIVITY</p>
+                <p class="copyright">© 2026 SAMANTHA GONZALES • ARCHIVING CREATIVITY</p>
                 <a href="#home" class="back-to-top">BACK TO TOP ↑</a>
             </div>
         </div>
     </footer>
 
 </body>
+
 
 
 </html>

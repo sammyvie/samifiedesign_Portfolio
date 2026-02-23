@@ -1,24 +1,32 @@
+
 /* ==========================================
-   2. HEADER & NAVIGATION (FIXED OVERLAP)
+   2. HEADER & NAVIGATION (FIXED & UNIQUE)
    ========================================== */
-   .header-nav {
+.header-nav {
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
     padding: 2.5rem 4rem;
-    background: transparent;
+    background: rgba(13, 1, 1, 0); 
+    border-bottom: 1px solid transparent;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: all 0.4s ease;
+    /* Split transitions to kill the 'ghost line' on scroll up */
+    transition: 
+        padding 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+        background 0.4s ease, 
+        box-shadow 0.2s ease, 
+        border-color 0.2s ease;
 }
 
 .header-nav.scrolled {
-    background: rgba(26, 1, 1, 0.95); 
-    padding: 1.2rem 4rem;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
+    background: rgba(13, 1, 1, 0.85); 
+    padding: 1rem 4rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .header-left {
@@ -35,54 +43,107 @@
 
 .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 2.5rem;
     list-style: none;
-    font-size: 11px;
+    font-size: 10px;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.3em;
 }
 
 .nav-links a {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.6);
     text-decoration: none;
-    transition: color 0.3s ease;
+    position: relative;
+    display: inline-block;
+    transition: color 0.3s ease, letter-spacing 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* UNIQUE HOVER: Text stretches out */
 .nav-links a:hover {
-    color: white;
+    color: #ffffff;
+    letter-spacing: 0.5em;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
 }
 
+/* Neon Red Underline */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background: #8b0000;
+    box-shadow: 0 0 8px #ff0000;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateX(-50%);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* SOCIAL ICONS (Fixed Email) */
 .social-icons {
     display: flex;
     gap: 1.5rem;
+    align-items: center;
 }
 
 .social-icons .address-link img {
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 1.2rem;
+    height: auto;
     filter: invert(1) brightness(2); 
-    opacity: 0.7;
-    transition: 0.3s ease;
+    opacity: 0.6;
+    transition: all 0.4s ease;
 }
 
 .address-link:hover img {
     opacity: 1;
-    transform: translateY(-2px);
-    filter: invert(1) brightness(10);
+    transform: translateY(-3px) scale(1.1);
+    filter: invert(1) brightness(10) drop-shadow(0 0 8px rgba(255, 0, 0, 0.8));
+}
+
+.email-icon {
+    transform: translateY(1px); /* Optical alignment fix for the envelope icon */
 }
 
 /* ==========================================
-   3. HERO & NEON TITLE SECTION
+   3. HERO & DYNAMIC BACKGROUND SECTION
    ========================================== */
 .hero-gradient {
-    background: linear-gradient(180deg, #1a0101 0%, #4a0404 45%, #2b0101 100%);
+    /* Set a deep dark base so the JS spotlights pop */
+    background: #0d0101; 
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative; /* CRITICAL for JS spotlights */
+    overflow: hidden;    /* Keeps the lights inside the section */
+}
+
+/* FILM GRAIN OVERLAY - Adds that cinematic grit */
+.hero-gradient::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png"); 
+    opacity: 0.12;
+    animation: grainMove 1s steps(4) infinite;
+    pointer-events: none;
+    z-index: 2; /* Sits above the light, below the text */
+}
+
+@keyframes grainMove {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(-1%, 1%); }
+    50% { transform: translate(1%, -1%); }
+    75% { transform: translate(-1%, -1%); }
 }
 
 .hero-content {
+    position: relative;
+    z-index: 10; /* Ensures text is always on top of the lights */
     text-align: center;
     width: 100%;
 }
@@ -107,18 +168,62 @@
     animation: typing 3s steps(30, end) forwards, blink 0.8s infinite;
 }
 
-/* Typing Animations */
 @keyframes typing { from { width: 0; } to { width: 30%; } }
 @keyframes blink { 50% { border-color: transparent; } }
 
-.title-container {
+/* ==========================================
+   TARGETED LINE GLOW (Borders Only)
+   ========================================== */
+   .title-container {
     border-top: 2px solid rgba(255, 255, 255, 0.2);
     border-bottom: 2px solid rgba(255, 255, 255, 0.2);
     padding: 4rem 0;
     margin: 0 auto;
     width: 85%;
+    
+    animation: flickerOnlyLines 4s linear infinite;
+    transition: border-color 0.3s ease;
 }
 
+@keyframes flickerOnlyLines {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        border-color: rgba(255, 255, 255, 0.9);
+        /* Drop-shadow targets ONLY the border lines */
+        filter: drop-shadow(0 -5px 8px rgba(139, 0, 0, 0.8)) 
+                drop-shadow(0 5px 8px rgba(139, 0, 0, 0.8));
+    }
+    20%, 24%, 55% {
+        border-color: rgba(255, 255, 255, 0.15);
+        filter: drop-shadow(0 0 0 transparent);
+    }
+}
+
+.title-container {
+    position: relative;
+    overflow: hidden; /* Keeps the glint inside the border area */
+}
+
+.title-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.1), 
+        transparent
+    );
+    animation: glintSweep 8s infinite linear;
+}
+
+@keyframes glintSweep {
+    0% { left: -100%; }
+    20% { left: 100%; }
+    100% { left: 100%; }
+}
 .portfolio-title {
     color: white;
     font-family: 'Inter', sans-serif;
@@ -129,21 +234,33 @@
     line-height: 1;
     display: inline-block;
     
-    /* Apply BOTH animations here */
-    animation: floatTitle 6s ease-in-out infinite, 
-               flickerNeon 4s linear infinite;
+    /* Added initialFade: it plays once for 2 seconds when the page loads */
+    animation: initialFade 2s ease-out forwards,
+               floatTitle 6s ease-in-out infinite 2s, 
+               flickerNeon 4s linear infinite 2s;
 }
 
-/* THE FLOATING EFFECT */
+/* New Animation: Starts invisible and slightly lower, then rises and fades in */
+@keyframes initialFade {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+        filter: blur(10px); /* Adds a premium "lens" focus effect */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
 @keyframes floatTitle {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-15px); }
 }
 
-/* THE NEON FLICKER EFFECT */
 @keyframes flickerNeon {
     0%, 18%, 22%, 25%, 53%, 57%, 100% {
-        /* The "ON" state with layered glow */
         text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
                      0 0 20px rgba(255, 255, 255, 0.4),
                      0 0 40px rgba(139, 0, 0, 0.6),
@@ -151,7 +268,6 @@
         opacity: 1;
     }
     20%, 24%, 55% {
-        /* The "OFF" flicker state */
         text-shadow: none;
         opacity: 0.7;
     }
@@ -167,6 +283,7 @@
     font-weight: 300;
     padding: 0 20px;
 }
+
 /* ==========================================
    4. CTA BUTTON
    ========================================== */
@@ -197,14 +314,14 @@
     letter-spacing: 4px;
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
 }
-/* ==========================================
-   ABOUT SECTION: CREAM & BURGUNDY (STUDENT EDITION)
-   ========================================== */
 
+/* ==========================================
+   ABOUT SECTION: CREAM & BURGUNDY
+   ========================================== */
    .about-section {
     background-color: #fdf7f2; /* Light cream background */
     padding: 120px 0;
-    color: #1a0101; /* Deep dark text for contrast */
+    color: #1a0101; 
     overflow: hidden;
 }
 
@@ -214,102 +331,125 @@
     padding: 0 40px;
 }
 
-/* 1. HERO AREA (Image & Bio) */
 .about-hero {
     display: flex;
     align-items: center;
     gap: 80px;
     margin-bottom: 100px;
 }
+/* --- ABOUT SECTION CONTAINER --- */
+.about-hero {
+    position: relative;
+    padding: 20px;
+    perspective: 1000px;
+}
 
+/* --- IMAGE STYLING: NO LINE ACCENT --- */
 .profile-frame {
     position: relative;
     width: 350px;
-    height: 450px;
+    height: 520px;
     flex-shrink: 0;
+    opacity: 0;
+    transform: translateX(-60px); /* Smooth slide from left */
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .profile-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 10px;
-    position: relative;
+    border-radius: 12px;
     z-index: 2;
-    box-shadow: 20px 20px 60px rgba(74, 4, 4, 0.05); /* Soft burgundy shadow */
+    /* Soft shadow matches the premium aesthetic */
+    box-shadow: 0 20px 40px rgba(74, 4, 4, 0.1);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.frame-accent {
-    position: absolute;
-    top: 15px;
-    left: -15px;
-    width: 100%;
-    height: 100%;
-    border: 2px solid #8b0000; /* Branding burgundy */
-    border-radius: 10px;
-    z-index: 1;
+/* --- TEXT REVEAL CORE --- */
+.about-content > * {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 2. TEXT & TYPOGRAPHY */
-.section-subtitle {
-    font-size: 10px;
-    letter-spacing: 4px;
-    color: #8b0000;
-    font-weight: 800;
-    margin-bottom: 10px;
-    text-transform: uppercase;
+/* --- ACTIVE ANIMATIONS --- */
+.about-hero.active .profile-frame {
+    opacity: 1;
+    transform: translateX(0);
 }
+
+.about-hero.active .about-content > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- STAGGERED TEXT WAVE --- */
+.about-hero.active .section-subtitle { transition-delay: 0.2s; }
+.about-hero.active .about-heading    { transition-delay: 0.4s; }
+.about-hero.active .about-para       { transition-delay: 0.6s; }
+.about-hero.active .about-stats      { transition-delay: 0.8s; }
+.about-hero.active .about-cta        { transition-delay: 1.0s; }
+
+/* HOVER: Subtle lift instead of border shift */
+.about-hero:hover .profile-img {
+    transform: translateY(-8px);
+}
+/* TYPOGRAPHY */
 
 .about-heading {
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 900;
     font-style: italic;
-    line-height: 1;
+    line-height: 1.1;
     margin-bottom: 25px;
-    color: #4a0404; /* Deep dark burgundy */
+    color: #4a0404;
 }
 
 .thin-text { 
-    font-weight: 300; 
+    font-weight:bolder; 
     color: #8b0000; 
     font-style: normal; 
     opacity: 0.8;
 }
 
 .about-para {
-    color: #444; 
+    color: #440202; 
     line-height: 1.8;
     margin-bottom: 30px;
-    font-size: 0.95rem;
+    font-size: 17px;
     max-width: 600px;
 }
+/* ==========================================
+   SKILLS & PROGRESS BARS (CINEMATIC)
+   ========================================== */
 
-/* 3. STUDENT STATS (BSIT Friendly) */
+/* 1. STUDENT STATS - Refined Typography */
 .about-stats {
     display: flex;
     gap: 40px;
-    margin-bottom: 35px;
+    margin-bottom: 40px;
 }
 
 .stat-item strong {
     display: block;
-    font-size: 1.6rem; 
+    font-size: 1.5rem;
     color: #4a0404;
-    line-height: 1.2;
+    line-height: 1;
     font-weight: 900;
 }
 
 .stat-item span {
-    font-size: 9px;
+    font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 2px;
     color: #8b0000;
     font-weight: 700;
 }
 
-/* 4. SKILLS CARD AREA */
+/* 2. SKILLS CARD AREA */
 .skills-glass-card {
-    background: #fffcf9; /* Brighter than section bg for depth */
+    background: #fffcf9;
     border: 1px solid rgba(139, 0, 0, 0.1);
     padding: 60px;
     border-radius: 30px;
@@ -327,15 +467,16 @@
 }
 
 .skills-title {
-    font-size: 1.4rem;
+    font-size: 35px;
     font-weight: 900;
     margin-bottom: 40px;
     letter-spacing: 1px;
     color: #4a0404;
     text-transform: uppercase;
+    line-height: 1.2;
 }
 
-/* 5. PROGRESS BARS (Visible Tracks) */
+/* 3. PROGRESS BAR ELEMENTS */
 .skill-row {
     margin-bottom: 30px;
 }
@@ -348,38 +489,77 @@
 }
 
 .label-group label {
-    font-size: 10px;
+    font-size: 15px;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: 700;
     color: #4a0404;
 }
 
+/* Percentage with "Reveal" animation */
 .percentage {
-    font-size: 12px;
+    font-size: 15px;
     color: #8b0000;
     font-weight: 800;
     font-family: serif;
     font-style: italic;
+    opacity: 0;
+    transform: translateY(5px);
+    transition: all 0.6s ease 1s;
+}
+
+.skills-grid.active .percentage {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .bar-bg {
     width: 100%;
-    height: 4px; 
-    background: #eee4dc; /* Visible beige track */
-    border-radius: 10px;
+    height: 6px; 
+    background: #eee4dc;
+    border-radius: 20px;
     overflow: hidden;
+    position: relative;
 }
 
+/* THE GRADIENT FILL */
 .bar-fill {
     height: 100%;
-    width: 0; /* Animated by script.js */
-    background: #8b0000;
-    border-radius: 10px;
-    transition: width 1.5s cubic-bezier(0.1, 0, 0.2, 1);
+    width: 0; 
+    background: linear-gradient(90deg, #4a0404 0%, #8b0000 100%);
+    border-radius: 20px;
+    position: relative;
+    /* Luxury Easing */
+    transition: width 2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* 6. BUTTON STYLE - SAMIFIED SHINE VERSION */
+/* THE GLINT/SHIMMER EFFECT */
+.bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.25), 
+        transparent
+    );
+    transform: translateX(-100%);
+}
+
+.skills-grid.active .bar-fill::after {
+    animation: shimmerSweep 1.8s ease-out forwards;
+    animation-delay: 1.2s;
+}
+
+@keyframes shimmerSweep {
+    100% { transform: translateX(100%); }
+}
+
+/* CTA BUTTON */
 .about-cta {
     display: inline-block;
     padding: 14px 35px;
@@ -391,29 +571,9 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     border-radius: 4px;
-    transition: all 0.3s ease;
-    
-    /* Required for Shine */
     position: relative;
     overflow: hidden;
-}
-
-/* The Shine Glint */
-.about-cta::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(
-        to right, 
-        rgba(255, 255, 255, 0) 0%, 
-        rgba(255, 255, 255, 0.3) 50%, 
-        rgba(255, 255, 255, 0) 100%
-    );
-    transform: skewX(-25deg);
-    transition: none;
+    transition: all 0.3s ease;
 }
 
 .about-cta:hover {
@@ -422,17 +582,817 @@
     box-shadow: 0 10px 20px rgba(74, 4, 4, 0.15);
 }
 
-/* Trigger Shine on Hover */
-.about-cta:hover::after {
-    left: 150%;
-    transition: left 0.7s ease-in-out;
+/* ==========================================
+   MOBILE RESPONSIVENESS (HERO & ABOUT)
+   ========================================== */
+   @media (max-width: 992px) {
+    /* NAVIGATION */
+    .header-nav, .header-nav.scrolled {
+        padding: 1.5rem 2rem;
+    }
+    
+    /* HERO SECTION */
+    .portfolio-title {
+        font-size: clamp(2rem, 18vw, 6rem); /* Shrinks the massive text */
+    }
+    
+    .title-container {
+        width: 95%;
+        padding: 2rem 0;
+    }
+    .tagline {
+        font-size: 11px;      /* Edit this to change tagline font size */
+        line-height: 1.6;     /* Improves readability on small screens */
+        margin: 2rem auto;    /* Reduces spacing around the text */
+    }
+    
+    .cta-button {
+        padding: 15px 40px;   /* Makes the button slightly smaller for mobile */
+        font-size: 10px;      /* Edit this to change button text size */
+        letter-spacing: 1px;  /* Reduces spacing to fit on one line */
+    }
+    .name-label {
+        padding-top: 6rem;
+        letter-spacing: 0.4em;
+    }
+
+    .name-label span {
+        width: auto; /* Allow the width to fit the content */
+        animation: typing 3s steps(30, end) forwards, blink 0.8s infinite;
+        white-space: nowrap; /* Keep it on one line */
+        border-right: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    /* Redefine the typing animation for mobile to reach 100% width */
+    @keyframes typing { 
+    from { width: 0; } 
+    to { width: 65%; } /* Changed from 30% to 100% */
+    }
+
+
+/* ==========================================
+   2. HEADER & NAVIGATION (FIXED & UNIQUE)
+   ========================================== */
+   .header-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 2.5rem 4rem;
+    background: rgba(13, 1, 1, 0); 
+    border-bottom: 1px solid transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Split transitions to kill the 'ghost line' on scroll up */
+    transition: 
+        padding 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+        background 0.4s ease, 
+        box-shadow 0.2s ease, 
+        border-color 0.2s ease;
 }
 
-/* RESPONSIVE DESIGN */
-@media (max-width: 992px) {
-    .about-hero { flex-direction: column; gap: 40px; text-align: center; }
-    .about-para { margin: 0 auto 30px; }
-    .about-stats { justify-content: center; }
-    .skills-grid { grid-template-columns: 1fr; gap: 40px; }
-    .center-line { display: none; }
+.header-nav.scrolled {
+    background: rgba(13, 1, 1, 0.85); 
+    padding: 1rem 4rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.logo-img {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+}
+
+.nav-links a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    transition: color 0.3s ease, letter-spacing 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* UNIQUE HOVER: Text stretches out */
+.nav-links a:hover {
+    color: #ffffff;
+    letter-spacing: 0.5em;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+/* Neon Red Underline */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background: #8b0000;
+    box-shadow: 0 0 8px #ff0000;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateX(-50%);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* SOCIAL ICONS (Fixed Email) */
+.social-icons {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.social-icons .address-link img {
+    width: 1.2rem;
+    height: auto;
+    filter: invert(1) brightness(2); 
+    opacity: 0.6;
+    transition: all 0.4s ease;
+}
+
+.address-link:hover img {
+    opacity: 1;
+    transform: translateY(-3px) scale(1.1);
+    filter: invert(1) brightness(10) drop-shadow(0 0 8px rgba(255, 0, 0, 0.8));
+}
+
+.email-icon {
+    transform: translateY(1px); /* Optical alignment fix for the envelope icon */
+}
+
+/* ==========================================
+   3. HERO & DYNAMIC BACKGROUND SECTION
+   ========================================== */
+.hero-gradient {
+    /* Set a deep dark base so the JS spotlights pop */
+    background: #0d0101; 
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* CRITICAL for JS spotlights */
+    overflow: hidden;    /* Keeps the lights inside the section */
+}
+
+/* FILM GRAIN OVERLAY - Adds that cinematic grit */
+.hero-gradient::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png"); 
+    opacity: 0.12;
+    animation: grainMove 1s steps(4) infinite;
+    pointer-events: none;
+    z-index: 2; /* Sits above the light, below the text */
+}
+
+@keyframes grainMove {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(-1%, 1%); }
+    50% { transform: translate(1%, -1%); }
+    75% { transform: translate(-1%, -1%); }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10; /* Ensures text is always on top of the lights */
+    text-align: center;
+    width: 100%;
+}
+
+.name-label {
+    text-transform: uppercase;
+    letter-spacing: 0.8em;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 2rem;
+    padding-top: 9rem;
+    display: flex;
+    justify-content: center;
+}
+
+.name-label span {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 1px solid rgba(255, 255, 255, 0.5);
+    width: 0;
+    animation: typing 3s steps(30, end) forwards, blink 0.8s infinite;
+}
+
+@keyframes typing { from { width: 0; } to { width: 30%; } }
+@keyframes blink { 50% { border-color: transparent; } }
+
+/* ==========================================
+   TARGETED LINE GLOW (Borders Only)
+   ========================================== */
+   .title-container {
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    padding: 4rem 0;
+    margin: 0 auto;
+    width: 85%;
+    
+    animation: flickerOnlyLines 4s linear infinite;
+    transition: border-color 0.3s ease;
+}
+
+@keyframes flickerOnlyLines {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        border-color: rgba(255, 255, 255, 0.9);
+        /* Drop-shadow targets ONLY the border lines */
+        filter: drop-shadow(0 -5px 8px rgba(139, 0, 0, 0.8)) 
+                drop-shadow(0 5px 8px rgba(139, 0, 0, 0.8));
+    }
+    20%, 24%, 55% {
+        border-color: rgba(255, 255, 255, 0.15);
+        filter: drop-shadow(0 0 0 transparent);
+    }
+}
+
+.title-container {
+    position: relative;
+    overflow: hidden; /* Keeps the glint inside the border area */
+}
+
+.title-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.1), 
+        transparent
+    );
+    animation: glintSweep 8s infinite linear;
+}
+
+@keyframes glintSweep {
+    0% { left: -100%; }
+    20% { left: 100%; }
+    100% { left: 100%; }
+}
+.portfolio-title {
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    font-size: clamp(4rem, 14vw, 10.5rem);
+    line-height: 1;
+    display: inline-block;
+    
+    /* Added initialFade: it plays once for 2 seconds when the page loads */
+    animation: initialFade 2s ease-out forwards,
+               floatTitle 6s ease-in-out infinite 2s, 
+               flickerNeon 4s linear infinite 2s;
+}
+
+/* New Animation: Starts invisible and slightly lower, then rises and fades in */
+@keyframes initialFade {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+        filter: blur(10px); /* Adds a premium "lens" focus effect */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes floatTitle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes flickerNeon {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                     0 0 20px rgba(255, 255, 255, 0.4),
+                     0 0 40px rgba(139, 0, 0, 0.6),
+                     0 0 80px rgba(139, 0, 0, 0.4);
+        opacity: 1;
+    }
+    20%, 24%, 55% {
+        text-shadow: none;
+        opacity: 0.7;
+    }
+}
+
+.tagline {
+    max-width: 800px;
+    margin: 3rem auto;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 2;
+    letter-spacing: 0.08em;
+    font-weight: 300;
+    padding: 0 20px;
+}
+
+/* ==========================================
+   4. CTA BUTTON
+   ========================================== */
+.cta-wrapper {
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.cta-button {
+    background-color: white;
+    color: #300202;
+    padding: 20px 60px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 2px;
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.cta-button:hover {
+    transform: translateY(-8px);
+    letter-spacing: 4px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+}
+
+/* ==========================================
+   ABOUT SECTION: CREAM & BURGUNDY
+   ========================================== */
+   .about-section {
+    background-color: #fdf7f2; /* Light cream background */
+    padding: 120px 0;
+    color: #1a0101; 
+    overflow: hidden;
+}
+
+.about-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.about-hero {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    margin-bottom: 100px;
+}
+/* --- ABOUT SECTION CONTAINER --- */
+.about-hero {
+    position: relative;
+    padding: 20px;
+    perspective: 1000px;
+}
+
+/* --- IMAGE STYLING: NO LINE ACCENT --- */
+.profile-frame {
+    position: relative;
+    width: 350px;
+    height: 520px;
+    flex-shrink: 0;
+    opacity: 0;
+    transform: translateX(-60px); /* Smooth slide from left */
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    z-index: 2;
+    /* Soft shadow matches the premium aesthetic */
+    box-shadow: 0 20px 40px rgba(74, 4, 4, 0.1);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- TEXT REVEAL CORE --- */
+.about-content > * {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- ACTIVE ANIMATIONS --- */
+.about-hero.active .profile-frame {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.about-hero.active .about-content > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- STAGGERED TEXT WAVE --- */
+.about-hero.active .section-subtitle { transition-delay: 0.2s; }
+.about-hero.active .about-heading    { transition-delay: 0.4s; }
+.about-hero.active .about-para       { transition-delay: 0.6s; }
+.about-hero.active .about-stats      { transition-delay: 0.8s; }
+.about-hero.active .about-cta        { transition-delay: 1.0s; }
+
+/* HOVER: Subtle lift instead of border shift */
+.about-hero:hover .profile-img {
+    transform: translateY(-8px);
+}
+/* TYPOGRAPHY */
+
+.about-heading {
+    font-size: 3rem;
+    font-weight: 900;
+    font-style: italic;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    color: #4a0404;
+}
+
+.thin-text { 
+    font-weight:bolder; 
+    color: #8b0000; 
+    font-style: normal; 
+    opacity: 0.8;
+}
+
+.about-para {
+    color: #440202; 
+    line-height: 1.8;
+    margin-bottom: 30px;
+    font-size: 17px;
+    max-width: 600px;
+}
+/* ==========================================
+   SKILLS & PROGRESS BARS (CINEMATIC)
+   ========================================== */
+
+/* 1. STUDENT STATS - Refined Typography */
+.about-stats {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.stat-item strong {
+    display: block;
+    font-size: 1.5rem;
+    color: #4a0404;
+    line-height: 1;
+    font-weight: 900;
+}
+
+.stat-item span {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #8b0000;
+    font-weight: 700;
+}
+
+/* 2. SKILLS CARD AREA */
+.skills-glass-card {
+    background: #fffcf9;
+    border: 1px solid rgba(139, 0, 0, 0.1);
+    padding: 60px;
+    border-radius: 30px;
+    box-shadow: 0 20px 40px rgba(74, 4, 4, 0.03);
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 60px;
+}
+
+.center-line { 
+    background: rgba(139, 0, 0, 0.1); 
+}
+
+.skills-title {
+    font-size: 35px;
+    font-weight: 900;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+    color: #4a0404;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+
+/* 3. PROGRESS BAR ELEMENTS */
+.skill-row {
+    margin-bottom: 30px;
+}
+
+.label-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 10px;
+}
+
+.label-group label {
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: #4a0404;
+}
+
+/* Percentage with "Reveal" animation */
+.percentage {
+    font-size: 15px;
+    color: #8b0000;
+    font-weight: 800;
+    font-family: serif;
+    font-style: italic;
+    opacity: 0;
+    transform: translateY(5px);
+    transition: all 0.6s ease 1s;
+}
+
+.skills-grid.active .percentage {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.bar-bg {
+    width: 100%;
+    height: 6px; 
+    background: #eee4dc;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* THE GRADIENT FILL */
+.bar-fill {
+    height: 100%;
+    width: 0; 
+    background: linear-gradient(90deg, #4a0404 0%, #8b0000 100%);
+    border-radius: 20px;
+    position: relative;
+    /* Luxury Easing */
+    transition: width 2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* THE GLINT/SHIMMER EFFECT */
+.bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.25), 
+        transparent
+    );
+    transform: translateX(-100%);
+}
+
+.skills-grid.active .bar-fill::after {
+    animation: shimmerSweep 1.8s ease-out forwards;
+    animation-delay: 1.2s;
+}
+
+@keyframes shimmerSweep {
+    100% { transform: translateX(100%); }
+}
+
+/* CTA BUTTON */
+.about-cta {
+    display: inline-block;
+    padding: 14px 35px;
+    background: #4a0404;
+    color: #fdf7f2;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.about-cta:hover {
+    background: #8b0000;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(74, 4, 4, 0.15);
+}
+
+/* ==========================================
+   MOBILE RESPONSIVENESS (HERO & ABOUT)
+   ========================================== */
+   @media (max-width: 992px) {
+    /* NAVIGATION */
+    .header-nav, .header-nav.scrolled {
+        padding: 1.5rem 2rem;
+    }
+    
+    /* HERO SECTION */
+    .portfolio-title {
+        font-size: clamp(2rem, 18vw, 6rem); /* Shrinks the massive text */
+    }
+    
+    .title-container {
+        width: 95%;
+        padding: 2rem 0;
+    }
+    .tagline {
+        font-size: 11px;      /* Edit this to change tagline font size */
+        line-height: 1.6;     /* Improves readability on small screens */
+        margin: 2rem auto;    /* Reduces spacing around the text */
+    }
+    
+    .cta-button {
+        padding: 15px 40px;   /* Makes the button slightly smaller for mobile */
+        font-size: 10px;      /* Edit this to change button text size */
+        letter-spacing: 1px;  /* Reduces spacing to fit on one line */
+    }
+    .name-label {
+        padding-top: 6rem;
+        letter-spacing: 0.4em;
+    }
+
+    .name-label span {
+        width: auto; /* Allow the width to fit the content */
+        animation: typing 3s steps(30, end) forwards, blink 0.8s infinite;
+        white-space: nowrap; /* Keep it on one line */
+        border-right: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    /* Redefine the typing animation for mobile to reach 100% width */
+    @keyframes typing { 
+    from { width: 0; } 
+    to { width: 65%; } /* Changed from 30% to 100% */
+    }
+/* ==========================================
+   MOBILE RESPONSIVENESS (992px and below)
+   ========================================== */
+   @media (max-width: 992px) {
+    
+    /* ABOUT SECTION CONTAINER */
+    .about-hero {
+        flex-direction: column;
+        gap: 35px;
+        text-align: center;
+        padding: 0 15px;
+    }
+
+    .profile-frame {
+        width: 260px; /* Scaled down for better proportion */
+        height: 380px;
+        margin: 0 auto;
+    }
+
+    .about-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    /* BIO DESCRIPTION - Smaller & Balanced */
+    .about-para {
+        font-size: 13px;        /* Reduced for a cleaner look */
+        line-height: 1.7;       
+        margin: 0 auto 35px auto; 
+        width: 100%;
+        max-width: 450px;       /* Keeps text block from feeling too wide */
+        padding-inline: 10px;
+        text-align: center;     /* Center align looks better than justify on mobile */
+        color: rgba(26, 1, 1, 0.85);
+    }
+
+    /* THE STATS ROW (BSIT / CLEAN / CREATIVE) */
+    .about-stats {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 380px;      /* Prevents stats from stretching too far */
+        margin: 0 auto 45px auto;
+        gap: 10px;
+    }
+
+    .stat-item {
+        flex: 1;               /* Equal column widths */
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .stat-item strong {
+        font-size: 0.9rem;     /* Small enough to fit on one line */
+        letter-spacing: 0.5px;
+        white-space: nowrap;   /* No awkward line breaks */
+        color: #4a0404;
+        margin-bottom: 5px;
+    }
+
+    .stat-item span {
+        font-size: 7.5px;      /* Tiny, elegant sub-labels */
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: block;
+        opacity: 0.7;
+    }
+
+    /* SKILLS SECTION */
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .center-line {
+        display: none;
+    }
+
+    .skills-glass-card {
+        padding: 45px 20px;
+        margin-top: 15px;
+        border-radius: 20px;
+    }
+
+    .skills-title {
+        font-size: 17px;       
+        letter-spacing: 4px;   /* Airy, premium feel */
+        margin-bottom: 35px;
+        text-align: center;
+        text-transform: uppercase;
+        color: #4a0404;
+    }
+    /* GLOBAL BUTTON ANIMATION FIX (Mobile) */
+    .cta-button, .about-cta {
+        /* Ensure transitions are explicitly defined for mobile */
+        transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1) !important;
+        cursor: pointer;
+        display: inline-block;
+        -webkit-tap-highlight-color: transparent; /* Removes the ugly blue box on tap */
+    }
+
+    /* Mobile "Tap" Effect (Replaces Hover) */
+    .cta-button:active, .about-cta:active,
+    .cta-button:hover, .about-cta:hover {
+        transform: translateY(-5px) scale(1.02); /* Subtle lift */
+        letter-spacing: 3px; /* The "Stretch" effect you liked */
+        box-shadow: 0 15px 30px rgba(74, 4, 4, 0.2);
+        background-color: #8b0000; /* Darker red on click */
+        color: white !important;
+    }
+}
+
+/* ==========================================
+   EXTRA SMALL DEVICES (480px and below)
+   ========================================== */
+@media (max-width: 480px) {
+    .portfolio-title {
+        font-size: 3.2rem;     /* Prevents title overflow */
+    }
+    
+    .about-heading {
+        font-size: 1.8rem;     /* Keeps heading proportional */
+    }
+    
+    .stat-item strong {
+        font-size: 0.85rem;    /* Extra shrink for very narrow phones */
+    }
+
+    .about-para {
+        font-size: 12.5px;     /* Ultra-clean reading size */
+    }
+}
+   }}

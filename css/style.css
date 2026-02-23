@@ -1,15 +1,21 @@
 /* ==========================================
    1. GLOBAL STYLES & BUTTONS
    ========================================== */
-   html {
-    scroll-behavior: smooth;
-}
-
-body {
+   html, body {
     margin: 0;
     padding: 0;
-    background-color: #1a0101;
+    width: 100%;
+    /* These two lines are critical to stop the "moving around" */
     overflow-x: hidden;
+    position: relative;
+    background-color: #1a0101;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+
+/* Apply border-box globally so padding doesn't break widths */
+*, *::before, *::after {
+    box-sizing: inherit;
 }
 
 .cta-wrapper {
@@ -17,6 +23,7 @@ body {
     margin-bottom: 5rem;
     display: flex;
     justify-content: center;
+    width: 100%; /* Keeps it centered */
 }
 
 .cta-button {
@@ -31,10 +38,46 @@ body {
     letter-spacing: 2px;
     transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    white-space: nowrap; /* Prevents text from wrapping inside button */
 }
 
 .cta-button:hover {
     transform: translateY(-8px);
     letter-spacing: 4px;
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+}
+
+/* ==========================================
+   MOBILE RESPONSIVENESS (GLOBAL)
+   ========================================== */
+@media (max-width: 768px) {
+    /* Stop any side-to-side shifting */
+    body {
+        position: relative;
+        overflow-x: hidden;
+    }
+
+    .cta-button {
+        padding: 18px 0; /* Vertical padding only */
+        font-size: 11px;
+        width: 85%; /* Sized relative to screen width */
+        max-width: 320px; /* Keeps it from getting too wide on tablets */
+        text-align: center;
+        letter-spacing: 1px;
+        /* Remove heavy hover effects for touch screens */
+        transform: none; 
+    }
+
+    .cta-button:active {
+        /* Subtle feedback for touch instead of hover */
+        transform: scale(0.98);
+        background-color: #f0f0f0;
+    }
+
+    .cta-wrapper {
+        margin-top: 1.5rem;
+        margin-bottom: 4rem;
+        padding: 0 20px; /* Side breathing room */
+    }
 }

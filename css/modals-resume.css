@@ -7,6 +7,7 @@
     padding: 100px 0;
 }
 
+
 /* 1. CREATIVE HEADER STYLES */
 .creative-header-wrapper {
     position: relative;
@@ -76,7 +77,7 @@
 
 .resume-tagline {
     font-size: 1.1rem;
-    color: #666;
+    color: #4a0404;
     max-width: 500px;
 }
 
@@ -504,7 +505,9 @@
     height: 8px;
     background: #4a0404;
     border-radius: 50%;
-}/* ==========================================
+}
+
+/* ==========================================
    UNIFIED CERTIFICATES STYLING (FIXED ARROWS)
    ========================================== */
 .certificates-section {
@@ -659,17 +662,203 @@
 
 .btn-download-cv:hover .btn-icon {
     transform: translateY(3px);
-}
+}/* ==========================================
+   RESUME SECTION MOBILE OPTIMIZATION (FINAL)
+   ========================================== */
 
-/* Responsive adjustment for the column */
-.text-md-end {
-    display: flex;
-    justify-content: flex-end;
-}
+@media (max-width: 992px) {
+    /* 1. HEADER & GLOBAL SECTION ADJUSTMENTS */
+    .resume-section {
+        padding: 60px 0;
+    }
 
-@media (max-width: 768px) {
-    .text-md-end {
+    .resume-main-title {
+        font-size: 2.2rem;
+        line-height: 1.1;
+        text-align: center;
+    }
+
+    .header-watermark {
+        display: none; /* Prevents horizontal overflow */
+    }
+
+    .resume-tagline {
+        font-size: 14px;
+        text-align: center;
+        margin: 15px auto;
+        padding: 0 10px;
+    }
+
+    .creative-header-wrapper {
+        text-align: center;
+        padding-bottom: 40px;
+    }
+
+    .header-line-animated {
+        margin: 15px auto;
+        width: 60px !important;
+    }
+
+    /* 2. EXPERIENCE CARDS (STACKING & CENTERING) */
+    .experience-container::before {
+        left: 15px; /* Moves timeline line to the left */
+    }
+
+    .experience-wide-card, 
+    .experience-wide-card:nth-child(even) {
+        flex-direction: column !important; 
+        align-items: center;
+        text-align: center; /* Centers text for better mobile balance */
+        border-radius: 20px;
+        margin-bottom: 40px;
+        width: 100%;
+    }
+
+    .exp-visual {
+        flex: 0 0 100%;
+        width: 100%;
+        height: 220px;
+        padding: 15px;
+    }
+
+    .exp-visual img {
+        border-radius: 15px;
+        object-fit: cover;
+    }
+
+    .exp-info {
+        padding: 25px 20px 35px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centers the button inside info block */
+    }
+
+    .exp-title {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+    }
+
+    .exp-bullets {
+        text-align: left; /* Keeps list readable while container is centered */
+        width: 100%;
+        max-width: 320px; 
+    }
+
+    .exp-bullets li {
+        font-size: 13px;
+        padding-left: 20px;
+    }
+
+    /* 3. EDUCATION & SUB-TITLES */
+    .sub-section-title {
+        font-size: 1.2rem;
+        margin: 50px 0 30px;
+        text-align: center;
+    }
+
+    .resume-card {
+        padding: 30px 20px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .card-dot {
+        left: 50%;
+        top: -10px;
+        transform: translateX(-50%);
+    }
+
+    /* 4. CERTIFICATES (ARROWS & CAPTION FIX) */
+    .cert-stack {
+        height: auto; 
+        flex-direction: column;
+        perspective: none;
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    .cert-main {
+        width: 100% !important;
+        max-width: 100%;
+        border: 4px solid #fff;
+        z-index: 1;
+    }
+
+    .cert-side {
+        display: none !important;
+    }
+
+    .carousel-controls-container {
+        display: flex !important; 
+        position: absolute;
+        top: 40%; /* Adjusted to sit over the image */
+        left: 0;
+        right: 0;
+        transform: translateY(-50%);
+        width: 100%;
+        justify-content: space-between;
+        padding: 0 5px;
+        z-index: 10;
+        pointer-events: none;
+    }
+
+    .control-btn {
+        pointer-events: auto;
+        background: rgba(255, 255, 255, 0.9) !important;
+        border-radius: 50%;
+        padding: 5px;
+    }
+
+    .custom-arrow {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+        border: 1px solid #4a0404;
+        color: #4a0404;
+    }
+
+    .cert-caption {
+        padding: 0 5%;
+        margin-top: 25px;
+        text-align: center;
+    }
+
+    .cert-caption h4 {
+        font-size: 18px;
+    }
+
+    /* 5. BUTTONS (CENTERING & WIDTH) */
+    .btn-download-cv, 
+    .exp-info .about-cta {
+        display: inline-flex !important;
+        width: 100%;
+        max-width: 280px;
         justify-content: center;
-        margin-top: 20px;
+        margin: 20px auto 0 auto !important; /* Forces perfect centering */
+        font-size: 10px;
+        padding: 14px 20px;
+        letter-spacing: 1.5px;
+    }
+
+    .text-md-end {
+        display: flex;
+        justify-content: center !important;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    /* 6. WATERMARK HEADERS & ACCENTS */
+    .bg-watermark {
+        font-size: 3rem; 
+        top: 5px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .fg-title {
+        font-size: 1.1rem;
+        gap: 10px;
+        justify-content: center;
     }
 }

@@ -117,7 +117,7 @@
    ULTRA-ELEGANT EDITORIAL FOOTER
    ========================================== */
 .footer-section {
-    background-color: #1a0101; 
+    background-color: #2c0202; 
     color: white;
     padding: 140px 0 60px;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -266,4 +266,211 @@ footer::before, footer::after {
 .footer-section {
     display: block;
     unicode-bidi: isolate; 
+}
+/* ==========================================
+   CONTACT & FOOTER MOBILE BLOCK (COMPLETE)
+   ========================================== */
+   @media (max-width: 992px) {
+    
+    /* 1. CONTACT SECTION LAYOUT */
+    .contact-section {
+        padding: 60px 15px;
+    }
+
+    .contact-wrapper {
+        display: flex;
+        flex-direction: column; /* Stacks Info Panel on top of Form */
+        margin-top: 30px;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+    }
+
+    /* 2. INFO PANEL (THE CLEAN ALIGNMENT FIX) */
+    .contact-info-panel {
+        padding: 50px 25px;
+        text-align: center;
+        background: #4a0404;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact-info-panel h3 {
+        font-size: 1.6rem;
+        font-weight: 800;
+        margin-bottom: 12px;
+    }
+
+    .contact-info-panel p {
+        font-size: 13px;
+        opacity: 0.8;
+        max-width: 280px;
+        margin-bottom: 40px;
+    }
+
+    .info-item {
+        display: flex;
+        flex-direction: column; /* Forces Icon, Label, and Text to stack vertically */
+        align-items: center;
+        margin-bottom: 30px;
+        width: 100%;
+        transition: all 0.4s ease;
+    }
+
+    .info-item i {
+        font-size: 1.4rem;
+        margin-bottom: 12px;
+        background: rgba(255, 255, 255, 0.1);
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+    }
+
+    .info-item .details {
+        text-align: center;
+    }
+
+    .info-item .details h4 {
+        font-size: 9px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: rgba(255, 255, 255, 0.5);
+        margin-bottom: 4px;
+        font-weight: 400;
+    }
+
+    .info-item .details p {
+        font-size: 14px;
+        font-weight: 600;
+        margin: 0;
+        letter-spacing: 0.5px;
+    }
+
+    /* 3. CONTACT FORM CLEANUP */
+    .contact-form {
+        padding: 40px 25px;
+        background: #ffffff;
+    }
+
+    .form-group label {
+        font-size: 10px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: #1a0101;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .form-group input, 
+    .form-group textarea {
+        width: 100%;
+        padding: 14px 18px !important;
+        font-size: 14px !important; /* Standard size to prevent mobile browser zoom */
+        background: #f9f9f9 !important;
+        border: 1px solid rgba(0,0,0,0.08) !important;
+        border-radius: 10px !important;
+        color: #1a0101 !important;
+        margin-bottom: 20px;
+    }
+
+    .send-btn {
+        width: 100% !important;
+        padding: 18px !important;
+        background: #4a0404 !important;
+        color: white !important;
+        border-radius: 50px !important;
+        font-weight: 800;
+        font-size: 12px;
+        letter-spacing: 2px;
+        margin-top: 5px;
+        transition: all 0.3s ease !important;
+    }
+
+    .send-btn:active {
+        transform: scale(0.97);
+        background: #2a0202 !important;
+    }
+
+    /* 4. FOOTER MAIN CONTENT */
+    .footer-section {
+        padding: 80px 20px 40px;
+    }
+
+    .footer-main-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 50px;
+        margin-bottom: 70px;
+    }
+
+    .footer-big-text {
+        font-size: clamp(2.5rem, 12vw, 4rem); 
+        letter-spacing: -1px;
+        line-height: 1.0;
+    }
+
+    .footer-email {
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+        margin-top: 15px;
+    }
+
+    /* 5. FOOTER LINKS & NEON */
+    .footer-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 45px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .footer-label {
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 10px;
+        letter-spacing: 3px;
+    }
+
+    .footer-links li {
+        text-align: center;
+        margin-bottom: 12px;
+    }
+
+    /* Trigger neon glow on tap */
+    .footer-statement:active .neon-text {
+        color: white;
+        text-shadow: 0 0 20px rgba(139, 0, 0, 0.9);
+    }
+
+    /* 6. BOTTOM BAR GLASSMORPHISM */
+    .footer-bottom-bar {
+        flex-direction: column;
+        gap: 25px;
+        padding: 30px 20px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.04);
+        text-align: center;
+    }
+
+    .back-to-top:active {
+        color: #8b0000;
+        transform: translateY(-5px);
+    }
+}
+
+/* 7. EXTRA SMALL PHONES */
+@media (max-width: 480px) {
+    .footer-big-text {
+        font-size: 2.2rem;
+    }
+    .contact-info-panel {
+        padding: 40px 15px;
+    }
 }

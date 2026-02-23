@@ -74,3 +74,66 @@
     width: 30px;
     border-radius: 10px;
 }
+
+/* ==========================================
+   TESTIMONIALS MOBILE OPTIMIZATION
+   ========================================== */
+   @media (max-width: 992px) {
+    .testimonials-section {
+        padding: 60px 20px;
+    }
+
+    .testimonial-card {
+        padding: 40px 25px; /* Reduced from 60px */
+        margin: 0 10px;
+        border-radius: 25px;
+    }
+
+    .quote-icon {
+        font-size: 4rem; /* Scaled down from 8rem */
+        top: -10px;
+        left: 20px;
+        opacity: 0.2; /* Slightly more visible since it's smaller */
+    }
+
+    .testi-text {
+        font-size: 1rem; /* Better for mobile reading */
+        line-height: 1.6;
+        margin-bottom: 25px;
+    }
+
+    .author-info h5 {
+        font-size: 1rem;
+        letter-spacing: 1px;
+    }
+
+    .author-info span {
+        font-size: 0.7rem;
+    }
+
+    /* Adjusting Indicators for touch */
+    .carousel-indicators-custom {
+        margin-top: 30px;
+        gap: 8px;
+    }
+
+    .carousel-indicators-custom button {
+        width: 10px;
+        height: 10px;
+    }
+
+    .carousel-indicators-custom button.active {
+        width: 25px;
+    }
+}
+
+/* Extra Small Devices */
+@media (max-width: 480px) {
+    .testimonial-card {
+        padding: 35px 20px;
+    }
+    
+    .testi-text {
+        font-size: 0.95rem;
+    }
+}
