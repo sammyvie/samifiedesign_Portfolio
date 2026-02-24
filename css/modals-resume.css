@@ -3,7 +3,7 @@
    SAMIFIED RESUME SECTION (MODERN DESIGN)
    ========================================== */
    .resume-section {
-    background-color: #fdf7f2 !important; /* Soft cream background */
+    background-color: #fdf7f2 !important; 
     padding: 100px 0;
 }
 
@@ -21,7 +21,7 @@
     left: -10px;
     font-size: 10rem;
     font-weight: 900;
-    color: rgba(74, 4, 4, 0.03); /* Extremely faint branding */
+    color: rgba(74, 4, 4, 0.03); 
     z-index: -1;
     user-select: none;
     line-height: 1;
@@ -91,8 +91,8 @@
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    position: relative; /* Required for shine */
-    overflow: hidden;    /* Clips the shine */
+    position: relative; 
+    overflow: hidden;   
     transition: all 0.3s ease;
     border: none;
     box-shadow: 0 4px 15px rgba(74, 4, 4, 0.2);
@@ -111,8 +111,8 @@
     font-size: 11px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    position: relative; /* Required for shine */
-    overflow: hidden;    /* Clips the shine */
+    position: relative; 
+    overflow: hidden;    
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(74, 4, 4, 0.15);
 }
@@ -120,7 +120,7 @@
 /* 3. LIGHT BTN (Dark Red Row) */
 .dark-project-row .light-btn {
     background-color: white !important;
-    color: #4a0404 !important; /* Your signature dark red */
+    color: #4a0404 !important; 
     border: none;
     padding: 14px 35px;
     border-radius: 50px; 
@@ -132,14 +132,11 @@
     display: inline-block;
     width: fit-content;
     margin: 30px auto 0 auto; 
-    
-    /* Required for the shine effect */
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease;
 }
 
-/* The White Shine Layer */
 .dark-project-row .light-btn::after {
     content: '';
     position: absolute;
@@ -213,7 +210,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 2; /* Keeps icon above the shine */
+    z-index: 2;
 }
 
 /* 3. SECTION LABELS & TITLES */
@@ -230,7 +227,7 @@
 .experience-container {
     display: flex;
     flex-direction: column;
-    gap: 60px; /* More breathing room */
+    gap: 60px; 
     position: relative;
     padding: 20px 0;
 }
@@ -252,7 +249,7 @@
     align-items: center;
     background: #fff;
     border-radius: 30px;
-    overflow: visible; /* Allows image to "float" */
+    overflow: visible;
     border: 1px solid rgba(74, 4, 4, 0.05);
     transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
     position: relative;
@@ -273,7 +270,7 @@
 .exp-visual {
     flex: 0 0 45%;
     height: 320px;
-    padding: 20px; /* Creates the "floating" inset look */
+    padding: 20px; 
 }
 
 .exp-visual img {
@@ -364,7 +361,6 @@
     font-weight: bold;
 }
 
-/* Responsive Fix */
 @media (max-width: 992px) {
     .experience-container::before { left: 20px; }
     .experience-wide-card, .experience-wide-card:nth-child(even) {
@@ -462,21 +458,19 @@
     overflow: hidden;
 }
 
-/* The large background "Watermark" text */
 .bg-watermark {
     position: absolute;
     top: 0;
     left: -5px;
     font-size: 5rem;
     font-weight: 900;
-    color: rgba(74, 4, 4, 0.04); /* Very subtle */
+    color: rgba(74, 4, 4, 0.04); 
     text-transform: uppercase;
     line-height: 1;
     z-index: 0;
     user-select: none;
 }
 
-/* The actual foreground title */
 .fg-title {
     position: relative;
     font-size: 1.5rem;
@@ -490,7 +484,6 @@
     z-index: 1;
 }
 
-/* The creative line accent */
 .fg-title::after {
     content: '';
     flex-grow: 1;
@@ -498,7 +491,6 @@
     background: linear-gradient(to right, rgba(74, 4, 4, 0.2), transparent);
 }
 
-/* Special dot for the start of the title */
 .fg-title::before {
     content: '';
     width: 8px;
@@ -551,7 +543,6 @@
 .cert-side.left { left: 5%; transform: scale(0.85) rotateY(15deg); }
 .cert-side.right { right: 5%; transform: scale(0.85) rotateY(-15deg); }
 
-/* Caption Styling */
 .cert-caption {
     text-align: center;
     margin-top: 40px;
@@ -580,19 +571,18 @@
     line-height: 1.6;
 }
 
-/* Fixed Arrow Positioning */
 .carousel-controls-container {
     position: absolute;
-    top: 80%; /* Adjust this to move the arrows up or down */
+    top: 80%; 
     width: 100%;
     display: flex;
     justify-content: space-between;
     padding: 0 15%;
-    pointer-events: none; /* Allows clicking through to caption if needed */
+    pointer-events: none; 
 }
 
 .control-btn {
-    pointer-events: auto; /* Re-enables clicking on the buttons */
+    pointer-events: auto; 
     background: none;
     border: none;
     cursor: pointer;
@@ -621,7 +611,7 @@
     .cert-main { width: 90%; }
     .cert-side, .carousel-controls-container { display: none; }
 }
-/* --- Certificate CTA Button --- */
+
 .cert-caption .about-cta {
     display: inline-block;
     margin: 25px auto 0 auto;
@@ -642,7 +632,6 @@
     cursor: pointer;
 }
 
-/* Shine effect logic */
 .cert-caption .about-cta::after {
     content: '';
     position: absolute;
@@ -660,7 +649,6 @@
     transition: none;
 }
 
-/* Desktop Hover */
 .cert-caption .about-cta:hover {
     transform: translateY(-3px);
     letter-spacing: 2.5px;
@@ -673,7 +661,6 @@
     transition: left 0.7s ease-in-out;
 }
 
-/* Mobile Alignment Fix */
 @media (max-width: 992px) {
     .cert-caption .about-cta {
         display: flex;
@@ -693,7 +680,7 @@
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    background-color: #4a0404; /* Your signature dark red */
+    background-color: #4a0404; 
     color: white !important;
     padding: 14px 32px;
     border-radius: 50px;
@@ -708,7 +695,6 @@
     cursor: pointer;
 }
 
-/* Hover Effect: Turns white with a red border */
 .btn-download-cv:hover {
     transform: translateY(-5px);
     background-color: white !important;
@@ -717,7 +703,6 @@
     box-shadow: 0 15px 30px rgba(74, 4, 4, 0.25);
 }
 
-/* Icon Animation: The arrow moves down slightly on hover */
 .btn-icon {
     display: flex;
     align-items: center;
@@ -743,7 +728,7 @@
     }
 
     .header-watermark {
-        display: none; /* Prevents horizontal overflow */
+        display: none; 
     }
 
     .resume-tagline {
@@ -765,14 +750,14 @@
 
     /* 2. EXPERIENCE CARDS (STACKING & CENTERING) */
     .experience-container::before {
-        left: 15px; /* Moves timeline line to the left */
+        left: 15px; 
     }
 
     .experience-wide-card, 
     .experience-wide-card:nth-child(even) {
         flex-direction: column !important; 
         align-items: center;
-        text-align: center; /* Centers text for better mobile balance */
+        text-align: center; 
         border-radius: 20px;
         margin-bottom: 40px;
         width: 100%;
@@ -794,7 +779,7 @@
         padding: 25px 20px 35px 20px;
         display: flex;
         flex-direction: column;
-        align-items: center; /* Centers the button inside info block */
+        align-items: center; 
     }
 
     .exp-title {
@@ -803,7 +788,7 @@
     }
 
     .exp-bullets {
-        text-align: left; /* Keeps list readable while container is centered */
+        text-align: left;
         width: 100%;
         max-width: 320px; 
     }
@@ -856,7 +841,7 @@
     .carousel-controls-container {
         display: flex !important; 
         position: absolute;
-        top: 40%; /* Adjusted to sit over the image */
+        top: 40%; 
         left: 0;
         right: 0;
         transform: translateY(-50%);
@@ -899,7 +884,7 @@
         width: 100%;
         max-width: 280px;
         justify-content: center;
-        margin: 20px auto 0 auto !important; /* Forces perfect centering */
+        margin: 20px auto 0 auto !important; 
         font-size: 10px;
         padding: 14px 20px;
         letter-spacing: 1.5px;
