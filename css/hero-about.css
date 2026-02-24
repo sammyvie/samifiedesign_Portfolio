@@ -13,6 +13,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+   
     /* Split transitions to kill the 'ghost line' on scroll up */
     transition: 
         padding 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
@@ -105,7 +106,7 @@
 }
 
 .email-icon {
-    transform: translateY(1px); /* Optical alignment fix for the envelope icon */
+    transform: translateY(1px); 
 }
 
 /* ==========================================
@@ -118,8 +119,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative; /* CRITICAL for JS spotlights */
-    overflow: hidden;    /* Keeps the lights inside the section */
+    position: relative; 
+    overflow: hidden;    
 }
 
 /* FILM GRAIN OVERLAY - Adds that cinematic grit */
@@ -131,7 +132,7 @@
     opacity: 0.12;
     animation: grainMove 1s steps(4) infinite;
     pointer-events: none;
-    z-index: 2; /* Sits above the light, below the text */
+    z-index: 2; 
 }
 
 @keyframes grainMove {
@@ -143,7 +144,7 @@
 
 .hero-content {
     position: relative;
-    z-index: 10; /* Ensures text is always on top of the lights */
+    z-index: 10; 
     text-align: center;
     width: 100%;
 }
@@ -188,7 +189,6 @@
 @keyframes flickerOnlyLines {
     0%, 18%, 22%, 25%, 53%, 57%, 100% {
         border-color: rgba(255, 255, 255, 0.9);
-        /* Drop-shadow targets ONLY the border lines */
         filter: drop-shadow(0 -5px 8px rgba(139, 0, 0, 0.8)) 
                 drop-shadow(0 5px 8px rgba(139, 0, 0, 0.8));
     }
@@ -200,7 +200,7 @@
 
 .title-container {
     position: relative;
-    overflow: hidden; /* Keeps the glint inside the border area */
+    overflow: hidden; 
 }
 
 .title-container::before {
@@ -245,7 +245,7 @@
     0% {
         opacity: 0;
         transform: translateY(20px);
-        filter: blur(10px); /* Adds a premium "lens" focus effect */
+        filter: blur(10px); 
     }
     100% {
         opacity: 1;
@@ -319,7 +319,7 @@
    ABOUT SECTION: CREAM & BURGUNDY
    ========================================== */
    .about-section {
-    background-color: #fdf7f2; /* Light cream background */
+    background-color: #fdf7f2; 
     padding: 120px 0;
     color: #1a0101; 
     overflow: hidden;
@@ -351,7 +351,7 @@
     height: 520px;
     flex-shrink: 0;
     opacity: 0;
-    transform: translateX(-60px); /* Smooth slide from left */
+    transform: translateX(-60px); 
     transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -508,7 +508,7 @@
 
 /* 2. PROGRESS BAR ELEMENTS */
 .skill-row {
-    margin-bottom: 40px; /* More breathing room between bars */
+    margin-bottom: 40px; 
 }
 
 .label-group {
@@ -519,7 +519,7 @@
 }
 
 .label-group label {
-    font-size: 19px; /* Bold, clear labels */
+    font-size: 19px; 
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: 700;
@@ -531,7 +531,7 @@
     font-size: 19px;
     color: #8b0000;
     font-weight: 800;
-    font-family: 'Playfair Display', serif; /* Or your chosen serif font */
+    font-family: 'Playfair Display', serif; 
     font-style: italic;
     opacity: 0;
     transform: translateY(5px);
@@ -546,7 +546,7 @@
 /* THE TRACK (Background) */
 .bar-bg {
     width: 100%;
-    height: 12px; /* Substantial, premium thickness */
+    height: 12px; 
     background: #eee4dc;
     border-radius: 30px;
     overflow: hidden;
@@ -561,8 +561,7 @@
     background: linear-gradient(90deg, #4a0404 0%, #8b0000 100%);
     border-radius: 30px;
     position: relative;
-    box-shadow: 0 0 10px rgba(139, 0, 0, 0.2); /* Subtle glow */
-    /* Luxury Easing for the loading effect */
+    box-shadow: 0 0 10px rgba(139, 0, 0, 0.2); 
     transition: width 2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -583,7 +582,6 @@
     transform: translateX(-100%);
 }
 
-/* Animation trigger when section is in view */
 .skills-grid.active .bar-fill::after {
     animation: shimmerSweep 1.8s ease-out forwards;
     animation-delay: 1.2s;
@@ -594,7 +592,6 @@
     100% { transform: translateX(100%); }
 }
 
-/* 3. CENTER DIVIDER LINE (Desktop Only) */
 .center-line {
     position: absolute;
     left: 50%;
@@ -610,7 +607,7 @@
    ========================================== */
 @media (max-width: 992px) {
     .skills-grid {
-        grid-template-columns: 1fr; /* Stacks to single column */
+        grid-template-columns: 1fr; 
         gap: 30px;
     }
 
@@ -624,12 +621,12 @@
     }
 
     .bar-bg {
-        height: 10px; /* Slightly thinner for mobile but still bold */
+        height: 10px; 
     }
 
     .label-group label, 
     .percentage {
-        font-size: 15px; /* Scaled down for mobile clarity */
+        font-size: 15px; 
     }
 
     .skill-row {
@@ -670,7 +667,7 @@
     
     /* HERO SECTION */
     .portfolio-title {
-        font-size: clamp(2rem, 18vw, 6rem); /* Shrinks the massive text */
+        font-size: clamp(2rem, 18vw, 6rem); 
     }
     
     .title-container {
@@ -678,15 +675,15 @@
         padding: 2rem 0;
     }
     .tagline {
-        font-size: 11px;      /* Edit this to change tagline font size */
-        line-height: 1.6;     /* Improves readability on small screens */
-        margin: 2rem auto;    /* Reduces spacing around the text */
+        font-size: 11px;      
+        line-height: 1.6;    
+        margin: 2rem auto;   
     }
     
     .cta-button {
-        padding: 15px 40px;   /* Makes the button slightly smaller for mobile */
-        font-size: 10px;      /* Edit this to change button text size */
-        letter-spacing: 1px;  /* Reduces spacing to fit on one line */
+        padding: 15px 40px;   
+        font-size: 10px;      
+        letter-spacing: 1px; 
     }
     .name-label {
         padding-top: 6rem;
@@ -694,16 +691,15 @@
     }
 
     .name-label span {
-        width: auto; /* Allow the width to fit the content */
+        width: auto; 
         animation: typing 3s steps(30, end) forwards, blink 0.8s infinite;
-        white-space: nowrap; /* Keep it on one line */
+        white-space: nowrap; 
         border-right: 1px solid rgba(255, 255, 255, 0.5);
     }
 
-    /* Redefine the typing animation for mobile to reach 100% width */
     @keyframes typing { 
     from { width: 0; } 
-    to { width: 65%; } /* Changed from 30% to 100% */
+    to { width: 65%; } 
     }
 
 
@@ -721,7 +717,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* Split transitions to kill the 'ghost line' on scroll up */
     transition: 
         padding 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
         background 0.4s ease, 
@@ -766,14 +761,12 @@
     transition: color 0.3s ease, letter-spacing 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* UNIQUE HOVER: Text stretches out */
 .nav-links a:hover {
     color: #ffffff;
     letter-spacing: 0.5em;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
 }
 
-/* Neon Red Underline */
 .nav-links a::after {
     content: '';
     position: absolute;
@@ -791,7 +784,6 @@
     width: 100%;
 }
 
-/* SOCIAL ICONS (Fixed Email) */
 .social-icons {
     display: flex;
     gap: 1.5rem;
@@ -813,24 +805,22 @@
 }
 
 .email-icon {
-    transform: translateY(1px); /* Optical alignment fix for the envelope icon */
+    transform: translateY(1px);
 }
 
 /* ==========================================
    3. HERO & DYNAMIC BACKGROUND SECTION
    ========================================== */
 .hero-gradient {
-    /* Set a deep dark base so the JS spotlights pop */
     background: #0d0101; 
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative; /* CRITICAL for JS spotlights */
-    overflow: hidden;    /* Keeps the lights inside the section */
+    position: relative; 
+    overflow: hidden;    
 }
 
-/* FILM GRAIN OVERLAY - Adds that cinematic grit */
 .hero-gradient::after {
     content: '';
     position: absolute;
@@ -839,7 +829,7 @@
     opacity: 0.12;
     animation: grainMove 1s steps(4) infinite;
     pointer-events: none;
-    z-index: 2; /* Sits above the light, below the text */
+    z-index: 2; 
 }
 
 @keyframes grainMove {
@@ -851,7 +841,7 @@
 
 .hero-content {
     position: relative;
-    z-index: 10; /* Ensures text is always on top of the lights */
+    z-index: 10; 
     text-align: center;
     width: 100%;
 }
@@ -908,7 +898,7 @@
 
 .title-container {
     position: relative;
-    overflow: hidden; /* Keeps the glint inside the border area */
+    overflow: hidden; 
 }
 
 .title-container::before {
@@ -942,18 +932,16 @@
     line-height: 1;
     display: inline-block;
     
-    /* Added initialFade: it plays once for 2 seconds when the page loads */
     animation: initialFade 2s ease-out forwards,
                floatTitle 6s ease-in-out infinite 2s, 
                flickerNeon 4s linear infinite 2s;
 }
 
-/* New Animation: Starts invisible and slightly lower, then rises and fades in */
 @keyframes initialFade {
     0% {
         opacity: 0;
         transform: translateY(20px);
-        filter: blur(10px); /* Adds a premium "lens" focus effect */
+        filter: blur(10px); 
     }
     100% {
         opacity: 1;
@@ -1027,7 +1015,7 @@
    ABOUT SECTION: CREAM & BURGUNDY
    ========================================== */
    .about-section {
-    background-color: #fdf7f2; /* Light cream background */
+    background-color: #fdf7f2; 
     padding: 120px 0;
     color: #1a0101; 
     overflow: hidden;
@@ -1059,7 +1047,7 @@
     height: 520px;
     flex-shrink: 0;
     opacity: 0;
-    transform: translateX(-60px); /* Smooth slide from left */
+    transform: translateX(-60px); 
     transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -1069,7 +1057,6 @@
     object-fit: cover;
     border-radius: 12px;
     z-index: 2;
-    /* Soft shadow matches the premium aesthetic */
     box-shadow: 0 20px 40px rgba(74, 4, 4, 0.1);
     transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -1099,7 +1086,6 @@
 .about-hero.active .about-stats      { transition-delay: 0.8s; }
 .about-hero.active .about-cta        { transition-delay: 1.0s; }
 
-/* HOVER: Subtle lift instead of border shift */
 .about-hero:hover .profile-img {
     transform: translateY(-8px);
 }
@@ -1132,7 +1118,6 @@
    SKILLS & PROGRESS BARS (CINEMATIC)
    ========================================== */
 
-/* 1. STUDENT STATS - Refined Typography */
 .about-stats {
     display: flex;
     gap: 40px;
@@ -1204,7 +1189,6 @@
     color: #4a0404;
 }
 
-/* Percentage with "Reveal" animation */
 .percentage {
     font-size: 15px;
     color: #8b0000;
@@ -1237,11 +1221,9 @@
     background: linear-gradient(90deg, #4a0404 0%, #8b0000 100%);
     border-radius: 20px;
     position: relative;
-    /* Luxury Easing */
     transition: width 2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* THE GLINT/SHIMMER EFFECT */
 .bar-fill::after {
     content: '';
     position: absolute;
@@ -1301,7 +1283,7 @@
     
     /* HERO SECTION */
     .portfolio-title {
-        font-size: clamp(2rem, 18vw, 6rem); /* Shrinks the massive text */
+        font-size: clamp(2rem, 18vw, 6rem); 
     }
     
     .title-container {
@@ -1309,15 +1291,15 @@
         padding: 2rem 0;
     }
     .tagline {
-        font-size: 11px;      /* Edit this to change tagline font size */
-        line-height: 1.6;     /* Improves readability on small screens */
-        margin: 2rem auto;    /* Reduces spacing around the text */
+        font-size: 11px;      
+        line-height: 1.6;  
+        margin: 2rem auto;   
     }
     
     .cta-button {
-        padding: 15px 40px;   /* Makes the button slightly smaller for mobile */
-        font-size: 10px;      /* Edit this to change button text size */
-        letter-spacing: 1px;  /* Reduces spacing to fit on one line */
+        padding: 15px 40px;  
+        font-size: 10px;      
+        letter-spacing: 1px;  
     }
     .name-label {
         padding-top: 6rem;
@@ -1325,16 +1307,15 @@
     }
 
     .name-label span {
-        width: auto; /* Allow the width to fit the content */
+        width: auto; 
         animation: typing 3s steps(30, end) forwards, blink 0.8s infinite;
-        white-space: nowrap; /* Keep it on one line */
+        white-space: nowrap; 
         border-right: 1px solid rgba(255, 255, 255, 0.5);
     }
 
-    /* Redefine the typing animation for mobile to reach 100% width */
     @keyframes typing { 
     from { width: 0; } 
-    to { width: 65%; } /* Changed from 30% to 100% */
+    to { width: 65%; } 
     }
 /* ==========================================
    MOBILE RESPONSIVENESS (992px and below)
@@ -1350,7 +1331,7 @@
     }
 
     .profile-frame {
-        width: 260px; /* Scaled down for better proportion */
+        width: 260px; 
         height: 380px;
         margin: 0 auto;
     }
@@ -1364,13 +1345,13 @@
 
     /* BIO DESCRIPTION - Smaller & Balanced */
     .about-para {
-        font-size: 13px;        /* Reduced for a cleaner look */
+        font-size: 13px;      
         line-height: 1.7;       
         margin: 0 auto 35px auto; 
         width: 100%;
-        max-width: 450px;       /* Keeps text block from feeling too wide */
+        max-width: 450px;    
         padding-inline: 10px;
-        text-align: center;     /* Center align looks better than justify on mobile */
+        text-align: center;    
         color: rgba(26, 1, 1, 0.85);
     }
 
@@ -1379,13 +1360,13 @@
         display: flex;
         justify-content: space-between;
         width: 100%;
-        max-width: 380px;      /* Prevents stats from stretching too far */
+        max-width: 380px;     
         margin: 0 auto 45px auto;
         gap: 10px;
     }
 
     .stat-item {
-        flex: 1;               /* Equal column widths */
+        flex: 1;              
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -1393,15 +1374,15 @@
     }
 
     .stat-item strong {
-        font-size: 0.9rem;     /* Small enough to fit on one line */
+        font-size: 0.9rem;    
         letter-spacing: 0.5px;
-        white-space: nowrap;   /* No awkward line breaks */
+        white-space: nowrap; 
         color: #4a0404;
         margin-bottom: 5px;
     }
 
     .stat-item span {
-        font-size: 7.5px;      /* Tiny, elegant sub-labels */
+        font-size: 7.5px;     
         text-transform: uppercase;
         letter-spacing: 1px;
         display: block;
@@ -1426,28 +1407,25 @@
 
     .skills-title {
         font-size: 17px;       
-        letter-spacing: 4px;   /* Airy, premium feel */
+        letter-spacing: 4px; 
         margin-bottom: 35px;
         text-align: center;
         text-transform: uppercase;
         color: #4a0404;
     }
-    /* GLOBAL BUTTON ANIMATION FIX (Mobile) */
     .cta-button, .about-cta {
-        /* Ensure transitions are explicitly defined for mobile */
         transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1) !important;
         cursor: pointer;
         display: inline-block;
-        -webkit-tap-highlight-color: transparent; /* Removes the ugly blue box on tap */
+        -webkit-tap-highlight-color: transparent; 
     }
 
-    /* Mobile "Tap" Effect (Replaces Hover) */
     .cta-button:active, .about-cta:active,
     .cta-button:hover, .about-cta:hover {
-        transform: translateY(-5px) scale(1.02); /* Subtle lift */
-        letter-spacing: 3px; /* The "Stretch" effect you liked */
+        transform: translateY(-5px) scale(1.02); 
+        letter-spacing: 3px; 
         box-shadow: 0 15px 30px rgba(74, 4, 4, 0.2);
-        background-color: #8b0000; /* Darker red on click */
+        background-color: #8b0000; 
         color: white !important;
     }
 }
@@ -1457,19 +1435,19 @@
    ========================================== */
 @media (max-width: 480px) {
     .portfolio-title {
-        font-size: 3.2rem;     /* Prevents title overflow */
+        font-size: 3.2rem;    
     }
     
     .about-heading {
-        font-size: 1.8rem;     /* Keeps heading proportional */
+        font-size: 1.8rem;    
     }
     
     .stat-item strong {
-        font-size: 0.85rem;    /* Extra shrink for very narrow phones */
+        font-size: 0.85rem;   
     }
 
     .about-para {
-        font-size: 12.5px;     /* Ultra-clean reading size */
+        font-size: 12.5px;     
     }
 }
    }}
