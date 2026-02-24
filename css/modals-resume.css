@@ -530,7 +530,7 @@
 }
 
 .cert-main {
-    width: 500px;
+    width: 600px;
     z-index: 5;
     box-shadow: 0 15px 40px rgba(74, 4, 4, 0.15);
     border: 6px solid #fff;
@@ -559,7 +559,7 @@
 }
 
 .cert-caption h4 {
-    font-size: 24px;
+    font-size: 28px;
     color: #1a0101;
     font-weight: 800;
     margin-bottom: 10px;
@@ -576,7 +576,7 @@
 
 .cert-caption p {
     color: #666;
-    font-size: 14px;
+    font-size: 19px;
     line-height: 1.6;
 }
 
@@ -620,6 +620,70 @@
 @media (max-width: 768px) {
     .cert-main { width: 90%; }
     .cert-side, .carousel-controls-container { display: none; }
+}
+/* --- Certificate CTA Button --- */
+.cert-caption .about-cta {
+    display: inline-block;
+    margin: 25px auto 0 auto;
+    padding: 12px 30px;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    background-color: #4a0404;
+    color: white !important;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0 4px 15px rgba(74, 4, 4, 0.15);
+    border: none;
+    cursor: pointer;
+}
+
+/* Shine effect logic */
+.cert-caption .about-cta::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right, 
+        rgba(255, 255, 255, 0) 0%, 
+        rgba(255, 255, 255, 0.3) 50%, 
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg);
+    transition: none;
+}
+
+/* Desktop Hover */
+.cert-caption .about-cta:hover {
+    transform: translateY(-3px);
+    letter-spacing: 2.5px;
+    background-color: #8b0000;
+    box-shadow: 0 8px 25px rgba(74, 4, 4, 0.3);
+}
+
+.cert-caption .about-cta:hover::after {
+    left: 150%;
+    transition: left 0.7s ease-in-out;
+}
+
+/* Mobile Alignment Fix */
+@media (max-width: 992px) {
+    .cert-caption .about-cta {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-width: 220px;
+        font-size: 9px;
+        padding: 14px 20px;
+    }
 }
 
 /* ==========================================

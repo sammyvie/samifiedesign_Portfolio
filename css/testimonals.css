@@ -9,9 +9,9 @@
 
 .testimonial-card {
     background: white;
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
-    padding: 60px;
+    padding: 70px;
     border-radius: 20px;
     text-align: center;
     position: relative;
@@ -31,7 +31,7 @@
 
 .testi-text {
     font-size: 1.25rem;
-    color: #555;
+    color: #4a0404;
     font-style: italic;
     line-height: 1.8;
     margin-bottom: 30px;
