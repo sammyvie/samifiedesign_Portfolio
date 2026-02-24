@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
         emailjs.init("YOUR_PUBLIC_KEY"); 
     }
 
-    // Function to initialize Bootstrap carousels and force them to cycle
     const initCarousel = (selector, interval) => {
         const el = document.querySelector(selector);
         if (el && typeof bootstrap !== 'undefined') {
@@ -14,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ride: 'carousel', 
                 pause: 'hover' 
             });
-            carouselInstance.cycle(); // Forces the carousel to start moving on its own
+            carouselInstance.cycle(); 
         }
     };
     
@@ -194,7 +193,6 @@ document.addEventListener('DOMContentLoaded', () => {
             navCentral.classList.toggle('mobile-active');
             navSocials.classList.toggle('mobile-active');
             
-            // Prevent body scroll when menu is open
             document.body.style.overflow = navCentral.classList.contains('mobile-active') ? 'hidden' : 'auto';
         });
 
