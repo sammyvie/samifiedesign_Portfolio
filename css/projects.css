@@ -1,50 +1,27 @@
 /* ==========================================
-   PORTFOLIO SECTION - REFINED
+   PORTFOLIO SECTION - REFINED & STABILIZED
    ========================================== */
    .project-section {
     background-color: #fdf7f2;
     padding: 100px 0;
+    overflow-x: hidden; /* Stops horizontal "shaking" on mobile */
 }
 
 .project-container {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 25px;
+    /* This ensures the container itself doesn't expand wildly */
+    box-sizing: border-box; 
 }
 
+/* THE HEADER BOX */
 .portfolio-header-box {
     border: 2px solid #8b0000;
     border-radius: 12px;
     padding: 40px;
     text-align: center;
     margin-bottom: 90px;
-}
-
-/* Replicating the "Red Section" style for the light section descriptions */
-.project-desc-accent {
-    color: #4a0404 !important; /* Deep maroon/brown for readability */
-    border-left: 3px solid #8b0000; /* That thick red line you liked */
-    padding-left: 20px;
-    text-align: left; /* Left alignment is key for this editorial look */
-    margin: 30px auto;
-    font-weight: 500;
-    max-width: 90%;
-    line-height: 1.8;
-}
-
-/* Enhancing the Bold keywords to match your theme */
-.project-desc-accent strong {
-    color: #8b0000;
-    font-weight: 800;
-}
-
-/* Ensures the container stays tidy */
-.project-card {
-    transition: all 0.3s ease;
-}
-
-.project-card:hover .project-desc-accent {
-    border-left-color: #ee7878; /* Line changes color on hover for a creative touch */
 }
 
 .portfolio-main-title {
@@ -56,71 +33,124 @@
     margin-bottom: 20px;
 }
 
-.portfolio-subtitle {
-    font-size: 17px;
-    color: #4a0404;
-    max-width: 700px;
-    margin: 0 auto;
-    line-height: 1.6;
-    letter-spacing: 0.3px;
-}
-
-/* Grid & Cards */
+/* THE GRID SYSTEM */
 .project-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 90px;
+    /* On desktop: 2 equal columns. On mobile: 1 column */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 80px 60px; /* Large vertical gap prevents overlapping */
+    width: 100%;
 }
 
+/* THE PROJECT CARD */
 .project-card {
     display: flex;
     flex-direction: column;
-    align-items: center; 
-    text-align: center;
-    height: 200%;
-    width: 200%;
-    padding-bottom: 40px;
+    text-align: left; /* Editorial alignment */
+    height: 100%;
+    transition: transform 0.3s ease;
+    position: relative;
 }
 
+/* THE IMAGE CONTAINER (The Laptop) */
+.laptop-main-display {
+    width: 100%;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    position: relative;
+    background: #000; /* Backdrop for images */
+}
+
+.laptop-static-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .laptop-static-img {
+    transform: scale(1.03);
+}
+
+/* TITLES */
 .project-card-title {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     font-weight: 800;
     color: #8b0000;
-    margin-bottom: 22px;
+    margin-bottom: 15px;
     font-style: italic;
     letter-spacing: -0.2px;
 }
 
-.project-desc {
-    font-size: 14.5px;
-    color: #4a0404;
-    margin: 25px auto 30px auto;
-    line-height: 1.8;
-    flex-grow: 1; 
-    max-width: 88%; 
-    display: block; 
+/* THE DESCRIPTION ACCENT (The "Sam" Box) */
+.project-desc-accent {
+    color: #4a0404 !important;
+    border-left: 4px solid #8b0000;
+    padding: 10px 0 10px 20px;
+    margin: 10px 0 30px 0;
     font-weight: 500;
+    line-height: 1.8;
+    font-size: 14.5px;
+    flex-grow: 1; /* This pushes the button to the bottom */
 }
 
-/* Button Centering */
+.project-desc-accent strong {
+    color: #8b0000;
+    font-weight: 800;
+}
+
+/* BUTTON CENTERING & FIX */
 .project-card .about-cta {
-    margin: auto auto 0 auto;
-    display: inline-block;
-    width: fit-content;
+    align-self: flex-start; /* Keeps it left-aligned with the text */
     background-color: #4a0404;
     color: white !important;
     padding: 14px 35px;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 11px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    border: none;
-    cursor: pointer;
     transition: all 0.3s ease;
+    border: none;
 }
 
+.project-card .about-cta:hover {
+    background-color: #8b0000;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(139, 0, 0, 0.2);
+}
+
+/* ==========================================
+   MOBILE FIX (PIXEL 7 / 992px)
+   ========================================== */
+@media (max-width: 992px) {
+    .portfolio-main-title {
+        font-size: 2rem;
+    }
+    
+    .project-grid {
+        gap: 60px; /* Tighter gap for mobile */
+    }
+
+    .project-card {
+        text-align: center; /* Center for mobile thumb-scrolling */
+    }
+
+    .project-desc-accent {
+        border-left: none;
+        border-top: 3px solid #8b0000;
+        padding-left: 0;
+        padding-top: 20px;
+        text-align: center;
+    }
+
+    .project-card .about-cta {
+        align-self: center; /* Centers button on mobile */
+    }
+}
 /* THE LAPTOP BOX */
 .laptop-main-display {
     position: relative;
