@@ -42,10 +42,9 @@
     letter-spacing: 0.3px;
 }
 
-/* 2. GRID & CARDS (NETLIFY STABILIZED) */
+/* 2. GRID & CARDS (DESKTOP) */
 .project-grid {
     display: grid;
-    /* Grid-template handles responsiveness automatically */
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 100px 60px; 
     width: 100%;
@@ -64,12 +63,12 @@
 .laptop-main-display, .phone-main-display {
     position: relative;
     cursor: pointer;
-    /* Removed background: #000 to keep it transparent */
     width: 100%;
     margin-bottom: 25px;
-    display: flex;         /* Added to center the image inside */
+    display: flex;        
     justify-content: center;
     align-items: center;
+    background: transparent; /* Keeping it clean */
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -77,11 +76,12 @@
     transform: translateY(-12px) scale(1.02);
     z-index: 5;
 }
+
 .laptop-static-img, .phone-screen-window img {
     max-width: 100%;
     height: auto;
     display: block;
-    margin: 0 auto; /* Hard center */
+    margin: 0 auto;
 }
 
 /* 4. SHARED HOVER LOGIC */
@@ -95,6 +95,7 @@
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: 10;
+    border-radius: 12px;
 }
 
 .laptop-main-display:hover .hover-overlay,
@@ -122,7 +123,6 @@
     letter-spacing: -0.2px;
 }
 
-/* The Sam-Style Accent Box */
 .project-desc-accent {
     color: #4a0404 !important;
     border-left: 4px solid #8b0000;
@@ -131,13 +131,7 @@
     font-weight: 500;
     line-height: 1.8;
     font-size: 14.5px;
-    /* This flex-grow ensures buttons align at the bottom */
     flex-grow: 1;
-}
-
-.project-desc-accent strong {
-    color: #8b0000;
-    font-weight: 800;
 }
 
 /* 6. BUTTONS */
@@ -153,15 +147,6 @@
     letter-spacing: 1.5px;
     text-transform: uppercase;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    border: none;
-    cursor: pointer;
-    display: inline-block;
-}
-
-.project-card .about-cta:hover {
-    background-color: #8b0000;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(139, 0, 0, 0.2);
 }
 
 /* 7. DARK PROJECT ROW (CINEMATIC) */
@@ -174,34 +159,9 @@
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
-    z-index: 1;
-    overflow: hidden;
 }
 
-.dark-project-row .project-card-title { color: #ffffff !important; }
-
-.dark-project-row .project-desc-accent { 
-    color: rgba(253, 247, 242, 0.85) !important; 
-    border-left: 2px solid rgba(139, 0, 0, 0.5); 
-}
-
-.dark-project-row .light-btn {
-    background-color: #ffffff !important;
-    color: #4a0404 !important;
-    padding: 16px 40px;
-    border-radius: 50px; 
-    font-weight: 800;
-    display: inline-block;
-    transition: all 0.4s ease;
-    text-decoration: none;
-}
-
-.dark-project-row .light-btn:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 25px rgba(186, 22, 22, 0.4);
-}
-
-/* 8. MODALS (FIXED OVERLAYS) */
+/* 8. MODALS */
 .laptop-modal-overlay, .phone-modal-overlay {
     display: none;
     position: fixed !important;
@@ -214,105 +174,59 @@
     backdrop-filter: blur(12px);
 }
 
-.laptop-modal-content {
-    position: relative;
-    width: 90vw;
-    height: 85vh;
-    max-width: 1200px;
-    background: #1a1a1a;
-    border: 12px solid #333;
-    border-radius: 20px;
-    overflow: hidden;
-}
+/* ==========================================
+   9. SEPARATED MOBILE DESIGN (The Overhaul)
+   ========================================== */
 
-.phone-modal-content {
-    position: relative;
-    width: 320px;
-    height: 650px;
-    background: #000;
-    border: 10px solid #1a1a1a;
-    border-radius: 40px;
-    overflow: hidden;
-}
-
-.laptop-screen-window, .phone-screen-window {
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
-}
-
-.close-laptop, .close-phone {
-    position: absolute;
-    top: -55px; right: 0;
-    color: #fff;
-    font-size: 50px;
-    cursor: pointer;
-}
-
-/* Custom Scrollbars */
-.laptop-screen-window::-webkit-scrollbar, .phone-screen-window::-webkit-scrollbar {
-    width: 8px;
-}
-.laptop-screen-window::-webkit-scrollbar-thumb, .phone-screen-window::-webkit-scrollbar-thumb {
-    background: #8b0000;
-    border-radius: 10px;
-}
-
-/* 9. FULL RESPONSIVE DESIGN (992px and below) */
 @media (max-width: 992px) {
     .project-section { padding: 60px 0; }
     
-    .portfolio-header-box {
-        padding: 30px 20px;
-        margin-bottom: 60px;
-        border-width: 1.5px;
-    }
-
-    .portfolio-main-title { font-size: 2rem; }
-
     .project-grid {
-        grid-template-columns: 1fr; 
-        gap: 70px; 
+        grid-template-columns: 1fr; /* Stack everything */
+        gap: 80px; 
+        justify-items: center; /* Center the cards in the grid */
     }
 
     .project-card { 
-        text-align: center; 
-        padding-bottom: 20px;
+        text-align: center; /* Center all text */
+        align-items: center; /* Center all flex items (images/buttons) */
+        max-width: 500px; 
+        padding-bottom: 40px;
     }
 
-    /* Mobile Interaction States */
-    .laptop-main-display:hover, 
-    .laptop-main-display:active {
-        transform: translateY(-8px) scale(1.01);
+    /* Floating Image Fix */
+    .laptop-main-display, .phone-main-display {
+        background: transparent !important; 
+        margin-bottom: 30px;
+        width: 100%;
     }
 
-    .laptop-main-display:active .hover-overlay,
-    .phone-main-display:active .hover-overlay-mobile {
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
-
-    /* Button "Stretch" Animation on Mobile */
-    .project-card .about-cta {
-        align-self: center;
-        padding: 12px 30px;
-        font-size: 10px;
-    }
-
-    .project-card .about-cta:active {
-        letter-spacing: 4px; 
-        transform: translateY(-2px);
-        background-color: #8b0000;
-    }
-
+    /* ACCENT LINE RESET - Centers the line for mobile */
     .project-desc-accent {
-        max-width: 100%;
-        font-size: 13px;
-        margin: 25px 0;
-        padding: 15px 0 0 0;
         border-left: none;
         border-top: 2px solid #8b0000;
+        padding: 20px 0 0 0;
+        margin: 20px auto 35px auto;
         text-align: center;
+        max-width: 90%;
+    }
+
+    /* CENTER BUTTON */
+    .project-card .about-cta {
+        align-self: center;
+        padding: 16px 40px;
+        font-size: 11px;
+    }
+
+    /* Mobile Interaction (Tap) */
+    .project-card .about-cta:active {
+        letter-spacing: 4px; /* The Sam Stretch */
+        background-color: #8b0000;
+        transform: scale(0.95);
+    }
+
+    .laptop-main-display:active .hover-overlay {
+        opacity: 1 !important;
     }
 
     .dark-project-row {
@@ -321,17 +235,11 @@
         margin: 40px 0;
         padding: 60px 20px;
     }
-
-    .laptop-modal-content {
-        width: 94%;
-        height: 75vh;
-        border-width: 8px;
-    }
 }
 
-/* PIXEL 7 / EXTRA SMALL (480px and below) */
+/* PIXEL 7 / SMALL SCREEN */
 @media (max-width: 480px) {
-    .portfolio-main-title { font-size: 1.6rem; }
-    .project-card-title { font-size: 1.3rem; }
-    .phone-modal-content { width: 290px; height: 590px; border-width: 6px; }
+    .portfolio-main-title { font-size: 1.6rem; line-height: 1.2; }
+    .project-card-title { font-size: 1.4rem; }
+    .phone-main-display img { max-width: 80%; } /* Stops phone image from being too huge */
 }
