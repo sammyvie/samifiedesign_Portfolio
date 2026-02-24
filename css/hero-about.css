@@ -2,85 +2,11 @@
 /* ==========================================
    2. HEADER & NAVIGATION (FIXED & UNIQUE)
    ========================================== */
-.header-nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    padding: 2.5rem 4rem;
-    background: rgba(13, 1, 1, 0); 
-    border-bottom: 1px solid transparent;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* Split transitions to kill the 'ghost line' on scroll up */
-    transition: 
-        padding 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-        background 0.4s ease, 
-        box-shadow 0.2s ease, 
-        border-color 0.2s ease;
-}
-
-.header-nav.scrolled {
-    background: rgba(13, 1, 1, 0.85); 
-    padding: 1rem 4rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.header-left {
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-}
 
 .logo-img {
     height: 45px;
     width: auto;
     object-fit: contain;
-}
-
-.nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-    font-size: 18px;
-    text-transform: uppercase;
-    letter-spacing: 0.3em;
-}
-
-.nav-links a {
-    color: rgba(255, 255, 255, 0.6);
-    text-decoration: none;
-    position: relative;
-    display: inline-block;
-    transition: color 0.3s ease, letter-spacing 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* UNIQUE HOVER: Text stretches out */
-.nav-links a:hover {
-    color: #ffffff;
-    letter-spacing: 0.5em;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
-}
-
-/* Neon Red Underline */
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    width: 0;
-    height: 1px;
-    background: #8b0000;
-    box-shadow: 0 0 8px #ff0000;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    transform: translateX(-50%);
-}
-
-.nav-links a:hover::after {
-    width: 100%;
 }
 
 /* SOCIAL ICONS (Fixed Email) */
