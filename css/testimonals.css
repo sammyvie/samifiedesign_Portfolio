@@ -3,7 +3,7 @@
    TESTIMONIALS SECTION
    ========================================== */
    .testimonials-section {
-    background-color: #fdf7f2; /* Matches About/Resume */
+    background-color: #fdf7f2; 
     padding: 100px 0;
 }
 
@@ -52,7 +52,6 @@
     text-transform: uppercase;
 }
 
-/* Custom Indicators */
 .carousel-indicators-custom {
     display: flex;
     justify-content: center;
@@ -84,20 +83,20 @@
     }
 
     .testimonial-card {
-        padding: 40px 25px; /* Reduced from 60px */
+        padding: 40px 25px;
         margin: 0 10px;
         border-radius: 25px;
     }
 
     .quote-icon {
-        font-size: 4rem; /* Scaled down from 8rem */
+        font-size: 4rem; 
         top: -10px;
         left: 20px;
-        opacity: 0.2; /* Slightly more visible since it's smaller */
+        opacity: 0.2; 
     }
 
     .testi-text {
-        font-size: 1rem; /* Better for mobile reading */
+        font-size: 1rem; 
         line-height: 1.6;
         margin-bottom: 25px;
     }
@@ -111,7 +110,6 @@
         font-size: 0.7rem;
     }
 
-    /* Adjusting Indicators for touch */
     .carousel-indicators-custom {
         margin-top: 30px;
         gap: 8px;
@@ -127,7 +125,6 @@
     }
 }
 
-/* Extra Small Devices */
 @media (max-width: 480px) {
     .testimonial-card {
         padding: 35px 20px;
