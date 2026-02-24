@@ -3,8 +3,7 @@
    ========================================== */
    .contact-section {
     padding: 100px 0;
-    background-color: #fdf7f2; /* Matches About/Resume */
-
+    background-color: #fdf7f2; 
 }
 
 .contact-wrapper {
@@ -122,7 +121,7 @@
     padding: 140px 0 60px;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     overflow: hidden;
-    position: relative; /* Isolates the footer container */
+    position: relative; 
 }
 
 .footer-main-content {
@@ -247,15 +246,15 @@
    MODAL CLOSE BUTTONS (THE "X" FIX)
    ========================================== */
 .close-phone, .close-laptop {
-    position: fixed; /* Fixed prevents it from staying in the footer flow */
+    position: fixed; 
     top: 30px;
     right: 40px;
     font-size: 40px;
     color: white;
-    z-index: 9999; /* Higher than footer */
+    z-index: 9999; 
     cursor: pointer;
     line-height: 1;
-    display: none; /* Controlled by JS open/close */
+    display: none; 
 }
 
 /* GHOST PREVENTION */
@@ -279,7 +278,7 @@ footer::before, footer::after {
 
     .contact-wrapper {
         display: flex;
-        flex-direction: column; /* Stacks Info Panel on top of Form */
+        flex-direction: column; 
         margin-top: 30px;
         border-radius: 24px;
         overflow: hidden;
@@ -312,7 +311,7 @@ footer::before, footer::after {
 
     .info-item {
         display: flex;
-        flex-direction: column; /* Forces Icon, Label, and Text to stack vertically */
+        flex-direction: column; 
         align-items: center;
         margin-bottom: 30px;
         width: 100%;
@@ -371,7 +370,7 @@ footer::before, footer::after {
     .form-group textarea {
         width: 100%;
         padding: 14px 18px !important;
-        font-size: 14px !important; /* Standard size to prevent mobile browser zoom */
+        font-size: 14px !important; 
         background: #f9f9f9 !important;
         border: 1px solid rgba(0,0,0,0.08) !important;
         border-radius: 10px !important;
