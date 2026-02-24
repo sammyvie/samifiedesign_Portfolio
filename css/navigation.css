@@ -7,31 +7,28 @@
     left: 0;
     width: 100%;
     z-index: 1000;
-    background: transparent !important; /* Removes the full-width bar */
+    background: transparent !important; 
     padding: 25px 0; 
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 2. THE FLOATING PILL 
-   - This is the only part with a background.
-*/
+/* 2. THE FLOATING PILL */
 .nav-inner-container {
-    max-width: 1150px; /* Adjust this to control how wide the pill is */
+    max-width: 1150px; 
     width: 92%;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 12px 35px;
-    background:#2c0202; /* Semi-transparent dark burgundy */
-    backdrop-filter: blur(15px); /* Glassmorphism effect */
+    background:#2c0202; 
+    backdrop-filter: blur(15px); 
     -webkit-backdrop-filter: blur(15px);
     border-radius: 100px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     transition: all 0.4s ease;
 }
 
-/* SCROLL EFFECT - Pill shrinks and gets darker */
 .header-nav.scrolled {
     padding: 15px 0;
 }
@@ -43,7 +40,6 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* 3. LAYOUT ZONES (Prevents overlapping) */
 .nav-brand {
     flex: 1;
     display: flex;
@@ -51,7 +47,7 @@
 }
 
 .nav-central {
-    flex: 2; /* Gives more room for the Home/About/Project links */
+    flex: 2; 
     display: flex;
     justify-content: center;
 }
@@ -64,8 +60,6 @@
 }
 
 /* 4. ELEMENT STYLING */
-
-/* Logo */
 .nav-brand .logo-img {
     height: 42px;
     width: auto;
@@ -103,7 +97,7 @@
 .nav-socials img {
     width: 18px;
     height: 18px;
-    filter: brightness(0) invert(1); /* Makes all icons white to match text */
+    filter: brightness(0) invert(1); 
     opacity: 0.5;
     transition: 0.3s ease;
 }
@@ -141,13 +135,12 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: #2c0202; /* Your dark burgundy */
+        background: #2c0202; 
         border-radius: 100px;
         border: 1px solid rgba(255, 255, 255, 0.1);
         z-index: 2005;
     }
 
-    /* Hide desktop links and socials until toggled */
     .nav-central:not(.mobile-active), 
     .nav-socials:not(.mobile-active) {
         display: none !important;
@@ -156,7 +149,6 @@
     .nav-brand { flex: 1; display: flex; justify-content: flex-start; }
     .nav-brand .logo-img { height: 30px; width: auto; }
 
-    /* 3. DYNAMIC HAMBURGER (For your JS injection) */
     .hamburger {
         display: flex !important;
         flex-direction: column;
@@ -189,7 +181,7 @@
         position: fixed;
         top: 0;
         right: 0;
-        width: 75%; /* Draw-out style */
+        width: 75%; 
         height: 50vh;
         background: rgba(26, 1, 1, 0.98); 
         backdrop-filter: blur(15px);
@@ -223,7 +215,6 @@
     }
 
     .portfolio-title {
-        /* SAFE CLAMP: Fits Pixel 7 perfectly */
         font-size: clamp(2.3rem, 10vw, 5rem) !important;
         display: block;
         width: 100%;
@@ -239,7 +230,6 @@
 
     .tagline { font-size: 10.5px; line-height: 1.6; padding: 0 10px; margin: 2rem auto; }
 
-    /* 6. ABOUT SECTION FIXES */
     .about-section { padding: 60px 0; }
     .about-hero { flex-direction: column; text-align: center; gap: 30px; }
     
