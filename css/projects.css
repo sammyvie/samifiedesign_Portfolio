@@ -1,5 +1,5 @@
 /* ==========================================
-   PORTFOLIO SECTION - THE FULL "UNCUT" VERSION
+   PORTFOLIO SECTION - THE FINAL BOSS (FULL CODE)
    ========================================== */
 
    .project-section {
@@ -42,11 +42,12 @@
     letter-spacing: 0.3px;
 }
 
-/* 2. GRID & CARDS */
+/* 2. GRID & CARDS (NETLIFY STABILIZED) */
 .project-grid {
     display: grid;
+    /* This ensures they don't squash on smaller desktops */
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 80px 60px;
+    gap: 100px 60px; 
     width: 100%;
 }
 
@@ -56,6 +57,7 @@
     text-align: left;
     height: 100%;
     position: relative;
+    /* Smooth transitions for the whole card */
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -68,11 +70,13 @@
     box-shadow: 0 15px 35px rgba(0,0,0,0.1);
     width: 100%;
     margin-bottom: 25px;
+    background: #000;
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.laptop-main-display:hover {
+.laptop-main-display:hover, .phone-main-display:hover {
     transform: translateY(-12px) scale(1.02);
+    z-index: 5;
 }
 
 .laptop-static-img, .phone-screen-window img {
@@ -81,7 +85,7 @@
     display: block;
 }
 
-/* 4. HOVER OVERLAYS */
+/* 4. SHARED HOVER LOGIC */
 .hover-overlay, .hover-overlay-mobile {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -105,7 +109,8 @@
     text-transform: uppercase;
     border: 1.5px solid white;
     padding: 12px 24px;
-    font-size: 12px;
+    font-size: 11px;
+    letter-spacing: 1px;
 }
 
 /* 5. TEXT & TITLES */
@@ -118,6 +123,7 @@
     letter-spacing: -0.2px;
 }
 
+/* The Sam-Style Accent Box */
 .project-desc-accent {
     color: #4a0404 !important;
     border-left: 4px solid #8b0000;
@@ -126,6 +132,7 @@
     font-weight: 500;
     line-height: 1.8;
     font-size: 14.5px;
+    /* MAGIC: This flex-grow pushes the button to the bottom */
     flex-grow: 1;
 }
 
@@ -136,7 +143,7 @@
 
 /* 6. BUTTONS */
 .project-card .about-cta {
-    align-self: flex-start;
+    align-self: flex-start; /* Stays left on desktop */
     background-color: #4a0404;
     color: white !important;
     padding: 14px 35px;
@@ -148,6 +155,7 @@
     text-transform: uppercase;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     border: none;
+    cursor: pointer;
 }
 
 .project-card .about-cta:hover {
@@ -156,10 +164,10 @@
     box-shadow: 0 10px 20px rgba(139, 0, 0, 0.2);
 }
 
-/* 7. DARK PROJECT ROW (CINEMATIC BREAKOUT) */
+/* 7. DARK PROJECT ROW (CINEMATIC) */
 .dark-project-row {
     background-color: #120101 !important; 
-    padding: 80px 0;
+    padding: 90px 0;
     width: 100vw;
     position: relative;
     left: 50%;
@@ -171,6 +179,7 @@
 }
 
 .dark-project-row .project-card-title { color: #ffffff !important; }
+
 .dark-project-row .project-desc-accent { 
     color: rgba(253, 247, 242, 0.85) !important; 
     border-left: 2px solid rgba(139, 0, 0, 0.5); 
@@ -184,15 +193,21 @@
     font-weight: 800;
     display: inline-block;
     transition: all 0.4s ease;
+    text-decoration: none;
 }
 
-/* 8. MODALS (LAPTOP & PHONE) */
+.dark-project-row .light-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(186, 22, 22, 0.4);
+}
+
+/* 8. MODALS (FIXED OVERLAYS) */
 .laptop-modal-overlay, .phone-modal-overlay {
     display: none;
     position: fixed !important;
     top: 0; left: 0;
     width: 100vw; height: 100vh;
-    background: rgba(0, 0, 0, 0.95);
+    background: rgba(0, 0, 0, 0.96);
     z-index: 99999 !important;
     justify-content: center;
     align-items: center;
@@ -228,13 +243,22 @@
 
 .close-laptop, .close-phone {
     position: absolute;
-    top: -50px; right: 0;
+    top: -55px; right: 0;
     color: #fff;
     font-size: 50px;
     cursor: pointer;
 }
 
-/* 9. THE FULL RESPONSIVE DESIGN (992px and below) */
+/* Custom Red Scrollbar */
+.laptop-screen-window::-webkit-scrollbar, .phone-screen-window::-webkit-scrollbar {
+    width: 8px;
+}
+.laptop-screen-window::-webkit-scrollbar-thumb, .phone-screen-window::-webkit-scrollbar-thumb {
+    background: #8b0000;
+    border-radius: 10px;
+}
+
+/* 9. FULL RESPONSIVE DESIGN (992px and below) */
 @media (max-width: 992px) {
     .project-section { padding: 60px 0; }
     
@@ -248,7 +272,7 @@
 
     .project-grid {
         grid-template-columns: 1fr; 
-        gap: 60px; 
+        gap: 70px; 
     }
 
     .project-card { 
@@ -256,11 +280,10 @@
         padding-bottom: 20px;
     }
 
-    /* Keep Animations Alive for Tap */
+    /* Keep Lift Animation Alive for Tap */
     .laptop-main-display:hover, 
     .laptop-main-display:active {
         transform: translateY(-8px) scale(1.01);
-        box-shadow: 0 20px 40px rgba(74, 4, 4, 0.15);
     }
 
     /* Force Overlay on Tap for Mobile */
@@ -270,7 +293,7 @@
         visibility: visible !important;
     }
 
-    /* Button Stretch Animation */
+    /* Button "Stretch" Animation on Mobile */
     .project-card .about-cta {
         align-self: center;
         padding: 12px 30px;
@@ -278,7 +301,7 @@
     }
 
     .project-card .about-cta:active {
-        letter-spacing: 3px;
+        letter-spacing: 4px; /* Sam's signature stretch */
         transform: translateY(-3px);
         background-color: #8b0000;
     }
@@ -296,20 +319,20 @@
     .dark-project-row {
         width: 100%;
         left: 0; right: 0;
-        margin: 0;
+        margin: 40px 0;
         padding: 60px 20px;
     }
 
     .laptop-modal-content {
-        width: 92%;
+        width: 94%;
         height: 75vh;
         border-width: 8px;
     }
 }
 
-/* EXTRA SMALL DEVICES (480px and below) */
+/* EXTRA SMALL DEVICES (Pixel 7 / 480px and below) */
 @media (max-width: 480px) {
-    .portfolio-main-title { font-size: 1.5rem; }
+    .portfolio-main-title { font-size: 1.6rem; }
     .project-card-title { font-size: 1.3rem; }
-    .phone-modal-content { width: 280px; height: 580px; border-width: 6px; }
+    .phone-modal-content { width: 290px; height: 590px; border-width: 6px; }
 }
