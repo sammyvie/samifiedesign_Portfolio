@@ -45,7 +45,7 @@
 /* 2. GRID & CARDS (NETLIFY STABILIZED) */
 .project-grid {
     display: grid;
-    /* This ensures they don't squash on smaller desktops */
+    /* Grid-template handles responsiveness automatically */
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 100px 60px; 
     width: 100%;
@@ -57,7 +57,6 @@
     text-align: left;
     height: 100%;
     position: relative;
-    /* Smooth transitions for the whole card */
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -132,7 +131,7 @@
     font-weight: 500;
     line-height: 1.8;
     font-size: 14.5px;
-    /* MAGIC: This flex-grow pushes the button to the bottom */
+    /* This flex-grow ensures buttons align at the bottom */
     flex-grow: 1;
 }
 
@@ -143,7 +142,7 @@
 
 /* 6. BUTTONS */
 .project-card .about-cta {
-    align-self: flex-start; /* Stays left on desktop */
+    align-self: flex-start;
     background-color: #4a0404;
     color: white !important;
     padding: 14px 35px;
@@ -156,6 +155,7 @@
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     border: none;
     cursor: pointer;
+    display: inline-block;
 }
 
 .project-card .about-cta:hover {
@@ -249,7 +249,7 @@
     cursor: pointer;
 }
 
-/* Custom Red Scrollbar */
+/* Custom Scrollbars */
 .laptop-screen-window::-webkit-scrollbar, .phone-screen-window::-webkit-scrollbar {
     width: 8px;
 }
@@ -280,13 +280,12 @@
         padding-bottom: 20px;
     }
 
-    /* Keep Lift Animation Alive for Tap */
+    /* Mobile Interaction States */
     .laptop-main-display:hover, 
     .laptop-main-display:active {
         transform: translateY(-8px) scale(1.01);
     }
 
-    /* Force Overlay on Tap for Mobile */
     .laptop-main-display:active .hover-overlay,
     .phone-main-display:active .hover-overlay-mobile {
         opacity: 1 !important;
@@ -301,8 +300,8 @@
     }
 
     .project-card .about-cta:active {
-        letter-spacing: 4px; /* Sam's signature stretch */
-        transform: translateY(-3px);
+        letter-spacing: 4px; 
+        transform: translateY(-2px);
         background-color: #8b0000;
     }
 
@@ -330,7 +329,7 @@
     }
 }
 
-/* EXTRA SMALL DEVICES (Pixel 7 / 480px and below) */
+/* PIXEL 7 / EXTRA SMALL (480px and below) */
 @media (max-width: 480px) {
     .portfolio-main-title { font-size: 1.6rem; }
     .project-card-title { font-size: 1.3rem; }
