@@ -20,31 +20,28 @@
     margin-bottom: 90px;
 }
 
-/* Replicating the "Red Section" style for the light section descriptions */
 .project-desc-accent {
-    color: #4a0404 !important; /* Deep maroon/brown for readability */
-    border-left: 3px solid #8b0000; /* That thick red line you liked */
+    color: #4a0404 !important; 
+    border-left: 3px solid #8b0000; 
     padding-left: 20px;
-    text-align: left; /* Left alignment is key for this editorial look */
+    text-align: left;
     margin: 30px auto;
     font-weight: 500;
     max-width: 90%;
     line-height: 1.8;
 }
 
-/* Enhancing the Bold keywords to match your theme */
 .project-desc-accent strong {
     color: #8b0000;
     font-weight: 800;
 }
 
-/* Ensures the container stays tidy */
 .project-card {
     transition: all 0.3s ease;
 }
 
 .project-card:hover .project-desc-accent {
-    border-left-color: #ee7878; /* Line changes color on hover for a creative touch */
+    border-left-color: #ee7878;
 }
 
 .portfolio-main-title {
@@ -65,7 +62,6 @@
     letter-spacing: 0.3px;
 }
 
-/* Grid & Cards */
 .project-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -174,13 +170,13 @@
    ========================================== */
 .laptop-modal-overlay, .phone-modal-overlay {
     display: none;
-    position: fixed !important; /* Forces it over EVERYTHING */
+    position: fixed !important; 
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     background: rgba(10, 2, 2, 0.95);
-    z-index: 99999 !important; /* Above spotlights and nav */
+    z-index: 99999 !important; 
     justify-content: center;
     align-items: center;
     backdrop-filter: blur(12px);
@@ -200,7 +196,7 @@
 .laptop-screen-window {
     width: 100%;
     height: 100%;
-    overflow-y: auto; /* This allows the scrolling */
+    overflow-y: auto; 
     background: #1a1a1a;
     border-radius: 5px;
 }
@@ -221,7 +217,6 @@
     z-index: 100000;
 }
 
-/* Custom Scrollbar for the Modal Screen */
 .laptop-screen-window::-webkit-scrollbar {
     width: 8px;
 }
@@ -242,7 +237,7 @@
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
-    z-index: 1; /* Low Z-index so Modals stay on top */
+    z-index: 1; 
     overflow: hidden;
 }
 
@@ -293,7 +288,7 @@
     overflow: hidden;
     box-shadow: 0 0 50px rgba(139, 0, 0, 0.5);
 }.phone-screen-window {
-    display: none; /* Make sure there is NO "!important" here */
+    display: none; 
     width: 100%;
     height: 100%;
     overflow-y: auto;
@@ -308,7 +303,7 @@
     width: 100%;
     height: 100%;
     background: #fff;
-    display: none; /* Hidden by default, JS will show it if needed */
+    display: none;
 }
 /* --- THE CLICK TO VIEW PROPERLY FIX --- */
 .phone-main-display {
@@ -324,11 +319,11 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(139, 0, 0, 0.85); /* Dark red tint */
+    background: rgba(139, 0, 0, 0.85); 
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: 0; /* Hidden by default */
+    opacity: 0; 
     transition: opacity 0.3s ease;
     z-index: 2;
 }
@@ -344,7 +339,7 @@
     border: 1.5px solid white;
     padding: 10px 15px;
     font-size: 11px;
-    pointer-events: none; /* Let the click pass through to the div */
+    pointer-events: none; 
 }
 /* ==========================================
    LAPTOP MODAL POP-UP (ADDED TO DESIGN)
@@ -365,7 +360,7 @@
     width: 85%;
     max-width: 1100px;
     height: 80vh;
-    background: #1a1a1a; /* Sleek dark laptop frame */
+    background: #1a1a1a; 
     border: 12px solid #333;
     border-radius: 20px;
     position: relative;
@@ -373,7 +368,6 @@
     box-shadow: 0 50px 100px rgba(0,0,0,0.5);
 }
 
-/* This is the window that makes the "proper view" scrollable */
 .laptop-screen-window {
     width: 100%;
     height: 100%;
@@ -397,22 +391,19 @@
     cursor: pointer;
     z-index: 10001;
 }
-/* Keeps the button floating inside the modal without breaking the image scroll */
 .modal-action-bar {
     position: absolute;
     top: 20px;
     left: 20px;
-    z-index: 11000; /* Higher than everything else */
+    z-index: 11000; 
     pointer-events: auto;
 }
 
-/* Ensure the modal doesn't break the rest of the page */
 .laptop-modal-overlay {
-    display: none; /* Hidden by default */
+    display: none; 
     flex-direction: column;
 }
 
-/* Custom Red Scrollbar for the Pop-up */
 .laptop-screen-window::-webkit-scrollbar {
     width: 8px;
 }
@@ -451,27 +442,22 @@
 
     .project-card {
         padding-bottom: 20px;
-        /* Ensure animations have a base state */
         transform: translateY(0);
         transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    /* 3. KEEPING THE ANIMATIONS ALIVE (Tap/Active) */
-    /* On mobile, we trigger the lift on both hover and active (tap) */
     .laptop-main-display:hover, 
     .laptop-main-display:active {
         transform: translateY(-8px) scale(1.01);
         box-shadow: 0 20px 40px rgba(74, 4, 4, 0.15);
     }
 
-    /* Show the "Click to View" overlay on tap */
     .laptop-main-display:active .hover-overlay,
     .phone-main-display:active .hover-overlay-mobile {
         opacity: 1 !important;
         visibility: visible !important;
     }
 
-    /* 4. BUTTON ANIMATIONS (The Stretch) */
     .project-card .about-cta {
         padding: 12px 30px;
         font-size: 10px;
@@ -479,12 +465,11 @@
     }
 
     .project-card .about-cta:active {
-        letter-spacing: 3px; /* The stretch animation */
+        letter-spacing: 3px; 
         transform: translateY(-3px);
         background-color: #8b0000;
     }
 
-    /* 5. DESCRIPTION ACCENT - Mobile Polish */
     .project-desc-accent {
         max-width: 100%;
         font-size: 13px;
@@ -534,7 +519,6 @@
         line-height: 1.7;
     }
 
-    /* Adjusting the Simulator for tiny screens */
     .phone-modal-content {
         width: 280px; 
         height: 580px;
