@@ -1,27 +1,50 @@
 /* ==========================================
-   PORTFOLIO SECTION - THE FINAL BOSS (FULL CODE)
+   PORTFOLIO SECTION - REFINED
    ========================================== */
-
    .project-section {
     background-color: #fdf7f2;
     padding: 100px 0;
-    overflow-x: hidden;
 }
 
 .project-container {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 0 25px;
-    box-sizing: border-box;
+    padding: 0 20px;
 }
 
-/* 1. HEADER BOX */
 .portfolio-header-box {
     border: 2px solid #8b0000;
     border-radius: 12px;
     padding: 40px;
     text-align: center;
     margin-bottom: 90px;
+}
+
+/* Replicating the "Red Section" style for the light section descriptions */
+.project-desc-accent {
+    color: #4a0404 !important; /* Deep maroon/brown for readability */
+    border-left: 3px solid #8b0000; /* That thick red line you liked */
+    padding-left: 20px;
+    text-align: left; /* Left alignment is key for this editorial look */
+    margin: 30px auto;
+    font-weight: 500;
+    max-width: 90%;
+    line-height: 1.8;
+}
+
+/* Enhancing the Bold keywords to match your theme */
+.project-desc-accent strong {
+    color: #8b0000;
+    font-weight: 800;
+}
+
+/* Ensures the container stays tidy */
+.project-card {
+    transition: all 0.3s ease;
+}
+
+.project-card:hover .project-desc-accent {
+    border-left-color: #ee7878; /* Line changes color on hover for a creative touch */
 }
 
 .portfolio-main-title {
@@ -42,61 +65,94 @@
     letter-spacing: 0.3px;
 }
 
-/* 2. GRID & CARDS (DESKTOP) */
+/* Grid & Cards */
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 100px 60px; 
-    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
 }
 
 .project-card {
     display: flex;
     flex-direction: column;
-    text-align: left;
+    align-items: center; 
+    text-align: center;
     height: 100%;
-    margin-bottom: 90px;
-    position: relative;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 100%;
+    padding-bottom: 40px;
 }
 
-/* 3. MEDIA DISPLAYS (Laptop/Phone) */
-.laptop-main-display, .phone-main-display {
+.project-card-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #8b0000;
+    margin-bottom: 22px;
+    font-style: italic;
+    letter-spacing: -0.2px;
+}
+
+.project-desc {
+    font-size: 14.5px;
+    color: #4a0404;
+    margin: 25px auto 30px auto;
+    line-height: 1.8;
+    flex-grow: 1; 
+    max-width: 88%; 
+    display: block; 
+    font-weight: 500;
+}
+
+/* Button Centering */
+.project-card .about-cta {
+    margin: auto auto 0 auto;
+    display: inline-block;
+    width: fit-content;
+    background-color: #4a0404;
+    color: white !important;
+    padding: 14px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* THE LAPTOP BOX */
+.laptop-main-display {
     position: relative;
     cursor: pointer;
-    width: 100%;
-    margin-bottom: 25px;
-    display: flex;        
-    justify-content: center;
-    align-items: center;
-    background: transparent; /* Keeping it clean */
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    width: 100%; 
 }
 
-.laptop-main-display:hover, .phone-main-display:hover {
+.laptop-main-display:hover {
     transform: translateY(-12px) scale(1.02);
-    z-index: 5;
 }
 
-.laptop-static-img, .phone-screen-window img {
-    max-width: 100%;
+.laptop-static-img {
+    width: 100%;
     height: auto;
     display: block;
-    margin: 0 auto;
 }
 
-/* 4. SHARED HOVER LOGIC */
+/* SHARED HOVER LOGIC */
 .hover-overlay, .hover-overlay-mobile {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(74, 4, 4, 0.85); 
+    background: rgba(74, 4, 4, 0.82); 
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: 10;
-    border-radius: 12px;
 }
 
 .laptop-main-display:hover .hover-overlay,
@@ -110,142 +166,378 @@
     text-transform: uppercase;
     border: 1.5px solid white;
     padding: 12px 24px;
-    font-size: 11px;
-    letter-spacing: 1px;
+    font-size: 12px;
 }
 
-/* 5. TEXT & TITLES - CENTERED VERSION */
-.project-card-title {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #8b0000;
-    margin-bottom: 15px;
-    font-style: italic;
-    letter-spacing: -0.2px;
-    
-    /* THIS IS THE KEY */
+/* ==========================================
+   FIXED MODAL OVERLAYS (THE CURE)
+   ========================================== */
+.laptop-modal-overlay, .phone-modal-overlay {
+    display: none;
+    position: fixed !important; /* Forces it over EVERYTHING */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 2, 2, 0.95);
+    z-index: 99999 !important; /* Above spotlights and nav */
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(12px);
+}
+
+.laptop-modal-content {
+    position: relative;
+    width: 90vw;
+    height: 85vh;
+    max-width: 1200px;
+    background: #000;
+    border: 1px solid rgba(139, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.laptop-screen-window {
     width: 100%;
-    text-align: center; 
+    height: 100%;
+    overflow-y: auto; /* This allows the scrolling */
+    background: #1a1a1a;
+    border-radius: 5px;
+}
+
+.laptop-screen-window img {
+    width: 100%;
+    height: auto;
     display: block;
 }
 
-.project-desc-accent {
-    color: #4a0404 !important;
-    border-left: 4px solid #8b0000;
-    padding: 10px 0 10px 20px;
-    margin: 10px 0 30px 0;
-    font-weight: 500;
-    line-height: 1.8;
-    font-size: 14.5px;
-    flex-grow: 1;
+.close-laptop, .close-phone {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: #fff;
+    font-size: 40px;
+    cursor: pointer;
+    z-index: 100000;
 }
 
-/* 6. BUTTONS */
-.project-card .about-cta {
-    align-self: flex-start;
-    background-color: #4a0404;
-    color: white !important;
-    padding: 14px 35px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+/* Custom Scrollbar for the Modal Screen */
+.laptop-screen-window::-webkit-scrollbar {
+    width: 8px;
+}
+.laptop-screen-window::-webkit-scrollbar-thumb {
+    background: #8b0000;
+    border-radius: 10px;
 }
 
-/* 7. DARK PROJECT ROW (CINEMATIC) */
+/* ==========================================
+   DARK PROJECT ROW - CINEMATIC
+   ========================================== */
 .dark-project-row {
     background-color: #120101 !important; 
-    padding: 90px 0;
+    padding: 70px 0;
     width: 100vw;
     position: relative;
     left: 50%;
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
+    z-index: 1; /* Low Z-index so Modals stay on top */
+    overflow: hidden;
 }
 
-/* 8. MODALS */
-.laptop-modal-overlay, .phone-modal-overlay {
+.dark-project-row .project-card-title {
+    color: #ffffff !important;
+}
+
+.dark-project-row .project-desc {
+    color: rgba(253, 247, 242, 0.85) !important; 
+    border-left: 2px solid rgba(139, 0, 0, 0.5); 
+    padding-left: 20px;
+}
+
+.dark-project-row .light-btn {
+    background-color: #ffffff !important;
+    color: #4a0404 !important;
+    padding: 16px 40px;
+    border-radius: 50px; 
+    font-weight: 800;
+    margin-top: 35px;
+    transition: all 0.4s ease;
+}
+
+.dark-project-row .light-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(186, 22, 22, 0.4);
+}
+
+/* --- THE MOBILE MODAL FIX --- */
+.phone-modal-overlay {
     display: none;
     position: fixed !important;
     top: 0; left: 0;
     width: 100vw; height: 100vh;
-    background: rgba(0, 0, 0, 0.96);
+    background: rgba(0, 0, 0, 0.95);
     z-index: 99999 !important;
     justify-content: center;
     align-items: center;
+}
+
+.phone-modal-content {
+    position: relative;
+    width: 320px;
+    height: 650px;
+    background: #000;
+    border: 10px solid #1a1a1a;
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 0 50px rgba(139, 0, 0, 0.5);
+}.phone-screen-window {
+    display: none; /* Make sure there is NO "!important" here */
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+.phone-screen-window img {
+    width: 150%;
+    height: auto;
+    display: block;
+}
+
+#simulatorContainer {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    display: none; /* Hidden by default, JS will show it if needed */
+}
+/* --- THE CLICK TO VIEW PROPERLY FIX --- */
+.phone-main-display {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.hover-overlay-mobile {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(139, 0, 0, 0.85); /* Dark red tint */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+.phone-main-display:hover .hover-overlay-mobile {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.hover-overlay-mobile span {
+    color: white !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: 1.5px solid white;
+    padding: 10px 15px;
+    font-size: 11px;
+    pointer-events: none; /* Let the click pass through to the div */
+}
+/* ==========================================
+   LAPTOP MODAL POP-UP (ADDED TO DESIGN)
+   ========================================== */
+   .laptop-modal-overlay {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.95);
     backdrop-filter: blur(12px);
+    justify-content: center;
+    align-items: center;
+}
+
+.laptop-modal-content {
+    width: 85%;
+    max-width: 1100px;
+    height: 80vh;
+    background: #1a1a1a; /* Sleek dark laptop frame */
+    border: 12px solid #333;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+}
+
+/* This is the window that makes the "proper view" scrollable */
+.laptop-screen-window {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto; 
+    background: white;
+}
+
+.laptop-screen-window img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.close-laptop {
+    position: fixed;
+    top: 30px;
+    right: 45px;
+    color: white;
+    font-size: 55px;
+    font-weight: 200;
+    cursor: pointer;
+    z-index: 10001;
+}
+/* Keeps the button floating inside the modal without breaking the image scroll */
+.modal-action-bar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 11000; /* Higher than everything else */
+    pointer-events: auto;
+}
+
+/* Ensure the modal doesn't break the rest of the page */
+.laptop-modal-overlay {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+}
+
+/* Custom Red Scrollbar for the Pop-up */
+.laptop-screen-window::-webkit-scrollbar {
+    width: 8px;
+}
+.laptop-screen-window::-webkit-scrollbar-thumb {
+    background: #8b0000;
+    border-radius: 10px;
 }
 
 /* ==========================================
-   9. SEPARATED MOBILE DESIGN (The Overhaul)
+   PORTFOLIO RESPONSIVENESS (992px and below)
    ========================================== */
-
-@media (max-width: 992px) {
-    .project-section { padding: 60px 0; }
+   @media (max-width: 992px) {
     
-    .project-grid {
-        grid-template-columns: 1fr; /* Stack everything */
-        gap: 80px; 
-        justify-items: center; /* Center the cards in the grid */
+    .project-section {
+        padding: 60px 0;
     }
 
-    .project-card { 
-        text-align: center; /* Center all text */
-        align-items: center; /* Center all flex items (images/buttons) */
-        max-width: 500px; 
-        padding-bottom: 40px;
-    }
-
-    /* Floating Image Fix */
-    .laptop-main-display, .phone-main-display {
-        background: transparent !important; 
-        margin-bottom: 30px;
+    /* 1. HEADER BOX - Scaled for Mobile */
+    .portfolio-header-box {
+        padding: 30px 20px;
+        margin-bottom: 60px;
         width: 100%;
+        border-width: 1.5px;
     }
 
-    /* ACCENT LINE RESET - Centers the line for mobile */
-    .project-desc-accent {
-        border-left: none;
-        border-top: 2px solid #8b0000;
-        padding: 20px 0 0 0;
-        margin: 20px auto 35px auto;
-        text-align: center;
-        max-width: 90%;
+    .portfolio-main-title {
+        font-size: 1.8rem;
+        letter-spacing: 1px;
     }
 
-    /* CENTER BUTTON */
-    .project-card .about-cta {
-        align-self: center;
-        padding: 16px 40px;
-        font-size: 11px;
+    /* 2. GRID - Stacked Layout */
+    .project-grid {
+        grid-template-columns: 1fr; 
+        gap: 60px; 
     }
 
-    /* Mobile Interaction (Tap) */
-    .project-card .about-cta:active {
-        letter-spacing: 4px; /* The Sam Stretch */
-        background-color: #8b0000;
-        transform: scale(0.95);
+    .project-card {
+        padding-bottom: 20px;
+        /* Ensure animations have a base state */
+        transform: translateY(0);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    .laptop-main-display:active .hover-overlay {
+    /* 3. KEEPING THE ANIMATIONS ALIVE (Tap/Active) */
+    /* On mobile, we trigger the lift on both hover and active (tap) */
+    .laptop-main-display:hover, 
+    .laptop-main-display:active {
+        transform: translateY(-8px) scale(1.01);
+        box-shadow: 0 20px 40px rgba(74, 4, 4, 0.15);
+    }
+
+    /* Show the "Click to View" overlay on tap */
+    .laptop-main-display:active .hover-overlay,
+    .phone-main-display:active .hover-overlay-mobile {
         opacity: 1 !important;
+        visibility: visible !important;
     }
 
+    /* 4. BUTTON ANIMATIONS (The Stretch) */
+    .project-card .about-cta {
+        padding: 12px 30px;
+        font-size: 10px;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    .project-card .about-cta:active {
+        letter-spacing: 3px; /* The stretch animation */
+        transform: translateY(-3px);
+        background-color: #8b0000;
+    }
+
+    /* 5. DESCRIPTION ACCENT - Mobile Polish */
+    .project-desc-accent {
+        max-width: 100%;
+        font-size: 13px;
+        margin: 25px 0;
+        padding-left: 15px;
+        border-left-width: 2px;
+    }
+
+    /* 6. DARK ROW RESET */
     .dark-project-row {
         width: 100%;
-        left: 0; right: 0;
-        margin: 40px 0;
+        left: 0;
+        right: 0;
+        margin-left: 0;
+        margin-right: 0;
         padding: 60px 20px;
+    }
+
+    /* 7. MODAL SCALING (The Pop-up) */
+    .laptop-modal-content {
+        width: 92%;
+        height: 75vh;
+        border-width: 8px;
+    }
+
+    .close-laptop {
+        top: 15px;
+        right: 25px;
+        font-size: 45px;
     }
 }
 
-/* PIXEL 7 / SMALL SCREEN */
+/* ==========================================
+   EXTRA SMALL DEVICES (480px and below)
+   ========================================== */
 @media (max-width: 480px) {
-    .portfolio-main-title { font-size: 1.6rem; line-height: 1.2; }
-    .project-card-title { font-size: 1.4rem; }
-    .phone-main-display img { max-width: 80%; } /* Stops phone image from being too huge */
+    .portfolio-main-title {
+        font-size: 1.5rem;
+    }
+
+    .project-card-title {
+        font-size: 1.2rem;
+    }
+
+    .project-desc {
+        font-size: 12.5px;
+        line-height: 1.7;
+    }
+
+    /* Adjusting the Simulator for tiny screens */
+    .phone-modal-content {
+        width: 280px; 
+        height: 580px;
+        border-width: 6px;
+    }
 }
