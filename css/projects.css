@@ -64,12 +64,12 @@
 .laptop-main-display, .phone-main-display {
     position: relative;
     cursor: pointer;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    /* Removed background: #000 to keep it transparent */
     width: 100%;
     margin-bottom: 25px;
-    background: #000;
+    display: flex;         /* Added to center the image inside */
+    justify-content: center;
+    align-items: center;
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -77,11 +77,11 @@
     transform: translateY(-12px) scale(1.02);
     z-index: 5;
 }
-
 .laptop-static-img, .phone-screen-window img {
-    width: 100%;
+    max-width: 100%;
     height: auto;
     display: block;
+    margin: 0 auto; /* Hard center */
 }
 
 /* 4. SHARED HOVER LOGIC */
