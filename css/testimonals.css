@@ -1,136 +1,161 @@
-
 /* ==========================================
-   TESTIMONIALS SECTION
+   ENHANCED TESTIMONIALS WITH ANIMATION
    ========================================== */
    .testimonials-section {
     background-color: #fdf7f2; 
-    padding: 100px 0;
+    padding: 120px 0;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Floating Animation Keyframes */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
 }
 
 .testimonial-card {
-    background: white;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 70px;
-    border-radius: 20px;
-    text-align: center;
+    background: #ffffff;
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 60px 80px;
+    border-radius: 30px;
+    text-align: left;
     position: relative;
-    box-shadow: 0 20px 40px rgba(74, 4, 4, 0.05);
-    border-bottom: 5px solid #4a0404;
+    box-shadow: 0 15px 35px rgba(74, 4, 4, 0.05);
+    border: 1px solid rgba(74, 4, 4, 0.05);
+    transition: all 0.4s ease;
+    /* This triggers the floating effect */
+    animation: float 6s ease-in-out infinite;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 30px 60px rgba(74, 4, 4, 0.1);
+    animation-play-state: paused; /* Stops floating when user is reading */
+}
+
+/* Decorative Accent Bar */
+.testimonial-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 80px;
+    width: 60px;
+    height: 6px;
+    background: #4a0404;
+    border-radius: 0 0 10px 10px;
 }
 
 .quote-icon {
-    font-family: 'Inter', sans-serif;
-    font-size: 8rem;
-    color: rgba(74, 4, 4, 0.1);
+    font-size: 6rem;
+    color: #4a0404;
+    opacity: 0.08;
     position: absolute;
-    top: -20px;
-    left: 40px;
+    top: 20px;
+    right: 60px;
     line-height: 1;
+    pointer-events: none;
 }
 
 .testi-text {
-    font-size: 1.25rem;
-    color: #4a0404;
-    font-style: italic;
+    font-size: 1.35rem;
+    color: #333;
+    font-weight: 400;
     line-height: 1.8;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     position: relative;
     z-index: 1;
 }
 
-.author-info h5 {
-    font-weight: 900;
-    color: #4a0404;
-    letter-spacing: 2px;
-    margin-bottom: 5px;
+/* Author Section Layout */
+.testi-author {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-top: 1px solid #f0ece9;
+    padding-top: 30px;
 }
 
-.author-info span {
-    font-size: 0.8rem;
-    color: #888;
+.author-avatar {
+    width: 55px;
+    height: 55px;
+    background: #4a0404;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    box-shadow: 0 5px 15px rgba(74, 4, 4, 0.2);
+}
+
+.author-info h5 {
+    font-weight: 800;
+    color: #4a0404;
+    font-size: 1.1rem;
+    letter-spacing: 1.5px;
+    margin: 0;
     text-transform: uppercase;
 }
 
+.client-tag {
+    font-size: 0.85rem;
+    color: #8e7d7d;
+    font-weight: 500;
+}
+
+/* Modern Pill Indicators */
 .carousel-indicators-custom {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
     margin-top: 40px;
 }
 
 .carousel-indicators-custom button {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
+    width: 35px;
+    height: 6px;
+    border-radius: 10px;
     border: none;
-    background: #e0d0c0;
-    transition: 0.3s;
+    background: #dccbc0;
+    transition: all 0.3s ease;
 }
 
 .carousel-indicators-custom button.active {
     background: #4a0404;
-    width: 30px;
-    border-radius: 10px;
+    width: 70px;
 }
 
-/* ==========================================
-   TESTIMONIALS MOBILE OPTIMIZATION
-   ========================================== */
-   @media (max-width: 992px) {
-    .testimonials-section {
-        padding: 60px 20px;
-    }
-
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
     .testimonial-card {
-        padding: 40px 25px;
-        margin: 0 10px;
-        border-radius: 25px;
+        padding: 50px 30px 40px;
+        margin: 20px;
+        text-align: center;
+        animation: none; /* Disable float on mobile for better UX */
     }
-
-    .quote-icon {
-        font-size: 4rem; 
-        top: -10px;
-        left: 20px;
-        opacity: 0.2; 
-    }
-
-    .testi-text {
-        font-size: 1rem; 
-        line-height: 1.6;
-        margin-bottom: 25px;
-    }
-
-    .author-info h5 {
-        font-size: 1rem;
-        letter-spacing: 1px;
-    }
-
-    .author-info span {
-        font-size: 0.7rem;
-    }
-
-    .carousel-indicators-custom {
-        margin-top: 30px;
-        gap: 8px;
-    }
-
-    .carousel-indicators-custom button {
-        width: 10px;
-        height: 10px;
-    }
-
-    .carousel-indicators-custom button.active {
-        width: 25px;
-    }
+    .testimonial-card::before { left: 50%; transform: translateX(-50%); }
+    .testi-author { flex-direction: column; text-align: center; }
+    .quote-icon { top: 10px; right: 20px; font-size: 4rem; }
+    .testi-text { font-size: 1.1rem; }
 }
 
-@media (max-width: 480px) {
-    .testimonial-card {
-        padding: 35px 20px;
-    }
+.testimonial-card {
+    /* ... keep your existing styles ... */
     
-    .testi-text {
-        font-size: 0.95rem;
-    }
+    transform-style: preserve-3d;
+    transition: transform 0.15s ease-out, box-shadow 0.3s ease; /* Faster transition for mouse tracking */
+    will-change: transform; /* Helps browser performance */
+}
+
+/* Optional: Make the text inside "pop" out slightly */
+.testi-text {
+    transform: translateZ(50px);
+}
+.testi-author {
+    transform: translateZ(30px);
 }

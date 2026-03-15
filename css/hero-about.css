@@ -318,6 +318,7 @@
 /* ==========================================
    ABOUT SECTION: CREAM & BURGUNDY
    ========================================== */
+   
    .about-section {
     background-color: #fdf7f2; 
     padding: 120px 0;
@@ -419,12 +420,11 @@
     margin-bottom: 35px;
     font-size: 17px;
     max-width: 600px;
-}
-/* ==========================================
-   SKILLS & PROGRESS BARS (CINEMATIC)
+}/* ==========================================
+   REFRESHED SKILLS & PROGRESS BARS (MIDNIGHT MAROON)
    ========================================== */
 
-/* 1. STUDENT STATS - Refined Typography */
+/* 1. STUDENT STATS */
 .about-stats {
     display: flex;
     gap: 40px;
@@ -447,142 +447,148 @@
     font-weight: 700;
 }
 
-/* 2. SKILLS CARD AREA */
-.skills-glass-card {
-    background: #fffcf9;
-    border: 1px solid rgba(139, 0, 0, 0.1);
-    padding: 62px;
-    border-radius: 30px;
-    box-shadow: 0 20px 40px rgba(74, 4, 4, 0.03);
+/* 2. SECTION WRAPPER */
+.skills-section-outer {
+    padding: 100px 0;
+    background-color: #fffcf9; 
+    overflow: hidden;
 }
 
+/* 3. MAROON SHINING GLASS CARD */
+.skills-glass-card {
+    max-width: 1100px;
+    margin: 0 auto;
+    /* Deep Maroon Gradient */
+    background: linear-gradient(135deg, #4a0404 0%, #2b0202 100%);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 80px 60px;
+    border-radius: 40px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+    position: relative;
+    z-index: 2;
+    overflow: hidden; /* Important for the shining sweep */
+}
+
+/* THE CONTINUOUS SHINE SWEEP */
+.skills-glass-card::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -150%;
+    width: 200%;
+    height: 300%;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(255, 255, 255, 0) 40%,
+        rgba(255, 255, 255, 0.18) 50%,
+        rgba(255, 255, 255, 0) 60%,
+        transparent 100%
+    );
+    transform: rotate(30deg);
+    /* Faster duration + "linear" + no delay = Continuous feel */
+    animation: continuousShine 4s linear infinite;
+}
+@keyframes continuousShine {
+    0% { transform: translate(-100%, -50%) rotate(30deg); }
+    100% { transform: translate(100%, 50%) rotate(30deg); }
+}
+/* 4. GRID SETUP */
 .skills-grid {
     display: grid;
     grid-template-columns: 1fr 1px 1fr;
-    gap: 60px;
-}
-
-.center-line { 
-    background: rgba(139, 0, 0, 0.1); 
-}
-
-.skills-title {
-    font-size: 38px;
-    font-weight: 900;
-    margin-bottom: 40px;
-    letter-spacing: 1px;
-    color: #4a0404;
-    text-transform: uppercase;
-    line-height: 1.2;
-}
-/* ==========================================
-   SAMIFIED SKILLS & PROGRESS BARS (ENLARGED)
-   ========================================== */
-
-/* 1. CONTAINER & GRID */
-.skills-glass-card {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(74, 4, 4, 0.1);
-    padding: 60px 40px;
-    border-radius: 30px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03);
-}
-
-.skills-title {
-    font-size: 22px;
-    letter-spacing: 5px;
-    color: #4a0404;
-    text-transform: uppercase;
-    font-weight: 800;
-    margin-bottom: 50px;
-    text-align: center;
-}
-
-.skills-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
+    gap: 80px;
     position: relative;
 }
 
-/* 2. PROGRESS BAR ELEMENTS */
+.skills-title {
+    font-size: 24px;
+    letter-spacing: 4px;
+    /* White text for dark background */
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 900;
+    margin-bottom: 50px;
+    line-height: 1.3;
+}
+
+/* 5. PROGRESS BAR ELEMENTS */
 .skill-row {
-    margin-bottom: 40px; 
+    margin-bottom: 35px; 
 }
 
 .label-group {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 .label-group label {
-    font-size: 19px; 
+    font-size: 17px; 
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: 700;
-    color: #4a0404;
+    /* Soft Gold/Cream for text */
+    color: rgba(255, 252, 249, 0.9);
 }
 
-/* Percentage with "Reveal" animation */
+/* Percentage reveals when .active is added to section */
 .percentage {
-    font-size: 19px;
-    color: #8b0000;
+    font-size: 18px;
+    /* Brighter Red for the percentage */
+    color: #ff4d4d;
     font-weight: 800;
     font-family: 'Playfair Display', serif; 
     font-style: italic;
     opacity: 0;
     transform: translateY(5px);
-    transition: all 0.6s ease 1s;
+    transition: all 0.8s ease 0.8s;
 }
 
-.skills-grid.active .percentage {
+.skills-section-outer.active .percentage {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* THE TRACK (Background) */
+/* THE TRACK (Darker to blend with Maroon) */
 .bar-bg {
     width: 100%;
     height: 12px; 
-    background: #eee4dc;
+    background: rgba(0, 0, 0, 0.3);
     border-radius: 30px;
     overflow: hidden;
     position: relative;
-    box-shadow: inset 0 1px 3px rgba(74, 4, 4, 0.08);
 }
 
-/* THE GRADIENT FILL */
+/* THE FILL - Gold/White Gradient for contrast against Maroon */
 .bar-fill {
     height: 100%;
     width: 0; 
-    background: linear-gradient(90deg, #4a0404 0%, #8b0000 100%);
+    background: linear-gradient(90deg, #8b0000 0%, #ff4d4d 100%);
     border-radius: 30px;
     position: relative;
-    box-shadow: 0 0 10px rgba(139, 0, 0, 0.2); 
+    box-shadow: 0 0 15px rgba(255, 77, 77, 0.3); 
     transition: width 2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* THE GLINT/SHIMMER EFFECT */
+/* THE SHIMMER EFFECT */
 .bar-fill::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0; width: 100%; height: 100%;
     background: linear-gradient(
         90deg, 
         transparent, 
-        rgba(255, 255, 255, 0.35), 
+        rgba(255, 255, 255, 0.4), 
         transparent
     );
     transform: translateX(-100%);
 }
 
-.skills-grid.active .bar-fill::after {
+.skills-section-outer.active .bar-fill::after {
     animation: shimmerSweep 1.8s ease-out forwards;
     animation-delay: 1.2s;
 }
@@ -592,14 +598,22 @@
     100% { transform: translateX(100%); }
 }
 
+/* 6. CENTER LINE */
 .center-line {
-    position: absolute;
-    left: 50%;
-    top: 10%;
-    bottom: 10%;
     width: 1px;
-    background: rgba(74, 4, 4, 0.1);
-    transform: translateX(-50%);
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.2), transparent);
+}
+
+/* 7. MOBILE RESPONSIVE */
+@media (max-width: 992px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    .center-line { display: none; }
+    .skills-glass-card { padding: 50px 30px; }
+    .skills-title { font-size: 20px; text-align: center; }
+    .label-group label { font-size: 15px; }
 }
 
 /* ==========================================
@@ -1271,6 +1285,31 @@
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(74, 4, 4, 0.15);
 }
+/* 1. Fix the Label Alignment */
+.label-group label {
+    display: flex;
+    align-items: center; /* Vertically centers icon with text */
+    gap: 12px;           /* Exact space between icon and text */
+    font-size: 14px;     /* Adjust size to fit your design */
+    font-weight: 700;
+    color: #ffffff;      /* Matches your maroon card theme */
+}
+
+/* 2. Fix Icon Spacing & Sizing */
+.label-group label i {
+    width: 24px;         /* Fixed width so all text starts at the same spot */
+    text-align: center;  /* Centers narrow icons (like the lightbulb) */
+    font-size: 1.1rem;   /* Makes icons slightly more prominent */
+    color: rgba(255, 255, 255, 0.8); /* Slightly softer white for better hierarchy */
+    display: inline-block;
+}
+
+/* 3. Optional: Add a subtle glow to icons on hover */
+.skill-row:hover label i {
+    color: #ffffff;
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
 
 /* ==========================================
    MOBILE RESPONSIVENESS (HERO & ABOUT)
@@ -1431,8 +1470,117 @@
 }
 
 /* ==========================================
+   ABOUT SECTION: UPDATED FOR NIGHT MODE
+   ========================================== */
+   .about-section {
+    /* CHANGED: Now uses the variable from style.css */
+    background-color: var(--bg-section); 
+    padding: 120px 0;
+    /* CHANGED: Text color now adapts */
+    color: var(--text-body); 
+    overflow: hidden;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* TYPOGRAPHY */
+.about-heading {
+    font-size: 3rem;
+    font-weight: 900;
+    font-style: italic;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    /* CHANGED: Heading color now adapts */
+    color: var(--text-primary);
+    transition: color 0.5s ease;
+}
+
+.thin-text { 
+    font-weight: bolder; 
+    /* CHANGED: Accent color now adapts */
+    color: var(--accent); 
+    font-style: normal; 
+    opacity: 0.8;
+}
+
+.about-para {
+    /* CHANGED: Para color now adapts */
+    color: var(--text-body); 
+    line-height: 1.8;
+    margin-bottom: 35px;
+    font-size: 17px;
+    max-width: 600px;
+    transition: color 0.5s ease;
+}
+
+/* STUDENT STATS */
+.stat-item strong {
+    display: block;
+    font-size: 2rem;
+    /* CHANGED: Stat numbers now adapt */
+    color: var(--text-primary);
+    line-height: 1;
+    font-weight: 900;
+}
+
+.stat-item span {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    /* CHANGED: Stat labels now adapt */
+    color: var(--accent);
+    font-weight: 700;
+}
+
+/* SKILLS SECTION OUTER */
+.skills-section-outer {
+    padding: 100px 0;
+    /* CHANGED: Background adapts */
+    background-color: var(--bg-section); 
+    overflow: hidden;
+    transition: background-color 0.5s ease;
+}
+
+/* ==========================================
    EXTRA SMALL DEVICES (480px and below)
    ========================================== */
+
+   @media (max-width: 992px) {
+    /* 1. Force the dark maroon background on mobile */
+    .skills-glass-card {
+        background: linear-gradient(135deg, #4a0404 0%, #1a0101 100%) !important;
+        padding: 40px 20px !important;
+        border: none !important;
+    }
+
+    /* 2. Fix the Titles and Text for the dark background */
+    .skills-title, 
+    .label-group label, 
+    .percentage {
+        color: #ffffff !important;
+    }
+
+    /* 3. Fix Icon Placement on Mobile */
+    .label-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center; /* Vertical center icons with text */
+        width: 100%;
+    }
+
+    .label-group label {
+        display: flex;
+        align-items: center;
+        gap: 10px; /* Space between icon and text */
+        text-align: left;
+        flex: 1; /* Allows text to take up space */
+    }
+
+    /* 4. Ensure icons don't shrink on mobile */
+    .label-group label i {
+        min-width: 20px;
+        color: rgba(255, 255, 255, 0.8) !important;
+    }
+} 
 @media (max-width: 480px) {
     .portfolio-title {
         font-size: 3.2rem;    

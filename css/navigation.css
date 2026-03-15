@@ -272,6 +272,37 @@
     }
 }
 
+/* --- NIGHT MODE TOGGLE IN NAV --- */
+.mode-toggle-wrapper {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 10px; /* Space from social icons */
+    transition: transform 0.3s ease;
+}
+
+.mode-toggle-wrapper:hover {
+    transform: translateY(-2px);
+}
+
+.mode-icon {
+    font-size: 16px;
+    color: white;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.mode-toggle-wrapper:hover .mode-icon {
+    opacity: 1;
+}
+
+/* Optional: Pulse effect when in Dark Mode */
+body.night-mode .mode-icon {
+    color: #ff4d4d; /* Match your night-mode accent */
+    opacity: 1;
+    text-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
+}
+
 /* --- EXTRA SMALL (375px and below) --- */
 @media (max-width: 480px) {
     .portfolio-title { font-size: 2.4rem !important; }

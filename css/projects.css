@@ -501,27 +501,533 @@
         font-size: 45px;
     }
 }
+/* ==========================================
+   BRAND POSTER SECTION - REFINED STYLE
+   ========================================== */
+   .brand-poster-section {
+    padding: 120px 0;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 1;
+    background-color: #0b0b0b !important; 
+}
+
+/* Kills the messy overlapping text from previous CSS versions */
+.brand-poster-section::before,
+.brand-poster-section::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* --- Brand Offer Header --- */
+.brand-offer-header {
+    text-align: center;
+    margin-bottom: 50px;
+    z-index: 10;
+    padding: 0 20px;
+}
+
+.service-tag {
+    color: #8b0000; 
+    letter-spacing: 5px;
+    font-size: 11px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.brand-offer-header h2 {
+    color: #ffffff;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.brand-offer-header p {
+    color: rgba(255, 255, 255, 0.5); /* Dimmed to prioritize the H2 */
+    max-width: 550px;
+    margin: 0 auto;
+    font-size: 1.05rem;
+    line-height: 1.5;
+}
+
+/* --- Slider Core --- */
+.poster-slider-wrapper {
+    position: relative;
+    width: 380px; 
+    height: 550px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+}
+
+/* --- Navigation Arrows --- */
+.slider-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 100;
+}
+
+.slider-controls button {
+    pointer-events: auto;
+    background: rgba(139, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: 0.3s ease;
+}
+
+.slider-controls button:hover {
+    background: #8b0000;
+    transform: scale(1.1);
+}
+
+/* --- Cards Styling --- */
+.poster-card-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+    transform-origin: bottom center;
+}
+
+.poster-card {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: #000;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.8);
+    cursor: zoom-in;
+    animation: posterFloat 6s ease-in-out infinite;
+}
+
+.poster-img { width: 100%; height: 100%; object-fit: cover; }
+
+/* --- Bottom Caption --- */
+.brand-caption {
+    margin-top: 60px;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+@keyframes posterFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* POSTER MODAL OVERLAY */
+.poster-modal-overlay {
+    display: none; /* Hidden by default */
+    position: fixed !important;
+    top: 0; 
+    left: 0;
+    width: 100vw; 
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 100000 !important; /* Ensure it is above everything */
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(15px);
+}
+
+.poster-modal-content {
+    position: relative;
+    max-height: 90vh;
+    max-width: 90vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#modalFullPosterImg {
+    max-height: 85vh;
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 50px rgba(139, 0, 0, 0.3);
+    object-fit: contain;
+}
+
+/* Close Button (The X) */
+.close-poster {
+    position: absolute;
+    top: -60px; 
+    right: 0;
+    color: #fff; 
+    font-size: 50px; 
+    font-weight: 200;
+    cursor: pointer;
+    line-height: 1;
+    transition: 0.3s;
+}
+
+.close-poster:hover {
+    color: #8b0000;
+}
+
+/* Mobile tweak for the Close button */
+@media (max-width: 480px) {
+    .close-poster {
+        top: -50px;
+        right: 10px;
+    }
+}
+
+/* --- Mobile Responsiveness (Pixel 7) --- */
+@media (max-width: 480px) {
+    .brand-poster-section { padding: 60px 0 !important; }
+    .brand-offer-header h2 { font-size: 1.7rem; }
+    .brand-offer-header p { font-size: 0.9rem; }
+    .poster-slider-wrapper { width: 280px; height: 410px; }
+    
+    /* Arrows repositioned for mobile thumb reach */
+    .slider-controls { padding: 0 10px; }
+    .slider-controls button { width: 45px; height: 45px; font-size: 14px; }
+}
+@media (max-width: 480px) {
+    .brand-offer-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .brand-offer-header p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+    
+    .brand-offer-header {
+        margin-bottom: 30px;
+    }
+}
+
+/* THE CENTER ANCHOR */
+.poster-slider-wrapper {
+    position: relative;
+    width: 380px; 
+    height: 550px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: none !important; 
+    z-index: 5;
+}
+
+/* BOTTOM LABEL: Informational caption (Removed the "Order" / sales text) */
+.brand-poster-section::after {
+    content: "VISUAL IDENTITY & CREATIVE DIRECTION PORTFOLIO";
+    color: rgba(139, 0, 0, 0.8);
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-top: 60px;
+    font-weight: 600;
+}
+
+/* CARD STACKING & ANIMATION */
+.poster-card-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+    transform-origin: bottom center;
+}
+
+.poster-card-container.active { 
+    transform: translate(0, 0) rotate(0deg) scale(1.05); 
+    z-index: 10; 
+    opacity: 1; 
+}
+
+.poster-card-container.prev { 
+    transform: translate(-130px, 25px) rotate(-12deg); 
+    z-index: 5; 
+    opacity: 0.5; 
+}
+
+.poster-card-container.next { 
+    transform: translate(130px, 25px) rotate(12deg); 
+    z-index: 5; 
+    opacity: 0.5; 
+}
+
+.poster-card-container.hidden { 
+    transform: translate(0, 50px) scale(0.8); 
+    opacity: 0; 
+    z-index: 1; 
+}
+
+.poster-card {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: #000;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.8);
+    cursor: zoom-in;
+    animation: posterFloat 6s ease-in-out infinite;
+}
+
+.poster-img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+}
+
+/* SLIDER CONTROLS (Arrows) */
+.slider-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 100;
+}
+
+.slider-controls button {
+    pointer-events: auto;
+    background: rgba(139, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+}
+
+.slider-controls button:hover {
+    background: #8b0000;
+    transform: scale(1.1);
+}
+
+/* MODAL DESIGN */
+.poster-modal-overlay {
+    display: none;
+    position: fixed !important;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.98);
+    z-index: 100000 !important;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(20px);
+}
+
+#modalFullPosterImg {
+    max-height: 85vh;
+    border-radius: 10px;
+    box-shadow: 0 0 60px rgba(139, 0, 0, 0.3);
+}
+
+.close-poster {
+    position: absolute;
+    top: -50px; 
+    right: 0;
+    color: #fff; 
+    font-size: 50px; 
+    cursor: pointer;
+}
+
+@keyframes posterFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
 
 /* ==========================================
-   EXTRA SMALL DEVICES (480px and below)
+   EDITORIAL CATEGORY HEADERS
+   ========================================== */
+   .category-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: 120px auto 50px auto;
+    padding: 0 20px;
+    overflow: hidden;
+}
+
+.cat-left {
+    display: flex;
+    align-items: flex-end;
+    gap: 15px;
+}
+
+.cat-ghost-num {
+    font-size: 5rem;
+    font-weight: 900;
+    line-height: 0.8;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(139, 0, 0, 0.3);
+    font-family: 'serif'; /* Or any bold serif font you have */
+    transition: all 1s ease;
+}
+
+.cat-title-stack {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+.cat-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: #8b0000;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.cat-main-title {
+    font-size: 1.8rem;
+    color: #4a0404;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.cat-right-line {
+    flex-grow: 1;
+    height: 12px;
+    margin-left: 40px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid rgba(139, 0, 0, 0.2);
+    position: relative;
+}
+
+.line-inner {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0%; /* Start at 0 for animation */
+    height: 3px;
+    background: #8b0000;
+    transition: width 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* --- ANIMATION TRIGGER --- */
+.category-header.active .cat-ghost-num {
+    color: rgba(139, 0, 0, 0.05);
+    transform: translateY(0);
+}
+
+.category-header.active .line-inner {
+    width: 100%;
+}
+
+/* Mobile Tweak */
+@media (max-width: 768px) {
+    .cat-ghost-num { font-size: 3.5rem; }
+    .cat-main-title { font-size: 1.2rem; }
+    .cat-right-line { margin-left: 20px; }
+}
+/* ==========================================
+   MOBILE RESPONSIVE OVERRIDES (Pixel 7 Style)
    ========================================== */
 @media (max-width: 480px) {
-    .portfolio-main-title {
-        font-size: 1.5rem;
+    .brand-poster-section { 
+        padding: 80px 0 !important; 
+    }
+    
+    .brand-poster-section::before {
+        content: "CREATIVE DESIGN PORTFOLIO";
+        font-size: 10px;
+        letter-spacing: 3px;
+        margin-bottom: 30px;
     }
 
-    .project-card-title {
-        font-size: 1.2rem;
+    .poster-slider-wrapper { 
+        width: 260px; 
+        height: 380px; 
     }
 
-    .project-desc {
-        font-size: 12.5px;
-        line-height: 1.7;
+    .poster-card-container.prev { 
+        transform: translate(-40px, 15px) rotate(-8deg) !important; 
+        opacity: 0.3; 
+    }
+    
+    .poster-card-container.next { 
+        transform: translate(40px, 15px) rotate(8deg) !important; 
+        opacity: 0.3; 
+    }
+    
+    .brand-poster-section::after {
+        content: "Swipe posters to explore";
+        font-size: 10px;
+        margin-top: 40px;
     }
 
-    .phone-modal-content {
-        width: 280px; 
-        height: 580px;
-        border-width: 6px;
+    /* Restore arrows but make them smaller for Mobile */
+    .slider-controls {
+        display: flex !important;
+        padding: 0 10px;
+    }
+
+    .slider-controls button {
+        width: 45px;
+        height: 45px;
+        font-size: 14px;
+    }
+}
+/* ==========================================
+   TABLETS & SMALL LAPTOPS (992px and below)
+   ========================================== */
+   @media (max-width: 992px) {
+    .brand-poster-section {
+        width: 100%;
+        left: 0;
+        margin-left: 0;
+        padding: 80px 0;
+    }
+
+    .poster-slider-wrapper { 
+        width: 280px; /* Slightly narrower */
+        height: 410px; 
+    }
+
+    .poster-card-container.prev { 
+        transform: translate(-60px, 15px) rotate(-10deg); 
+    }
+
+    .poster-card-container.next { 
+        transform: translate(60px, 15px) rotate(10deg); 
+    }
+
+    .slider-controls {
+        padding: 0 20px;
+    }
+
+    .slider-controls button {
+        width: 50px;
+        height: 50px;
     }
 }
