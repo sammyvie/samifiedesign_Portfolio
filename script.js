@@ -1,22 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    /* --- 1. INITIALIZATION & CAROUSELS --- */
-    if (typeof emailjs !== 'undefined') {
-        emailjs.init("YOUR_PUBLIC_KEY"); 
+   /* --- 1. INITIALIZATION & CAROUSELS --- */
+   const initCarousel = (selector, interval) => {
+    const el = document.querySelector(selector);
+    if (el && typeof bootstrap !== 'undefined') {
+        const carouselInstance = new bootstrap.Carousel(el, { 
+            interval: interval, 
+            ride: 'carousel', 
+            pause: 'hover' 
+        });
+        carouselInstance.cycle(); 
     }
+};
 
-    const initCarousel = (selector, interval) => {
-        const el = document.querySelector(selector);
-        if (el && typeof bootstrap !== 'undefined') {
-            const carouselInstance = new bootstrap.Carousel(el, { 
-                interval: interval, 
-                ride: 'carousel', 
-                pause: 'hover' 
-            });
-            carouselInstance.cycle(); 
-        }
-    };
-    
     initCarousel('#certCarousel', 5000);
     initCarousel('#testimonialCarousel', 2000);
 
@@ -161,25 +157,38 @@ revealElements.forEach(el => observer.observe(el));
         }
     };
 
-    /* --- 7. EMAILJS FORM HANDLING --- */
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btnSpan = this.querySelector('button span');
-            const originalText = btnSpan.innerText;
-            btnSpan.innerText = "SENDING...";
-            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
-                .then(() => {
-                    btnSpan.innerText = "SENT!";
-                    this.reset();
-                    setTimeout(() => { btnSpan.innerText = originalText; }, 3000);
-                }, () => {
-                    btnSpan.innerText = "ERROR";
-                });
-        });
-    }
+ /* --- 7. FORMSPREE HANDLING (THE EASY WAY) --- */
+ const contactForm = document.getElementById('contactForm');
+ if (contactForm) {
+     contactForm.addEventListener('submit', async function(e) {
+         e.preventDefault();
+         const btnSpan = this.querySelector('button span');
+         const originalText = btnSpan.innerText;
+         
+         btnSpan.innerText = "SENDING...";
 
+         const data = new FormData(this);
+         
+         try {
+             const response = await fetch(this.action, {
+                 method: 'POST',
+                 body: data,
+                 headers: { 'Accept': 'application/json' }
+             });
+
+             if (response.ok) {
+                 btnSpan.innerText = "SENT!";
+                 this.reset();
+                 setTimeout(() => { btnSpan.innerText = originalText; }, 3000);
+             } else {
+                 throw new Error('Submission failed');
+             }
+         } catch (error) {
+             btnSpan.innerText = "ERROR - RETRY";
+             setTimeout(() => { btnSpan.innerText = originalText; }, 3000);
+         }
+     });
+ }
     /* --- 8. GLOBAL MODAL OUTSIDE CLICK HANDLER --- */
     window.addEventListener('click', (e) => {
         if (e.target === laptopModal) window.closeLaptopModal();
