@@ -501,6 +501,75 @@
         font-size: 45px;
     }
 }
+
+/* ==========================================
+   CREDENTIALS TOGGLE - TEAMUP CARD
+   ========================================== */
+.cred-details {
+    max-width: 90%;
+    margin: 0 auto 10px auto;
+    border-left: 3px solid #8b0000;
+    padding-left: 20px;
+}
+
+.cred-summary {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #8b0000;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+}
+
+.cred-summary::-webkit-details-marker { display: none; }
+
+.cred-summary::after {
+    content: "▾";
+    font-size: 13px;
+    transition: transform 0.25s ease;
+}
+
+.cred-details[open] .cred-summary::after {
+    transform: rotate(-180deg);
+}
+
+.cred-list {
+    padding: 10px 0 6px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cred-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.cred-tag {
+    background-color: #4a0404;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 3px;
+    white-space: nowrap;
+}
+
+.cred-text {
+    font-size: 11.5px;
+    color: #4a0404;
+    font-weight: 500;
+}
+
 /* ==========================================
    BRAND POSTER SECTION - REFINED STYLE
    ========================================== */
