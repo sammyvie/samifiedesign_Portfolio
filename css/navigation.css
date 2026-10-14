@@ -1,5 +1,5 @@
 /* ==========================================
-   FLOATING PILL NAVIGATION (FULL CLEANUP)
+   FLOATING PILL NAVIGATION (SLEEK & REFINED)
    ========================================== */
 .header-nav {
     position: fixed;
@@ -8,103 +8,155 @@
     width: 100%;
     z-index: 1000;
     background: transparent !important; 
-    padding: 25px 0; 
+    padding: 34px 0 16px; 
+    pointer-events: none;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* 2. THE FLOATING PILL */
 .nav-inner-container {
-    max-width: 1150px; 
-    width: 92%;
+    pointer-events: auto;
+    max-width: 1140px; 
+    width: 90%;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 35px;
-    background:#2c0202; 
-    backdrop-filter: blur(15px); 
-    -webkit-backdrop-filter: blur(15px);
+    padding: 9px 32px;
+    background: rgba(18, 2, 5, 0.78); 
+    backdrop-filter: blur(20px); 
+    -webkit-backdrop-filter: blur(20px);
     border-radius: 100px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(216, 168, 106, 0.28);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.65), inset 0 0 14px rgba(216, 168, 106, 0.06);
     transition: all 0.4s ease;
 }
 
 .header-nav.scrolled {
-    padding: 15px 0;
+    padding: 16px 0;
 }
 
 .header-nav.scrolled .nav-inner-container {
-    background:#2c0202;
+    background: rgba(14, 1, 4, 0.94);
     width: 88%;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    padding: 7px 28px;
+    border: 1px solid rgba(216, 168, 106, 0.38);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), inset 0 0 16px rgba(216, 168, 106, 0.1);
 }
 
 .nav-brand {
     flex: 1;
     display: flex;
     justify-content: flex-start;
+    align-items: center;
 }
 
 .nav-central {
     flex: 2; 
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .nav-socials {
     flex: 1;
     display: flex;
     justify-content: flex-end;
-    gap: 18px;
+    align-items: center;
+    gap: 12px;
+}
+
+.drawer-socials-row {
+    display: none;
 }
 
 /* 4. ELEMENT STYLING */
 .nav-brand .logo-img {
-    height: 42px;
+    height: 38px;
     width: auto;
-    transition: transform 0.3s ease;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
 }
 
 .nav-brand .logo-img:hover {
-    transform: scale(1.05);
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 10px rgba(216, 168, 106, 0.65));
 }
 
 /* Links */
 .nav-links {
     display: flex;
-    gap: 30px;
+    gap: 28px;
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
 .nav-links a {
+    font-family: 'Outfit', sans-serif;
     font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    color: white;
+    letter-spacing: 0.22em;
+    color: rgba(255, 255, 255, 0.72);
     text-decoration: none;
-    font-weight: 700;
-    transition: color 0.3s ease;
+    font-weight: 500;
+    position: relative;
+    padding: 4px 0;
+    transition: color 0.3s ease, letter-spacing 0.3s ease;
 }
 
 .nav-links a:hover {
-    color: white;
+    color: #ffffff;
+    letter-spacing: 0.25em;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.nav-links a.active {
+    color: #ffffff;
+}
+
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 1.5px;
+    background: linear-gradient(90deg, #d8a86a, #fff5e2);
+    border-radius: 2px;
+    box-shadow: 0 0 6px rgba(216, 168, 106, 0.9);
 }
 
 /* Social Icons */
-.nav-socials img {
-    width: 18px;
-    height: 18px;
-    filter: brightness(0) invert(1); 
-    opacity: 0.5;
-    transition: 0.3s ease;
+.social-pill-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 13px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.nav-socials a:hover img {
-    opacity: 1;
+.social-pill-link:hover {
+    color: #f7e6c4;
     transform: translateY(-2px);
+    text-shadow: 0 0 10px rgba(216, 168, 106, 0.85);
+}
+
+/* Hamburger Menu Button - Hidden on Desktop */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
 }
 
 /* ==========================================
@@ -121,154 +173,161 @@
 
     /* 2. NAVIGATION (CENTERED PILL) */
     .header-nav {
-        padding: 15px 0;
+        padding: 16px 0 10px !important;
         display: block;
         left: 0;
         right: 0;
     }
 
     .nav-inner-container {
-        width: 40%;
-        max-width: 650px;
+        width: 92% !important;
+        max-width: 680px;
         margin: 0 auto !important;
-        padding: 10px 20px;
+        padding: 8px 22px !important;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: #2c0202; 
+        background: rgba(18, 2, 5, 0.9) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
         border-radius: 100px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(216, 168, 106, 0.28) !important;
         z-index: 2005;
     }
 
-    .nav-central:not(.mobile-active), 
-    .nav-socials:not(.mobile-active) {
+    .nav-central:not(.mobile-active) {
+        display: none !important;
+    }
+
+    .nav-socials {
         display: none !important;
     }
 
     .nav-brand { flex: 1; display: flex; justify-content: flex-start; }
-    .nav-brand .logo-img { height: 30px; width: auto; }
+    .nav-brand .logo-img { height: 32px; width: auto; }
+
+    .nav-inner-container.nav-open {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        transform: none !important;
+    }
 
     .hamburger {
         display: flex !important;
         flex-direction: column;
         justify-content: center;
         gap: 5px;
-        width: 28px;
-        height: 25px;
+        width: 32px;
+        height: 28px;
         cursor: pointer;
         z-index: 2100;
         margin-left: auto;
+        padding: 2px;
+        background: none;
+        border: none;
+        outline: none;
     }
 
     .hamburger span {
         display: block;
         width: 100%;
-        height: 2px;
-        background-color: #ffffff;
-        border-radius: 2px;
+        height: 2.5px;
+        background-color: #ffeec8;
+        border-radius: 3px;
         transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
     }
 
     /* Hamburger Animation (X State) */
-    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active {
+        position: fixed !important;
+        top: 20px !important;
+        right: 22px !important;
+        width: 40px !important;
+        height: 40px !important;
+        border-radius: 50% !important;
+        background: rgba(30, 4, 8, 0.85) !important;
+        border: 1px solid rgba(216, 168, 106, 0.5) !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6) !important;
+        z-index: 100002 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 8px !important;
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); background-color: #ffeec8; }
     .hamburger.active span:nth-child(2) { opacity: 0; transform: translateX(10px); }
-    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); background-color: #ffeec8; }
 
-    /* 4. MOBILE MENU OVERLAY (REFINED SIZE) */
+    /* 4. LUXURY FULL-HEIGHT MOBILE DRAWER */
     .nav-central.mobile-active {
         display: flex !important;
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 75%; 
-        height: 50vh;
-        background: rgba(26, 1, 1, 0.98); 
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        flex-direction: column;
-        justify-content: center;
+        position: fixed !important;
+        top: 0 !important;
+        right: 0 !important;
+        width: min(340px, 86vw) !important; 
+        height: 100vh !important;
+        height: 100dvh !important;
+        background: rgba(14, 2, 4, 0.98) !important; 
+        backdrop-filter: blur(28px) !important;
+        -webkit-backdrop-filter: blur(28px) !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        z-index: 100000 !important;
+        box-shadow: -20px 0 60px rgba(0, 0, 0, 0.9) !important;
+        border-left: 1px solid rgba(216, 168, 106, 0.28) !important;
+        padding: 85px 24px 40px !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        animation: navSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    @keyframes navSlideIn {
+        from { transform: translateX(100%); }
+        to { transform: translateX(0); }
+    }
+
+    .nav-central.mobile-active .nav-links { 
+        display: flex !important;
+        flex-direction: column !important; 
+        gap: 22px !important; 
+        text-align: center !important; 
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .nav-central.mobile-active .nav-links li {
+        list-style: none !important;
+        width: 100% !important;
+    }
+
+    .nav-central.mobile-active .nav-links a { 
+        font-size: 16px !important; 
+        letter-spacing: 0.22em !important; 
+        color: #ffffff !important; 
+        font-weight: 600 !important;
+        display: block !important;
+        padding: 10px 0 !important;
+        transition: color 0.25s ease, letter-spacing 0.25s ease !important;
+    }
+
+    .nav-central.mobile-active .nav-links a:hover,
+    .nav-central.mobile-active .nav-links a.active {
+        color: #ffeec8 !important;
+        letter-spacing: 0.25em !important;
+    }
+
+    /* Mobile Drawer Socials */
+    .drawer-socials-row {
+        display: flex !important;
         align-items: center;
-        z-index: 2000;
-        box-shadow: -10px 0 40px rgba(0,0,0,0.8);
-        border-left: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .nav-links { flex-direction: column; gap: 30px; text-align: center; }
-    .nav-links a { 
-        font-size: 18px; 
-        letter-spacing: 3px; 
-        color: white !important; 
-        font-weight: 600;
-    }
-
-    /* 5. HERO SECTION FIXES */
-    .name-label { padding-top: 5rem; font-size: 10px; }
-    
-    .title-container {
-        width: 85%;
-        margin: 0 auto;
-        padding: 2.2rem 0;
-        overflow: hidden;
-        filter: none !important; 
-        box-shadow: 0 0 15px rgba(139, 0, 0, 0.3);
-    }
-
-    .portfolio-title {
-        font-size: clamp(2.3rem, 10vw, 5rem) !important;
-        display: block;
-        width: 100%;
-        text-align: center;
-        letter-spacing: -0.01em;
-        animation: initialFadeMobile 1.5s ease-out forwards;
-    }
-
-    @keyframes initialFadeMobile {
-        0% { opacity: 0; transform: translateY(10px); }
-        100% { opacity: 1; transform: translateY(0); }
-    }
-
-    .tagline { font-size: 10.5px; line-height: 1.6; padding: 0 10px; margin: 2rem auto; }
-
-    .about-section { padding: 60px 0; }
-    .about-hero { flex-direction: column; text-align: center; gap: 30px; }
-    
-    .profile-frame { 
-        width: 220px; 
-        height: 320px; 
-        margin: 0 auto; 
-        transform: none !important; 
-        opacity: 1 !important; 
-    }
-
-    .about-content { padding: 0 10px; }
-    .about-heading { font-size: 2.2rem; }
-    .about-para { font-size: 13px; margin-bottom: 25px; }
-
-    .about-stats { 
-        display: flex; 
-        justify-content: space-around; 
-        width: 100%; 
-        max-width: 380px; 
-        margin: 0 auto 30px auto; 
-    }
-    .stat-item strong { font-size: 0.9rem; }
-    .stat-item span { font-size: 7px; }
-
-    /* 7. SKILLS SECTION */
-    .skills-glass-card { padding: 30px 15px; border-radius: 20px; }
-    .skills-title { font-size: 18px; margin-bottom: 25px; }
-    .skills-grid { grid-template-columns: 1fr; gap: 20px; }
-    .center-line { display: none; }
-    .label-group label { font-size: 12px; }
-
-    /* 8. BUTTONS */
-    .cta-button, .about-cta { 
-        width: 85%; 
-        max-width: 280px; 
-        padding: 15px 0; 
-        font-size: 10px; 
-        letter-spacing: 1px;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid rgba(216, 168, 106, 0.2);
+        width: 80%;
     }
 }
 
@@ -305,6 +364,6 @@ body.night-mode .mode-icon {
 
 /* --- EXTRA SMALL (375px and below) --- */
 @media (max-width: 480px) {
-    .portfolio-title { font-size: 2.4rem !important; }
+    
     .nav-inner-container { width: 92%; }
 }

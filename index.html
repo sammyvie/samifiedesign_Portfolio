@@ -3,194 +3,869 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Samifiedportfolio</title>       
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap" rel="stylesheet">
+        <title>Samifiedportfolio</title>
+ 
+        <!-- FONTS: Luxury display serif and modern typography -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;600;700;900&family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,400;1,500;1,600&display=swap" rel="stylesheet">
+ 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <script src="https://cdn.tailwindcss.com"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="icon" type="image/png" href="./assets/Logo.png">
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-        
-        <link rel="stylesheet" href="style.css"> 
+ 
+        <link rel="stylesheet" href="./css/style.css">
         <link rel="stylesheet" href="./css/navigation.css">
         <link rel="stylesheet" href="./css/hero-about.css">
         <link rel="stylesheet" href="./css/projects.css">
-        <link rel="stylesheet" href="./css/modals-resume.css"> 
-        <link rel="stylesheet" href="./css/testimonals.css"> 
+        <link rel="stylesheet" href="./css/modals-resume.css">
+        <link rel="stylesheet" href="./css/testimonals.css">
         <link rel="stylesheet" href="./css/contact-footer.css">
-     </head>
+        <link rel="stylesheet" href="./css/constellation-intro.css">
+    </head>
 <body>
 
+    <noscript>
+        <style>.constellation-intro { display: none !important; }</style>
+    </noscript>
+
+    <!-- =====================================================================
+         CELESTIAL CONSTELLATION INTRO (INTERACTIVE OPENING EXPERIENCE)
+         ===================================================================== -->
+    <div class="constellation-intro" id="constellationIntro" role="dialog" aria-modal="true" aria-label="Constellation Opening Experience">
+        
+        <!-- Ambient Crimson Nebula & Celestial Lighting -->
+        <div class="intro-ambient-nebula" aria-hidden="true"></div>
+        <div class="intro-starfield" id="introStarfield" aria-hidden="true"></div>
+        <div class="intro-light-sweep" aria-hidden="true"></div>
+        <canvas id="introParticleCanvas" aria-hidden="true"></canvas>
+
+        <!-- Transition Shooting Stars Shower (Blazes across screen when transitioning to portfolio) -->
+        <div class="intro-shooting-stars-field" id="introShootingStarsField" aria-hidden="true">
+            <div class="intro-meteor meteor-1"></div>
+            <div class="intro-meteor meteor-2"></div>
+            <div class="intro-meteor meteor-3"></div>
+            <div class="intro-meteor meteor-4"></div>
+            <div class="intro-meteor meteor-5"></div>
+        </div>
+
+        <!-- Minimal Skip Intro Option -->
+        <button class="intro-skip-btn" id="introSkipBtn" aria-label="Skip intro and view portfolio" type="button">
+            Skip Intro <span aria-hidden="true">→</span>
+        </button>
+
+        <!-- Constellation Stage (Centering & Coordinate Reference) -->
+        <div class="intro-stage">
+
+            <!-- The "S" Signature Constellation Vector System -->
+            <svg class="constellation-svg" id="constellationSvg" viewBox="0 0 440 560" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                <defs>
+                    <!-- Celestial Gold Line Gradient -->
+                    <linearGradient id="goldLineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+                        <stop offset="25%" stop-color="#ffeec8" stop-opacity="0.9" />
+                        <stop offset="65%" stop-color="#e2b474" stop-opacity="0.85" />
+                        <stop offset="100%" stop-color="#d8a86a" stop-opacity="0.9" />
+                    </linearGradient>
+
+                    <!-- Standard 4-Point Celestial Sparkle Symbol (Pure hardware-accelerated vector) -->
+                    <g id="celestialSparkleSymbol">
+                        <circle r="7" fill="rgba(226, 180, 116, 0.22)" />
+                        <circle r="4.2" fill="rgba(255, 238, 200, 0.45)" />
+                        <path d="M 0,-18 Q 0,-3 3,0 Q 0,3 0,18 Q 0,3 -3,0 Q 0,-3 0,-18 Z" fill="#ffeec8" />
+                        <path d="M 0,-11 Q 0,-2 2,0 Q 0,2 0,11 Q 0,2 -2,0 Q 0,-2 0,-11 Z" fill="#e2b474" transform="rotate(45)" opacity="0.85" />
+                        <circle r="2.4" fill="#ffffff" />
+                    </g>
+
+                    <!-- Major Star Symbol for Principal Apices (Vega & Antares) -->
+                    <g id="celestialMajorStarSymbol">
+                        <circle r="13" fill="rgba(226, 180, 116, 0.2)" />
+                        <circle r="7.5" fill="rgba(255, 238, 200, 0.45)" />
+                        <path d="M 0,-26 Q 0,-4 4,0 Q 0,4 0,26 Q 0,4 -4,0 Q 0,-4 0,-26 Z" fill="#ffffff" />
+                        <path d="M 0,-26 Q 0,-4 4,0 Q 0,4 0,26 Q 0,4 -4,0 Q 0,-4 0,-26 Z" fill="#ffeec8" opacity="0.9" />
+                        <path d="M 0,-15 Q 0,-2.5 2.5,0 Q 0,2.5 0,15 Q 0,2.5 -2.5,0 Q 0,-2.5 0,-15 Z" fill="#e2b474" transform="rotate(45)" opacity="0.9" />
+                        <circle r="3.4" fill="#ffffff" />
+                    </g>
+                </defs>
+
+                <!-- Soft Radiant Halo Paths -->
+                <path class="constellation-line-halo" id="upperHalo" d="M 220,280 C 209.2,270.8 170.8,245.0 155,225 C 139.2,205.0 126.7,181.7 125,160 C 123.3,138.3 130.0,110.3 145,95 C 160.0,79.7 192.5,70.5 215,68 C 237.5,65.5 263.3,71.3 280,80 C 296.7,88.7 314.2,107.5 315,120 C 315.8,132.5 290.0,149.2 285,155" />
+                <path class="constellation-line-halo" id="lowerHalo" d="M 220,280 C 230.8,289.2 269.2,315.0 285,335 C 300.8,355.0 313.3,378.3 315,400 C 316.7,421.7 310.0,449.7 295,465 C 280.0,480.3 247.5,489.5 225,492 C 202.5,494.5 176.7,488.7 160,480 C 143.3,471.3 125.8,452.5 125,440 C 124.2,427.5 150.0,410.8 155,405" />
+
+                <!-- Crisp Golden Constellation Line Paths (Animated via progressive stroke-dashoffset) -->
+                <path class="constellation-line" id="upperLine" d="M 220,280 C 209.2,270.8 170.8,245.0 155,225 C 139.2,205.0 126.7,181.7 125,160 C 123.3,138.3 130.0,110.3 145,95 C 160.0,79.7 192.5,70.5 215,68 C 237.5,65.5 263.3,71.3 280,80 C 296.7,88.7 314.2,107.5 315,120 C 315.8,132.5 290.0,149.2 285,155" />
+                <path class="constellation-line" id="lowerLine" d="M 220,280 C 230.8,289.2 269.2,315.0 285,335 C 300.8,355.0 313.3,378.3 315,400 C 316.7,421.7 310.0,449.7 295,465 C 280.0,480.3 247.5,489.5 225,492 C 202.5,494.5 176.7,488.7 160,480 C 143.3,471.3 125.8,452.5 125,440 C 124.2,427.5 150.0,410.8 155,405" />
+
+                <!-- Leading Starlight Sparks (Riding the drawing edge of the lines) -->
+                <g class="traveling-spark-head" id="upperSparkHead" transform="translate(220, 280)">
+                    <circle r="9" fill="rgba(255, 238, 200, 0.3)" />
+                    <circle r="5" fill="rgba(226, 180, 116, 0.6)" />
+                    <circle r="2.8" fill="#ffffff" />
+                    <path d="M 0,-12 Q 0,-2 2,0 Q 0,2 0,12 Q 0,2 -2,0 Q 0,-2 0,-12 Z" fill="#ffeec8" />
+                    <path d="M 0,-12 Q 0,-2 2,0 Q 0,2 0,12 Q 0,2 -2,0 Q 0,-2 0,-12 Z" fill="#ffeec8" transform="rotate(90)" />
+                </g>
+                <g class="traveling-spark-head" id="lowerSparkHead" transform="translate(220, 280)">
+                    <circle r="9" fill="rgba(255, 238, 200, 0.3)" />
+                    <circle r="5" fill="rgba(226, 180, 116, 0.6)" />
+                    <circle r="2.8" fill="#ffffff" />
+                    <path d="M 0,-12 Q 0,-2 2,0 Q 0,2 0,12 Q 0,2 -2,0 Q 0,-2 0,-12 Z" fill="#ffeec8" />
+                    <path d="M 0,-12 Q 0,-2 2,0 Q 0,2 0,12 Q 0,2 -2,0 Q 0,-2 0,-12 Z" fill="#ffeec8" transform="rotate(90)" />
+                </g>
+
+                <!-- Surrounding Constellation Star Vertices (Sequentially awakened) -->
+                <!-- Upper Loop Star Nodes -->
+                <g class="star-node" id="node-7" transform="translate(155, 225)"><use href="#celestialSparkleSymbol" /></g>
+                <g class="star-node" id="node-6" transform="translate(125, 160)"><use href="#celestialSparkleSymbol" /></g>
+                <g class="star-node" id="node-5" transform="translate(145, 95)"><use href="#celestialSparkleSymbol" /></g>
+                <g class="star-node" id="node-4" transform="translate(215, 68)"><use href="#celestialMajorStarSymbol" /></g>
+                <g class="star-node" id="node-3" transform="translate(280, 80)"><use href="#celestialSparkleSymbol" /></g>
+                <g class="star-node" id="node-2" transform="translate(315, 120)"><use href="#celestialSparkleSymbol" /></g>
+                <g class="star-node" id="node-1" transform="translate(285, 155)"><use href="#celestialSparkleSymbol" /></g>
+
+                <!-- Lower Loop Star Nodes -->
+                <g class="star-node" id="node-9" transform="translate(285, 335)"><use href="#celestialSparkleSymbol" /></g>
+                <g class="star-node" id="node-10" transform="translate(315, 400)"><use href="#celestialSparkleSymbol" /></g>
+                <g class="star-node" id="node-11" transform="translate(295, 465)"><use href="#celestialSparkleSymbol" /></g>
+                <g class="star-node" id="node-12" transform="translate(225, 492)"><use href="#celestialMajorStarSymbol" /></g>
+                <g class="star-node" id="node-13" transform="translate(160, 480)"><use href="#celestialSparkleSymbol" /></g>
+                <g class="star-node" id="node-14" transform="translate(125, 440)"><use href="#celestialSparkleSymbol" /></g>
+                <g class="star-node" id="node-15" transform="translate(155, 405)"><use href="#celestialSparkleSymbol" /></g>
+            </svg>
+
+            <!-- Central Star Interactive Trigger (Positioned at exact center 220, 280) -->
+            <button class="central-star-trigger" id="centralStarBtn" aria-label="Enter Samifiedesign portfolio" aria-haspopup="false" type="button">
+                <div class="central-star-wrapper" id="centralStarWrapper">
+                    <svg width="72" height="72" viewBox="-36 -36 72 72" fill="none" aria-hidden="true">
+                        <circle r="30" fill="rgba(226, 180, 116, 0.12)" />
+                        <!-- Primary 4-point celestial sparkle rays -->
+                        <path d="M 0,-34 Q 0,-5 5,0 Q 0,5 0,34 Q 0,5 -5,0 Q 0,-5 0,-34 Z" fill="url(#centralStarGrad)" filter="drop-shadow(0 0 10px rgba(255, 238, 200, 0.95))" />
+                        <!-- Secondary diagonal 45-degree rays -->
+                        <path d="M 0,-19 Q 0,-3 3,0 Q 0,3 0,19 Q 0,3 -3,0 Q 0,-3 0,-19 Z" fill="#ffeec8" transform="rotate(45)" opacity="0.9" />
+                        <!-- Luminous white star core -->
+                        <circle r="4.2" fill="#ffffff" filter="drop-shadow(0 0 6px #ffffff)" />
+
+                        <defs>
+                            <linearGradient id="centralStarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#ffffff" />
+                                <stop offset="35%" stop-color="#ffeec8" />
+                                <stop offset="70%" stop-color="#e2b474" />
+                                <stop offset="100%" stop-color="#ba2230" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+            </button>
+
+            <!-- Short, Elegant Instruction -->
+            <p class="intro-instruction" id="introInstruction">CLICK THE STAR TO BEGIN</p>
+
+            <!-- Signature Monogram revealed upon S completion -->
+            <p class="intro-signature-label" id="introSignatureLabel">✦ SAMIFIEDESIGN ✦</p>
+
+        </div>
+    </div>
+
+    <!-- ==========================================
+         FLOATING LUXURY PILL NAVIGATION
+         ========================================== -->
     <header class="header-nav">
         <div class="nav-inner-container">
             <div class="nav-brand">
-                <a href="#home"><img src="./assets/Logo.png" alt="Logo" class="logo-img"></a>
+                <a href="#home" aria-label="Samantha Gonzales - Home">
+                    <img src="./assets/Logo.png" alt="Logo" class="logo-img">
+                </a>
             </div>
-    
+
             <nav class="nav-central">
                 <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#project">Project</a></li>
-                    <li><a href="#resume">Resume</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#home" class="nav-link active">HOME</a></li>
+                    <li><a href="#about" class="nav-link">ABOUT</a></li>
+                    <li><a href="#project" class="nav-link">PROJECT</a></li>
+                    <li><a href="#resume" class="nav-link">RESUME</a></li>
+                    <li><a href="#contact" class="nav-link">CONTACT</a></li>
                 </ul>
+                <div class="drawer-socials-row">
+                    <a href="https://www.linkedin.com/in/sam-gonzales-33b35b34a" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-pill-link">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/sammyvie" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-pill-link">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                    <a href="mailto:gonzalessamdt@gmail.com" class="social-pill-link" aria-label="Email">
+                        <i class="fa-regular fa-envelope"></i>
+                    </a>
+                </div>
             </nav>
-    
+
             <div class="nav-socials">
-                <a href="https://www.linkedin.com/in/sam-gonzales-33b35b34a" target="_blank">
-                    <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
+                <a href="https://www.linkedin.com/in/sam-gonzales-33b35b34a" target="_blank" aria-label="LinkedIn" class="social-pill-link">
+                    <i class="fa-brands fa-linkedin-in"></i>
                 </a>
-                <a href="https://github.com/sammyvie" target="_blank">
-                    <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
+                <a href="https://github.com/sammyvie" target="_blank" aria-label="GitHub" class="social-pill-link">
+                    <i class="fa-brands fa-github"></i>
                 </a>
-                <a href="mailto:gonzalessamdt@gmail.com" class="address-link">
-                    <img src="https://cdn-icons-png.flaticon.com/512/542/542689.png" alt="Email" class="email-icon">
+                <a href="mailto:gonzalessamdt@gmail.com" class="social-pill-link" aria-label="Email">
+                    <i class="fa-regular fa-envelope"></i>
                 </a>
             </div>
+            <button class="hamburger" id="navHamburger" aria-label="Toggle navigation" type="button">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </header>
 
     <main id="home" class="hero-gradient">
-        <div class="hero-content">
-            <p class="name-label"><span>GONZALES, SAMANTHA WAYNE </span></p>
-            
-            <div class="title-container">
-                <h1 class="portfolio-title">PORTFOLIO</h1>
+
+        <!-- Cinematic Space Background & Nebulae -->
+        <div class="space-nebula space-nebula-1" aria-hidden="true"></div>
+        <div class="space-nebula space-nebula-2" aria-hidden="true"></div>
+        <div class="space-nebula space-nebula-right" aria-hidden="true"></div>
+        <div class="hero-vignette" aria-hidden="true"></div>
+
+        <!-- Celestial Crimson Planet with Circling Planetary Ring -->
+        <div class="celestial-planet-wrap" aria-hidden="true">
+            <!-- Planetary Ring: Back portion passing behind the planet sphere -->
+            <svg class="planet-ring-svg planet-ring-back" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="ringBackGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffeec8" stop-opacity="0.85" />
+                        <stop offset="35%" stop-color="#d8a86a" stop-opacity="0.65" />
+                        <stop offset="70%" stop-color="#9a1824" stop-opacity="0.25" />
+                        <stop offset="100%" stop-color="#2a0206" stop-opacity="0" />
+                    </linearGradient>
+                    <filter id="ringGlow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="3" result="blur" />
+                        <feMerge>
+                            <feMergeNode in="blur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
+                </defs>
+                <g transform="rotate(-24 400 400)">
+                    <path d="M 25,400 A 375,115 0 0,1 775,400" stroke="url(#ringBackGrad)" stroke-width="14" opacity="0.32" />
+                    <path d="M 45,400 A 355,105 0 0,1 755,400" stroke="url(#ringBackGrad)" stroke-width="7" filter="url(#ringGlow)" />
+                    <path d="M 60,400 A 340,98 0 0,1 740,400" stroke="#fff8ea" stroke-width="1.8" opacity="0.9" />
+                    <path d="M 85,400 A 315,88 0 0,1 715,400" stroke="#d8a86a" stroke-width="2.5" opacity="0.45" />
+                </g>
+            </svg>
+
+            <!-- Planet Sphere Body -->
+            <div class="celestial-planet">
+                <div class="planet-atmosphere"></div>
+                <div class="planet-glow-ring"></div>
             </div>
-    
-            <p class="tagline reveal">
-                I design user-centered websites with clean and responsive layouts. 
-                I focus on creating visually balanced and easy-to-use interfaces. 
-                My work blends creativity with purposeful structure. 
-                I am always eager to learn and refine my front-end skills.
-            </p>
-    
-            <div class="cta-wrapper reveal">
-                <a href="#project" class="cta-button">View My Work</a>
+
+            <!-- Planetary Ring: Front portion passing in front of the planet sphere with Circling Orbiter -->
+            <svg class="planet-ring-svg planet-ring-front" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="ringFrontGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffeec8" stop-opacity="0.95" />
+                        <stop offset="35%" stop-color="#e2b474" stop-opacity="0.8" />
+                        <stop offset="70%" stop-color="#ba2230" stop-opacity="0.35" />
+                        <stop offset="100%" stop-color="#350408" stop-opacity="0.05" />
+                    </linearGradient>
+                </defs>
+                <g transform="rotate(-24 400 400)">
+                    <path d="M 775,400 A 375,115 0 0,1 25,400" stroke="url(#ringFrontGrad)" stroke-width="14" opacity="0.38" />
+                    <path d="M 755,400 A 355,105 0 0,1 45,400" stroke="url(#ringFrontGrad)" stroke-width="7" filter="url(#ringGlow)" />
+                    <path d="M 740,400 A 340,98 0 0,1 60,400" stroke="#fff8ea" stroke-width="1.8" opacity="0.95" />
+                    <path d="M 715,400 A 315,88 0 0,1 85,400" stroke="#e2b474" stroke-width="2.5" opacity="0.5" />
+
+                    <!-- Circling Stardust Satellite moving around the ring -->
+                    <g>
+                        <animateMotion dur="10s" repeatCount="indefinite" path="M 755,400 A 355,105 0 0,1 45,400" />
+                        <circle r="3.5" fill="#ffffff" filter="url(#ringGlow)" />
+                        <circle r="7.5" fill="rgba(255, 235, 195, 0.55)" />
+                    </g>
+                </g>
+            </svg>
+        </div>
+
+        <!-- Cosmic Orbital Vector Ring (SVG) - Single sweeping luxury celestial arc in deep space -->
+        <svg class="cosmic-orbit-system" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+                <linearGradient id="cosmicOrbitGrad" x1="100%" y1="20%" x2="0%" y2="80%">
+                    <stop offset="0%" stop-color="#fff5e0" stop-opacity="0.8" />
+                    <stop offset="30%" stop-color="#d8a86a" stop-opacity="0.65" />
+                    <stop offset="65%" stop-color="#9a2228" stop-opacity="0.25" />
+                    <stop offset="90%" stop-color="#3d050a" stop-opacity="0.05" />
+                    <stop offset="100%" stop-color="#120002" stop-opacity="0" />
+                </linearGradient>
+                <filter id="softOrbitGlow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="2" result="blur" />
+                    <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+            </defs>
+
+            <!-- Single sweeping celestial orbit looping gracefully behind showcase cards and sweeping under title -->
+            <ellipse cx="860" cy="510" rx="740" ry="240" transform="rotate(-15 860 510)"
+                     stroke="url(#cosmicOrbitGrad)" stroke-width="1.2" filter="url(#softOrbitGlow)" class="orbit-ellipse" />
+
+            <!-- Single stationary gleaming star node on the orbital curve (left edge accent) -->
+            <g transform="translate(180, 500)">
+                <circle r="3" fill="#ffffff" />
+                <circle r="7" fill="rgba(247, 218, 160, 0.4)" />
+            </g>
+        </svg>
+
+        <!-- Balanced Cosmic Sparkles, Starfield & Stargazer Meteors -->
+        <div class="hero-sparkles-field" aria-hidden="true">
+            <!-- Stargazer Meteor Streaks (Shooting stars) -->
+            <div class="shooting-star shooting-star-1"></div>
+            <div class="shooting-star shooting-star-2"></div>
+
+            <!-- Glistening Diamond Sparkles in Open Sky & Perimeter -->
+            <span class="cosmic-sparkle" style="--x:6%; --y:16%; --s:16px; --d:-1.2s; --t:5.2s">✦</span>
+            <span class="cosmic-sparkle" style="--x:10%; --y:6%; --s:12px; --d:-2.0s; --t:5.4s">✦</span>
+            <span class="cosmic-sparkle" style="--x:18%; --y:10%; --s:13px; --d:-3.5s; --t:6.0s">✦</span>
+            <span class="cosmic-sparkle" style="--x:24%; --y:18%; --s:14px; --d:-1.8s; --t:4.9s">✦</span>
+            <span class="cosmic-sparkle" style="--x:34%; --y:13%; --s:12px; --d:-0.8s; --t:4.8s">✦</span>
+            <span class="cosmic-sparkle" style="--x:44%; --y:7%; --s:13px; --d:-3.1s; --t:5.8s">✦</span>
+            <span class="cosmic-sparkle" style="--x:54%; --y:13%; --s:15px; --d:-0.9s; --t:6.1s">✦</span>
+            <span class="cosmic-sparkle" style="--x:62%; --y:11%; --s:15px; --d:-2.4s; --t:5.6s">✦</span>
+            <span class="cosmic-sparkle" style="--x:76%; --y:6%; --s:13px; --d:-4.1s; --t:5.0s">✦</span>
+            <span class="cosmic-sparkle" style="--x:83%; --y:15%; --s:13px; --d:-2.7s; --t:4.7s">✦</span>
+            <span class="cosmic-sparkle" style="--x:89%; --y:22%; --s:17px; --d:-1.7s; --t:6.2s">✦</span>
+            <span class="cosmic-sparkle" style="--x:95%; --y:12%; --s:14px; --d:-3.0s; --t:4.5s">✦</span>
+            <span class="cosmic-sparkle" style="--x:98%; --y:28%; --s:16px; --d:-3.8s; --t:5.3s">✦</span>
+            <span class="cosmic-sparkle" style="--x:96%; --y:62%; --s:14px; --d:-2.1s; --t:5.8s">✦</span>
+            <span class="cosmic-sparkle" style="--x:94%; --y:74%; --s:13px; --d:-1.4s; --t:5.6s">✦</span>
+            <span class="cosmic-sparkle" style="--x:86%; --y:82%; --s:13px; --d:-0.5s; --t:5.3s">✦</span>
+            <span class="cosmic-sparkle" style="--x:11%; --y:84%; --s:14px; --d:-2.8s; --t:5.7s">✦</span>
+
+            <!-- Ambient Micro Stardust Points -->
+            <span class="star-point" style="--x:3%; --y:32%; --s:2.5px; --d:-0.8s; --t:4.2s"></span>
+            <span class="star-point" style="--x:8%; --y:22%; --s:2px; --d:-1.5s; --t:3.5s"></span>
+            <span class="star-point" style="--x:13%; --y:9%; --s:2px; --d:-2.2s; --t:4.8s"></span>
+            <span class="star-point" style="--x:19%; --y:17%; --s:2.5px; --d:-3.2s; --t:4.1s"></span>
+            <span class="star-point" style="--x:26%; --y:16%; --s:2px; --d:-1.1s; --t:3.6s"></span>
+            <span class="star-point" style="--x:31%; --y:8%; --s:2px; --d:-0.6s; --t:3.8s"></span>
+            <span class="star-point" style="--x:40%; --y:14%; --s:2px; --d:-2.8s; --t:4.4s"></span>
+            <span class="star-point" style="--x:48%; --y:8%; --s:2.5px; --d:-3.4s; --t:4.5s"></span>
+            <span class="star-point" style="--x:58%; --y:6%; --s:3px; --d:-1.3s; --t:4.9s"></span>
+            <span class="star-point" style="--x:66%; --y:24%; --s:2px; --d:-2.1s; --t:3.7s"></span>
+            <span class="star-point" style="--x:68%; --y:16%; --s:2.5px; --d:-1.6s; --t:3.9s"></span>
+            <span class="star-point" style="--x:74%; --y:34%; --s:2.5px; --d:-0.9s; --t:4.3s"></span>
+            <span class="star-point" style="--x:81%; --y:28%; --s:3px; --d:-2.7s; --t:4.4s"></span>
+            <span class="star-point" style="--x:85%; --y:42%; --s:2px; --d:-3.6s; --t:4.7s"></span>
+            <span class="star-point" style="--x:92%; --y:36%; --s:2px; --d:-0.4s; --t:4.0s"></span>
+            <span class="star-point" style="--x:94%; --y:56%; --s:2.5px; --d:-1.8s; --t:3.9s"></span>
+            <span class="star-point" style="--x:97%; --y:48%; --s:2.5px; --d:-3.1s; --t:5.1s"></span>
+            <span class="star-point" style="--x:88%; --y:72%; --s:2px; --d:-2.4s; --t:4.5s"></span>
+            <span class="star-point" style="--x:72%; --y:88%; --s:2px; --d:-1.9s; --t:3.7s"></span>
+            <span class="star-point" style="--x:62%; --y:84%; --s:2.5px; --d:-0.7s; --t:4.2s"></span>
+            <span class="star-point" style="--x:38%; --y:82%; --s:2px; --d:-3.0s; --t:3.6s"></span>
+            <span class="star-point" style="--x:22%; --y:88%; --s:2.5px; --d:-2.5s; --t:4.6s"></span>
+            <span class="star-point" style="--x:4%; --y:74%; --s:2px; --d:-1.7s; --t:4.0s"></span>
+            <span class="star-point" style="--x:2%; --y:54%; --s:2px; --d:-1.2s; --t:4.1s"></span>
+        </div>
+
+        <!-- Rocky Martian Ground Horizon (Bottom Terrain) with Stargazers Silhouette -->
+        <div class="hero-rocky-terrain" aria-hidden="true">
+            <svg class="terrain-svg" viewBox="0 0 1600 200" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="terrainBackGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+                        <stop offset="0%" stop-color="#240408" />
+                        <stop offset="100%" stop-color="#090102" />
+                    </linearGradient>
+                    <linearGradient id="terrainFrontGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+                        <stop offset="0%" stop-color="#34060c" />
+                        <stop offset="35%" stop-color="#1c0306" />
+                        <stop offset="100%" stop-color="#060001" />
+                    </linearGradient>
+                </defs>
+                <!-- Back terrain layer -->
+                <path d="M 0,200 L 0,95 C 160,88 300,120 440,105 C 580,90 700,128 860,102 C 1020,76 1160,112 1300,94 C 1440,76 1530,102 1600,88 L 1600,200 Z" 
+                      fill="url(#terrainBackGrad)" />
+                <!-- Front jagged crags layer with glowing rim stroke -->
+                <path d="M 0,200 L 0,135 Q 90,118 160,140 Q 250,108 360,146 Q 490,122 610,154 Q 730,128 850,150 Q 990,98 1140,142 Q 1270,108 1420,150 Q 1520,118 1600,136 L 1600,200 Z" 
+                      fill="url(#terrainFrontGrad)" stroke="rgba(216, 95, 75, 0.5)" stroke-width="1.4" />
+
+                <!-- Stargazers on the Cliff Ridge gazing up at the Planet & Stars -->
+                <g class="stargazers-silhouette" transform="translate(1220, 78)">
+                    <!-- Tripod & Astronomy Telescope pointing toward upper right planet -->
+                    <path d="M 32,32 L 20,58 M 32,32 L 32,59 M 32,32 L 44,58" stroke="#160205" stroke-width="2.2" stroke-linecap="round" />
+                    <path d="M 32,32 L 20,58 M 32,32 L 32,59 M 32,32 L 44,58" stroke="rgba(216, 168, 106, 0.55)" stroke-width="0.8" stroke-linecap="round" />
+                    <!-- Telescope barrel angled 42deg toward upper right planet -->
+                    <line x1="18" y1="44" x2="50" y2="18" stroke="#140204" stroke-width="5" stroke-linecap="round" />
+                    <line x1="18" y1="44" x2="50" y2="18" stroke="rgba(255, 230, 180, 0.85)" stroke-width="1.2" stroke-linecap="round" />
+                    <!-- Objective lens sparkle -->
+                    <circle cx="50" cy="18" r="1.8" fill="#ffffff" />
+                    <!-- Stargazer 1 (Standing at telescope, looking into eyepiece) -->
+                    <circle cx="14" cy="38" r="4.2" fill="#140204" stroke="rgba(216, 168, 106, 0.65)" stroke-width="0.8" />
+                    <path d="M 14,42 C 12,47 10,52 9,58 L 19,58 C 18,52 17,47 16,42 Z" fill="#140204" stroke="rgba(216, 168, 106, 0.4)" stroke-width="0.6" />
+                    <!-- Stargazer 2 (Beside, seated on rock ledge, head tilted back stargazing) -->
+                    <circle cx="-5" cy="40" r="4.4" fill="#140204" stroke="rgba(216, 168, 106, 0.65)" stroke-width="0.8" />
+                    <path d="M -5,44 C -7,49 -10,54 -11,59 L 3,59 C 2,54 0,48 -3,44 Z" fill="#140204" stroke="rgba(216, 168, 106, 0.4)" stroke-width="0.6" />
+                    <!-- Raised arm pointing at the planet -->
+                    <path d="M -3,47 Q 8,40 16,36" stroke="rgba(216, 168, 106, 0.7)" stroke-width="1.2" stroke-linecap="round" fill="none" />
+                </g>
+            </svg>
+        </div>
+
+        <!-- Main Hero Content -->
+        <div class="hero-content">
+
+            <!-- LEFT: Luxury Typography & Bio -->
+            <div class="hero-text-side">
+                <div class="author-brow">
+                    <span class="brow-star">✦</span>
+                    <span class="brow-name">SAMANTHA GONZALES</span>
+                    <span class="brow-line"></span>
+                </div>
+
+                <div class="title-wrapper">
+                    <h1 class="portfolio-title">
+                        P<span class="portfolio-letter-o">O<span class="o-center-sparkle">✦</span></span>RTFOLIO
+                    </h1>
+                </div>
+
+                <p class="hero-role-title">Front-End Developer &amp; UI/UX Designer</p>
+
+                <p class="hero-description">
+                    I design and build intuitive, visually engaging websites and
+                    web applications that turn ideas into meaningful digital experiences.
+                </p>
+
+                <div class="hero-cta-area">
+                    <a href="#project" class="hero-pill-btn">
+                        <span>EXPLORE MY WORK</span>
+                        <span class="btn-arrow-icon">↗</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- RIGHT: 3D Angled Device Showcase + Vertical Counter -->
+            <div class="hero-showcase-stage">
+                <div class="device-3d-scene" id="device3dScene">
+                    <!-- Card 01: TeamUp Platform (Front / Active) -->
+                    <article class="website-mockup-card card-pos-0" data-index="0" id="heroCard0">
+                        <div class="website-frame">
+                            <div class="browser-header-bar">
+                                <div class="browser-dots">
+                                    <span class="b-dot b-dot-red"></span>
+                                    <span class="b-dot b-dot-yellow"></span>
+                                    <span class="b-dot b-dot-green"></span>
+                                </div>
+                                <div class="browser-url-pill">
+                                    <i class="fa-solid fa-lock url-lock"></i>
+                                    <span class="url-text">teamup-platform.com</span>
+                                </div>
+                                <div class="browser-actions">
+                                    <i class="fa-solid fa-arrow-rotate-right"></i>
+                                </div>
+                            </div>
+                            <div class="website-viewport">
+                                <img src="./assets/Teamup.png" alt="TeamUp Platform website preview" class="website-screen-img">
+                                <div class="website-glass-sheen"></div>
+                            </div>
+                            <div class="website-caption-bar">
+                                <div class="caption-left">
+                                    <span class="caption-project-num">PROJECT 01</span>
+                                    <h4 class="caption-project-title">TeamUp Platform</h4>
+                                </div>
+                                <div class="caption-right">
+                                    <span class="caption-tag">Web Development</span>
+                                    <span class="caption-tag">UI/UX Design</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 02: Lilas Aesthetic (Middle) -->
+                    <article class="website-mockup-card card-pos-1" data-index="1" id="heroCard1">
+                        <div class="website-frame">
+                            <div class="browser-header-bar">
+                                <div class="browser-dots">
+                                    <span class="b-dot b-dot-red"></span>
+                                    <span class="b-dot b-dot-yellow"></span>
+                                    <span class="b-dot b-dot-green"></span>
+                                </div>
+                                <div class="browser-url-pill">
+                                    <i class="fa-solid fa-lock url-lock"></i>
+                                    <span class="url-text">lilas-aesthetic.com</span>
+                                </div>
+                                <div class="browser-actions">
+                                    <i class="fa-solid fa-arrow-rotate-right"></i>
+                                </div>
+                            </div>
+                            <div class="website-viewport">
+                                <img src="./assets/Lilas.png" alt="Lilas Aesthetic website preview" class="website-screen-img">
+                                <div class="website-glass-sheen"></div>
+                            </div>
+                            <div class="website-caption-bar">
+                                <div class="caption-left">
+                                    <span class="caption-project-num">PROJECT 02</span>
+                                    <h4 class="caption-project-title">Lilas Aesthetic</h4>
+                                </div>
+                                <div class="caption-right">
+                                    <span class="caption-tag">UI/UX Design</span>
+                                    <span class="caption-tag">Branding</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 03: Paya Street Website (Back) -->
+                    <article class="website-mockup-card card-pos-2" data-index="2" id="heroCard2">
+                        <div class="website-frame">
+                            <div class="browser-header-bar">
+                                <div class="browser-dots">
+                                    <span class="b-dot b-dot-red"></span>
+                                    <span class="b-dot b-dot-yellow"></span>
+                                    <span class="b-dot b-dot-green"></span>
+                                </div>
+                                <div class="browser-url-pill">
+                                    <i class="fa-solid fa-lock url-lock"></i>
+                                    <span class="url-text">payastreetcafe.com</span>
+                                </div>
+                                <div class="browser-actions">
+                                    <i class="fa-solid fa-arrow-rotate-right"></i>
+                                </div>
+                            </div>
+                            <div class="website-viewport">
+                                <img src="./assets/paya_street.png" alt="Paya Street website preview" class="website-screen-img">
+                                <div class="website-glass-sheen"></div>
+                            </div>
+                            <div class="website-caption-bar">
+                                <div class="caption-left">
+                                    <span class="caption-project-num">PROJECT 03</span>
+                                    <h4 class="caption-project-title">Paya Street Website</h4>
+                                </div>
+                                <div class="caption-right">
+                                    <span class="caption-tag">Web Development</span>
+                                    <span class="caption-tag">Vue.js &bull; Make.com</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Vertical Counter on the Far Right (01 | 02 03) -->
+                <div class="stage-vertical-indicator" aria-label="Project selection">
+                    <button class="indicator-step active" data-index="0" aria-label="View Project 01">
+                        <span class="step-num">01</span>
+                        <span class="step-bar"></span>
+                    </button>
+                    <button class="indicator-step" data-index="1" aria-label="View Project 02">
+                        <span class="step-num">02</span>
+                        <span class="step-bar"></span>
+                    </button>
+                    <button class="indicator-step" data-index="2" aria-label="View Project 03">
+                        <span class="step-num">03</span>
+                        <span class="step-bar"></span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Left: Scroll to explore with vertical line and star -->
+        <div class="hero-scroll-indicator">
+            <div class="scroll-stem-line"></div>
+            <div class="scroll-label-group">
+                <span class="scroll-star-icon">✦</span>
+                <span class="scroll-text">SCROLL TO EXPLORE</span>
             </div>
         </div>
-    </main>
 
-    <!-- ABOUT SECTION -->
+    </main>
+ 
+
+    <!-- ==========================================
+         ABOUT SECTION: ARCHITECTURAL ELEGANCE & CELESTIAL SIGNATURE
+         (Designed to match Samifiedesign Luxury Aesthetic)
+         ========================================== -->
     <section id="about" class="about-section">
+        <!-- Ambient Celestial Accents -->
+        <div class="about-celestial-layer" aria-hidden="true">
+            <!-- Sweeping Celestial Gold Arc on the Right -->
+            <svg class="about-celestial-arc" viewBox="0 0 600 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 580,20 C 480,120 320,280 80,440" stroke="url(#aboutCelestialArcGrad)" stroke-width="1.2" stroke-linecap="round" />
+                <defs>
+                    <linearGradient id="aboutCelestialArcGrad" x1="100%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#d8a86a" stop-opacity="0.45" />
+                        <stop offset="45%" stop-color="#e2b474" stop-opacity="0.3" />
+                        <stop offset="100%" stop-color="#d8a86a" stop-opacity="0.04" />
+                    </linearGradient>
+                </defs>
+            </svg>
+            <!-- Ambient Sparkling 4-Point Stars -->
+            <span class="about-bg-star star-right-arc">✦</span>
+            <span class="about-bg-star star-mid-right">✦</span>
+        </div>
+
         <div class="about-container">
-            <div class="about-hero"> 
-                <div class="profile-frame">
-                    <img src="./assets/Profile.png" alt="Samantha" class="profile-img">
-                    <div class="frame-accent"></div>
-                </div>
-                <div class="about-content">
-                    <h2 class="about-heading">ABOUT <span class="thin-text">Samifiedesign</span></h2>
-                    <p class="about-para">
-                        I'm Samantha, the creator behind samifiedesign—a growing front-end developer passionate 
-                        about clean UI, responsive layouts, and meaningful digital experiences. I enjoy 
-                        transforming ideas into designs that feel organized, intuitive, and visually calm, 
-                        with careful attention to spacing, typography, and visual hierarchy. I'm continuously 
-                        improving my skills in web design, modern front-end practices, and user experience, 
-                        while staying open to learning new tools and techniques that enhance both design quality 
-                        and functionality. My goal is to create interfaces that are not only visually appealing 
-                        but also practical, accessible, and easy to navigate across different devices.
-                    </p>
-                    <div class="about-stats">
-                        <div class="stat-item"><strong>BSIT</strong><span>3rd Year Student</span></div>
-                        <div class="stat-item"><strong>CLEAN</strong><span>UI Philosophy</span></div>
-                        <div class="stat-item"><strong>CREATIVE</strong><span>Problem Solver</span></div>
+            <!-- TOP HERO GRID: Portrait Arch + Bio & Highlights -->
+            <div class="about-hero">
+
+                <!-- LEFT: Architectural Portrait Arch with Gold Hairline & Celestial Stars -->
+                <div class="about-portrait-wrap">
+                    <!-- Left Vertical Hairline with Centered Star -->
+                    <div class="portrait-left-axis" aria-hidden="true">
+                        <span class="axis-star">✦</span>
                     </div>
-                    <a href="#project" class="about-cta">EXPLORE MY WORKS</a>
+
+                    <!-- Outer Delicate Hairline Frame -->
+                    <div class="portrait-outer-frame" aria-hidden="true">
+                        <span class="frame-star star-top-right">✦</span>
+                        <span class="frame-star star-bottom-left">✦</span>
+                        <span class="frame-star star-bottom-center">✦</span>
+                    </div>
+
+                    <!-- Inner Arch Image Card -->
+                    <div class="profile-frame">
+                        <img src="./assets/Profile.png" alt="Samantha - Creator of Samifiedesign" class="profile-img" loading="lazy">
+                    </div>
+
+                    <!-- Right Floating Sparkle Accent -->
+                    <span class="portrait-float-star" aria-hidden="true">✦</span>
+                </div>
+
+                <!-- RIGHT: Luxury Typography, Bio, Stats & CTA -->
+                <div class="about-content">
+                    <div class="about-eyebrow">
+                        <span class="eyebrow-star">✦</span>
+                        <span class="eyebrow-text">ABOUT</span>
+                        <span class="eyebrow-line"></span>
+                    </div>
+
+                    <h2 class="about-heading">Samifiedesign</h2>
+
+                    <p class="about-para">
+                        I'm Samantha, the creator behind samifiedesign—a growing front-end developer passionate about clean UI, responsive layouts, and meaningful digital experiences. I enjoy transforming ideas into designs that feel organized, intuitive, and visually calm, with careful attention to spacing, typography, and visual hierarchy. I'm continuously improving my skills in web design, modern front-end practices, and user experience, while staying open to learning new tools and techniques that enhance both design quality and functionality. My goal is to create interfaces that are not only visually appealing but also practical, accessible, and easy to navigate across different devices.
+                    </p>
+
+                    <!-- Three Stat Highlights with Vertical Separators -->
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-top">
+                                <span class="stat-star">✦</span>
+                                <strong class="stat-value">BSIT</strong>
+                            </div>
+                            <span class="stat-label">3RD YEAR STUDENT</span>
+                        </div>
+
+                        <div class="stat-divider" aria-hidden="true"></div>
+
+                        <div class="stat-item">
+                            <div class="stat-top">
+                                <span class="stat-star">✦</span>
+                                <strong class="stat-value">CLEAN</strong>
+                            </div>
+                            <span class="stat-label">UI PHILOSOPHY</span>
+                        </div>
+
+                        <div class="stat-divider" aria-hidden="true"></div>
+
+                        <div class="stat-item">
+                            <div class="stat-top">
+                                <span class="stat-star">✦</span>
+                                <strong class="stat-value">CREATIVE</strong>
+                            </div>
+                            <span class="stat-label">PROBLEM SOLVER</span>
+                        </div>
+                    </div>
+
+                    <!-- Pill CTA Button -->
+                    <div class="about-cta-wrapper">
+                        <a href="#project" class="about-cta">
+                            <span>EXPLORE MY WORKS</span>
+                            <span class="cta-arrow" aria-hidden="true">→</span>
+                        </a>
+                    </div>
                 </div>
             </div>
-    
+
+            <!-- BOTTOM CARD: Midnight Wine Card (Technical Stack & Personal Strengths) -->
             <div class="skills-glass-card">
+                <!-- Cosmic Corner Glow Ring Accent -->
+                <div class="card-cosmic-ring" aria-hidden="true">
+                    <svg viewBox="0 0 160 160" fill="none">
+                        <circle cx="160" cy="160" r="140" stroke="rgba(216, 168, 106, 0.14)" stroke-width="1.2" />
+                        <circle cx="160" cy="160" r="105" stroke="rgba(216, 168, 106, 0.22)" stroke-width="1.5" />
+                        <circle cx="160" cy="160" r="70" stroke="rgba(216, 168, 106, 0.12)" stroke-width="1" />
+                    </svg>
+                </div>
+
                 <div class="skills-grid">
+                    <!-- Left Column: TECHNICAL STACK -->
                     <div class="skills-col">
-                        <h3 class="skills-title">TECHNICAL <br>STACK</h3>
-                        
-                        <div class="skill-row">
-                            <div class="label-group">
-                                <label><i class="fab fa-figma"></i> Figma & Wireframing</label>
-                                <span class="percentage">85%</span>
-                            </div>
-                            <div class="bar-bg"><div class="bar-fill" data-width="85%"></div></div>
+                        <div class="skills-card-header">
+                            <span class="col-header-star">✦</span>
+                            <h3 class="skills-title">TECHNICAL STACK</h3>
+                            <span class="col-header-line"></span>
                         </div>
-                        
-                        <div class="skill-row">
-                            <div class="label-group">
-                                <label><i class="fas fa-layer-group"></i> High-Fidelity Prototyping</label>
-                                <span class="percentage">80%</span>
+
+                        <div class="skill-row" data-percent="85">
+                            <div class="skill-icon-cell">
+                                <span class="icon-brackets">&lt;/&gt;</span>
                             </div>
-                            <div class="bar-bg"><div class="bar-fill" data-width="80%"></div></div>
+                            <div class="skill-content-cell">
+                                <div class="label-group">
+                                    <label>FIGMA &amp; WIREFRAMING</label>
+                                    <span class="percentage" data-target="85">85%</span>
+                                </div>
+                                <div class="bar-bg">
+                                    <div class="bar-fill" data-width="85%"></div>
+                                </div>
+                            </div>
                         </div>
-                    
-                        <div class="skill-row">
-                            <div class="label-group">
-                                <label><i class="fas fa-pen-nib"></i> Visual Branding (Canva/Adobe)</label>
-                                <span class="percentage">75%</span>
+
+                        <div class="skill-row" data-percent="70">
+                            <div class="skill-icon-cell">
+                                <i class="fa-solid fa-layer-group"></i>
                             </div>
-                            <div class="bar-bg"><div class="bar-fill" data-width="75%"></div></div>
+                            <div class="skill-content-cell">
+                                <div class="label-group">
+                                    <label>HIGH-FIDELITY PROTOTYPING</label>
+                                    <span class="percentage" data-target="70">70%</span>
+                                </div>
+                                <div class="bar-bg">
+                                    <div class="bar-fill" data-width="70%"></div>
+                                </div>
+                            </div>
                         </div>
-                    
-                        <div class="skill-row">
-                            <div class="label-group">
-                                <label><i class="fab fa-wordpress"></i> WordPress & CMS</label>
-                                <span class="percentage">60%</span>
+
+                        <div class="skill-row" data-percent="60">
+                            <div class="skill-icon-cell">
+                                <i class="fa-solid fa-paintbrush"></i>
                             </div>
-                            <div class="bar-bg"><div class="bar-fill" data-width="60%"></div></div>
+                            <div class="skill-content-cell">
+                                <div class="label-group">
+                                    <label>VISUAL BRANDING (CANVA/ADOBE)</label>
+                                    <span class="percentage" data-target="60">60%</span>
+                                </div>
+                                <div class="bar-bg">
+                                    <div class="bar-fill" data-width="60%"></div>
+                                </div>
+                            </div>
                         </div>
-                    
-                        <div class="skill-row">
-                            <div class="label-group">
-                                <label><i class="fas fa-code"></i> Frontend (Vue.js/HTML/CSS)</label>
-                                <span class="percentage">55%</span>
+
+                        <div class="skill-row" data-percent="75">
+                            <div class="skill-icon-cell">
+                                <i class="fa-solid fa-globe"></i>
                             </div>
-                            <div class="bar-bg"><div class="bar-fill" data-width="55%"></div></div>
+                            <div class="skill-content-cell">
+                                <div class="label-group">
+                                    <label>WORDPRESS &amp; CMS</label>
+                                    <span class="percentage" data-target="75">75%</span>
+                                </div>
+                                <div class="bar-bg">
+                                    <div class="bar-fill" data-width="75%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-row" data-percent="80">
+                            <div class="skill-icon-cell">
+                                <span class="icon-brackets">&lt;/&gt;</span>
+                            </div>
+                            <div class="skill-content-cell">
+                                <div class="label-group">
+                                    <label>FRONTEND (VUE.JS/HTML/CSS)</label>
+                                    <span class="percentage" data-target="80">80%</span>
+                                </div>
+                                <div class="bar-bg">
+                                    <div class="bar-fill" data-width="80%"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-            
-                    <div class="center-line"></div>
-            
+
+                    <!-- Center Divider with Floating Star Ornament -->
+                    <div class="skills-vertical-divider" aria-hidden="true">
+                        <span class="divider-center-star">✦</span>
+                    </div>
+
+                    <!-- Right Column: PERSONAL STRENGTHS -->
                     <div class="skills-col">
-                        <h3 class="skills-title">PERSONAL <br>STRENGTHS</h3>
-                        
-                        <div class="skill-row">
-                            <div class="label-group">
-                                <label><i class="fas fa-lightbulb"></i> Creativity</label>
-                                <span class="percentage">95%</span>
-                            </div>
-                            <div class="bar-bg"><div class="bar-fill" data-width="95%"></div></div>
+                        <div class="skills-card-header">
+                            <span class="col-header-star">✦</span>
+                            <h3 class="skills-title">PERSONAL STRENGTHS</h3>
+                            <span class="col-header-line"></span>
                         </div>
-                    
-                        <div class="skill-row">
-                            <div class="label-group">
-                                <label><i class="fas fa-users"></i> Teamwork & Collaboration</label>
-                                <span class="percentage">90%</span>
+
+                        <div class="skill-row" data-percent="90">
+                            <div class="skill-icon-cell">
+                                <i class="fa-regular fa-lightbulb"></i>
                             </div>
-                            <div class="bar-bg"><div class="bar-fill" data-width="90%"></div></div>
+                            <div class="skill-content-cell">
+                                <div class="label-group">
+                                    <label>CREATIVITY</label>
+                                    <span class="percentage" data-target="90">90%</span>
+                                </div>
+                                <div class="bar-bg">
+                                    <div class="bar-fill" data-width="90%"></div>
+                                </div>
+                            </div>
                         </div>
-                    
-                        <div class="skill-row">
-                            <div class="label-group">
-                                <label><i class="fas fa-clock"></i> Time Management</label>
-                                <span class="percentage">85%</span>
+
+                        <div class="skill-row" data-percent="85">
+                            <div class="skill-icon-cell">
+                                <i class="fa-solid fa-users"></i>
                             </div>
-                            <div class="bar-bg"><div class="bar-fill" data-width="85%"></div></div>
+                            <div class="skill-content-cell">
+                                <div class="label-group">
+                                    <label>TEAMWORK &amp; COLLABORATION</label>
+                                    <span class="percentage" data-target="85">85%</span>
+                                </div>
+                                <div class="bar-bg">
+                                    <div class="bar-fill" data-width="85%"></div>
+                                </div>
+                            </div>
                         </div>
-                    
-                        <div class="skill-row">
-                            <div class="label-group">
-                                <label><i class="fas fa-search"></i> Attention to Detail</label>
-                                <span class="percentage">92%</span>
+
+                        <div class="skill-row" data-percent="80">
+                            <div class="skill-icon-cell">
+                                <i class="fa-regular fa-clock"></i>
                             </div>
-                            <div class="bar-bg"><div class="bar-fill" data-width="92%"></div></div>
+                            <div class="skill-content-cell">
+                                <div class="label-group">
+                                    <label>TIME MANAGEMENT</label>
+                                    <span class="percentage" data-target="80">80%</span>
+                                </div>
+                                <div class="bar-bg">
+                                    <div class="bar-fill" data-width="80%"></div>
+                                </div>
+                            </div>
                         </div>
-                    
-                        <div class="skill-row">
-                            <div class="label-group">
-                                <label><i class="fas fa-brain"></i> User-Centric Problem Solving</label>
-                                <span class="percentage">88%</span>
+
+                        <div class="skill-row" data-percent="90">
+                            <div class="skill-icon-cell">
+                                <i class="fa-solid fa-magnifying-glass"></i>
                             </div>
-                            <div class="bar-bg"><div class="bar-fill" data-width="88%"></div></div>
+                            <div class="skill-content-cell">
+                                <div class="label-group">
+                                    <label>ATTENTION TO DETAIL</label>
+                                    <span class="percentage" data-target="90">90%</span>
+                                </div>
+                                <div class="bar-bg">
+                                    <div class="bar-fill" data-width="90%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-row" data-percent="88">
+                            <div class="skill-icon-cell">
+                                <i class="fa-regular fa-user"></i>
+                            </div>
+                            <div class="skill-content-cell">
+                                <div class="label-group">
+                                    <label>USER-CENTRIC PROBLEM SOLVING</label>
+                                    <span class="percentage" data-target="88">88%</span>
+                                </div>
+                                <div class="bar-bg">
+                                    <div class="bar-fill" data-width="88%"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -200,741 +875,739 @@
 
     
     <section id="project" class="project-section">
-        <div class="project-container">
+        <!-- 1. DARK COSMIC GALAXY REGION -->
+        <div class="project-dark-section">
+            <div class="project-planet"></div>
+            <div class="project-orbit"></div>
             
-            <div class="portfolio-header-box reveal">
-                <span class="header-watermark">CREATIONS</span>
-                <div class="title-wrapper">
-                    <h2 class="portfolio-main-title">
-                        <span class="title-accent">Samified</span> 
-                        <span class="title-main">Portfolio</span>
-                    </h2>
-                    <div class="header-line"></div>
-                </div>
-                <p class="portfolio-subtitle">
-                    Curated digital experiences built with <span class="highlight">precision</span> and <span class="highlight">passion</span>.
-                </p>
-            </div>
-    
-            <div class="category-header reveal">
-                <div class="cat-left">
-                    <span class="cat-ghost-num">01</span>
-                    <div class="cat-title-stack">
-                        <span class="cat-label">CORE DEVELOPMENT</span>
-                        <h3 class="cat-main-title">Frontend Development</h3>
+            <!-- Twinkling 4-point Stars -->
+            <div class="st" style="left:6%;top:90px;--s:22px"></div>
+            <div class="st" style="left:30%;top:60px;--s:12px;--d:.8s"></div>
+            <div class="st" style="left:52%;top:150px;--s:16px;--d:1.6s"></div>
+            <div class="st" style="left:93%;top:520px;--s:14px;--d:.4s"></div>
+            <div class="st" style="left:3%;top:640px;--s:14px;--d:2s"></div>
+            <div class="st" style="left:48%;top:880px;--s:18px;--d:1.2s"></div>
+            <div class="st" style="left:96%;top:1180px;--s:20px;--d:.6s"></div>
+            <div class="st" style="left:2%;top:1250px;--s:12px;--d:2.4s"></div>
+            <div class="st" style="left:60%;top:1500px;--s:14px;--d:1s"></div>
+
+            <div class="works-wrap">
+                <!-- Eyebrow -->
+                <div class="works-eyebrow">✦ Portfolio · 2026</div>
+
+                <!-- Header Row -->
+                <div class="works-header-row">
+                    <h2 class="serif gold works-main-title">Selected<br><i style="font-weight:500">Works</i></h2>
+                    <div class="works-intro-block">
+                        <p class="works-intro-text">Websites, interfaces, and visuals, from live builds to Figma concepts. Filter by craft or open any laptop to preview.</p>
+                        <div class="craft-pills">
+                            <button class="craft-pill on" data-filter="all">All</button>
+                            <button class="craft-pill" data-filter="frontend">Front-end</button>
+                            <button class="craft-pill" data-filter="uiux">UI/UX</button>
+                            <button class="craft-pill" data-filter="mobile">Mobile</button>
+                            <button class="craft-pill" data-filter="graphics">Graphics</button>
+                        </div>
                     </div>
                 </div>
-                <div class="cat-right-line">
-                    <div class="line-inner"></div>
+
+                <!-- Category Subtitle Divider -->
+                <div class="works-cat-divider">
+                    <div class="serif works-cat-subtitle">Websites and web design</div>
+                    <div class="works-cat-line"></div>
                 </div>
-            </div>
-    
-            <div class="project-grid">
-                <div class="project-card">
-                    <h3 class="project-card-title">Paya Street Cafe</h3>
-                    <div class="laptop-main-display" onclick="openLaptopModal('./assets/paya_street.png')">
-                        <img src="./assets/laptop_paya.png" alt="Paya Cafe" class="laptop-static-img">
-                        <div class="hover-overlay"><span>Click to view properly</span></div>
-                    </div>
-                    <p class="project-desc project-desc-accent">
-                        This collaborative effort focused on building a <strong>highly reactive front-end</strong> for a 
-                        local coffee brand. Utilizing the Vue.js framework, we engineered a dynamic digital menu 
-                        that balances fast load times with a clean, high-contrast aesthetic.
-                    </p>
-                    <a href="https://paya-street-website.vercel.app" target="_blank" class="about-cta">EXPLORE CREATION</a>
-                </div>
-    
-                <div class="project-card">
-                    <h3 class="project-card-title">TeamUP</h3>
-                    <div class="laptop-main-display" onclick="openLaptopModal('./assets/teamup.png')">
-                        <img src="./assets/laptop_teamup.png" alt="TeamUP" class="laptop-static-img">
-                        <div class="hover-overlay"><span>Click to view properly</span></div>
-                    </div>
-                    <p class="project-desc project-desc-accent">
-                        A <strong>role-based collaborative platform</strong> where developers join guilds, 
-                        accept missions, and build projects together. Engineered with three distinct 
-                        user roles — admin, freelancer, and commissioner — each with a tailored dashboard and workflow.
-                    </p>
-                
-                    <details class="cred-details">
-                        <summary class="cred-summary">View Test Credentials</summary>
-                        <div class="cred-list">
-                            <div class="cred-item">
-                                <span class="cred-tag">Admin</span>
-                                <span class="cred-text">admin@teamup.com &nbsp;·&nbsp; teamup-admin1234</span>
-                            </div>
-                            <div class="cred-item">
-                                <span class="cred-tag">Freelancer</span>
-                                <span class="cred-text">Freelancer@gmail.com &nbsp;·&nbsp; Freelancer1%</span>
-                            </div>
-                            <div class="cred-item">
-                                <span class="cred-tag">Commissioner</span>
-                                <span class="cred-text">Commissioneuser@gmail.com &nbsp;·&nbsp; CMsioner1#</span>
+
+                <!-- 2-Column Staggered Project Grid -->
+                <div class="works-grid">
+
+                    <!-- Card 01: Paya Street Café -->
+                    <div id="card-paya" class="works-glass-card paya-glow">
+                        <div class="st cn" style="left:-22px;top:-18px;--s:12px;--d:.5s"></div>
+                        <div class="thread cn" style="left:100%;top:50%;width:80px;transform:rotate(53.13deg)"></div>
+                        <div class="node cn" style="left:100%;top:50%"></div>
+                        <div class="st cn" style="left:calc(100% + 24px);top:calc(50% + 32px);--s:10px;margin:-5px 0 0 -5px;--d:1s"></div>
+
+                        <div class="card-meta-header">
+                            <span>Front-end · Vue.js</span>
+                            <span class="card-numeral">01</span>
+                        </div>
+
+                        <div class="fl laptop-main-display" onclick="openLaptopModal('./assets/paya_street.png', 'https://paya-street-website.vercel.app')">
+                            <img src="./assets/laptop_paya.png" alt="Paya Street Café" class="laptop-static-img">
+                            <div class="hover-overlay">
+                                <span>Click to preview ↗</span>
                             </div>
                         </div>
-                    </details>
-                
-                    <a href="https://teamuupp.netlify.app/" target="_blank" class="about-cta">EXPLORE CREATION</a>
-                </div>
-            </div>
-    
-            <div class="category-header reveal">
-                <div class="cat-left">
-                    <span class="cat-ghost-num">02</span>
-                    <div class="cat-title-stack">
-                        <span class="cat-label">UI/UX VISUALS</span>
-                        <h3 class="cat-main-title">High-Fidelity Web Design</h3>
-                    </div>
-                </div>
-                <div class="cat-right-line">
-                    <div class="line-inner"></div>
-                </div>
-            </div>
-    
-            <div class="dark-project-row">
-                <div class="project-container">
-                    <div class="project-grid">
-                        <div class="project-card dark-card">
-                            <h3 class="project-card-title">ARC SPACE</h3>
-                            <div class="laptop-main-display" onclick="openLaptopModal('./assets/Arc.png')">
-                                <img src="./assets/laptop_arc.png" alt="ARC SPACE" class="laptop-static-img">
-                                <div class="hover-overlay"><span>Click to view properly</span></div>
+
+                        <div class="card-content-wrap">
+                            <h3 class="works-card-title">Paya Street Café</h3>
+                            <p class="works-card-desc">A dynamic menu and calm, high-contrast layout for a local coffee brand.</p>
+                            <div class="tag-row">
+                                <span class="tag">Vue.js</span>
+                                <span class="tag">Make.com</span>
                             </div>
-                            <p class="project-desc project-desc-accent">
-                                Defined by <strong>architectural precision</strong>, this landing page design focuses on 
-                                the intersection of modern structural blueprints and digital minimalism. It prioritizes 
-                                spatial hierarchy to showcase large-scale professional portfolios with a high-end, 
-                                corporate feel.
-                            </p>
-                            <a href="https://www.figma.com/design/vuYmpd9ErWISzXRj1wHoLE/ARC-SPACE-Landing-page?t=S1R1GRmHzA6obL6e-1" target="_blank" class="about-cta light-btn">VIEW FIGMA DESIGN</a>
-                        </div>
-    
-                        <div class="project-card dark-card">
-                            <h3 class="project-card-title">Lila Aesthetics</h3>
-                            <div class="laptop-main-display" onclick="openLaptopModal('./assets/Lilas.png')">
-                                <img src="./assets/laptop_lia.png" alt="Lila Aesthetics" class="laptop-static-img">
-                                <div class="hover-overlay"><span>Click to view properly</span></div>
+                            <div class="btn-row">
+                                <a class="works-btn fill" href="https://paya-street-website.vercel.app" target="_blank" rel="noopener noreferrer">Visit live site ↗</a>
                             </div>
-                            <p class="project-desc project-desc-accent">
-                                This holistic e-commerce concept explores <strong>sensory web design</strong> for the 
-                                beauty industry. I engineered a curated skincare experience that balances soft, 
-                                editorial typography with a functional shopping interface tailored for modern wellness brands.
-                            </p>
-                            <a href="https://www.figma.com/design/VvyCshQZakqz96Tgdx350z/Lila-Aesthetic?node-id=0-1&t=SffJbBudIL5PrkH5-1" target="_blank" class="about-cta light-btn">VIEW FIGMA DESIGN</a>
+                        </div>
+                    </div>
+
+                    <!-- Card 02: TeamUP (Staggered Down) -->
+                    <div id="card-teamup" class="works-glass-card teamup-glow sg">
+                        <div class="node cn" style="left:0;top:50%"></div>
+                        <div class="thread cn" style="left:0;top:100%;width:62.5px;transform:rotate(140.2deg)"></div>
+                        <div class="node cn" style="left:0;top:100%"></div>
+                        <div class="st cn" style="left:-24px;top:calc(100% + 20px);--s:10px;margin:-5px 0 0 -5px;--d:1.4s"></div>
+
+                        <div class="card-meta-header">
+                            <span>Front-end · Platform</span>
+                            <span class="card-numeral">02</span>
+                        </div>
+
+                        <div class="fl laptop-main-display" style="--d:1.2s" onclick="openLaptopModal('./assets/Teamup.png', 'https://teamuupp.netlify.app/')">
+                            <img src="./assets/laptop_teamup.png" alt="TeamUP Platform" class="laptop-static-img">
+                            <div class="hover-overlay">
+                                <span>Click to preview ↗</span>
+                            </div>
+                        </div>
+
+                        <div class="card-content-wrap">
+                            <h3 class="works-card-title">TeamUP</h3>
+                            <p class="works-card-desc">Role-based collaboration platform with admin, freelancer, and commissioner dashboards.</p>
+                            <div class="tag-row">
+                                <span class="tag">Role-based</span>
+                                <span class="tag">Dashboard</span>
+                            </div>
+                            <div class="btn-row">
+                                <details class="works-cred-details">
+                                    <summary class="works-btn">Test credentials ▾</summary>
+                                    <div class="works-cred-popup">
+                                        <div class="cred-row">
+                                            <span class="cred-role">Admin</span>
+                                            <span class="cred-val">admin@teamup.com · teamup-admin1234</span>
+                                        </div>
+                                        <div class="cred-row">
+                                            <span class="cred-role">Freelancer</span>
+                                            <span class="cred-val">Freelancer@gmail.com · Freelancer1%</span>
+                                        </div>
+                                        <div class="cred-row">
+                                            <span class="cred-role">Commissioner</span>
+                                            <span class="cred-val">Commissioneuser@gmail.com · CMsioner1#</span>
+                                        </div>
+                                    </div>
+                                </details>
+                                <a class="works-btn fill" href="https://teamuupp.netlify.app/" target="_blank" rel="noopener noreferrer">Visit live site ↗</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 03: ARC Space -->
+                    <div id="card-arc" class="works-glass-card arc-glow">
+                        <div class="node cn" style="left:100%;top:0"></div>
+                        <div class="thread cn" style="left:100%;top:50%;width:80px;transform:rotate(53.13deg)"></div>
+                        <div class="node cn" style="left:100%;top:50%"></div>
+                        <div class="st cn" style="left:calc(100% + 24px);top:calc(50% + 32px);--s:10px;margin:-5px 0 0 -5px;--d:.7s"></div>
+
+                        <div class="card-meta-header">
+                            <span>UI/UX · Figma</span>
+                            <span class="card-numeral">03</span>
+                        </div>
+
+                        <div class="fl laptop-main-display" style="--d:2.2s" onclick="openLaptopModal('./assets/Arc.png', 'https://www.figma.com/design/vuYmpd9ErWISzXRj1wHoLE/ARC-SPACE-Landing-page?t=S1R1GRmHzA6obL6e-1')">
+                            <img src="./assets/laptop_arc.png" alt="ARC Space" class="laptop-static-img">
+                            <div class="hover-overlay">
+                                <span>Click to preview ↗</span>
+                            </div>
+                        </div>
+
+                        <div class="card-content-wrap">
+                            <h3 class="works-card-title">ARC Space</h3>
+                            <p class="works-card-desc">Architecture landing page built on strong visual hierarchy.</p>
+                            <div class="tag-row">
+                                <span class="tag">Figma</span>
+                                <span class="tag">Landing page</span>
+                            </div>
+                            <div class="btn-row">
+                                <a class="works-btn fill" href="https://www.figma.com/design/vuYmpd9ErWISzXRj1wHoLE/ARC-SPACE-Landing-page?t=S1R1GRmHzA6obL6e-1" target="_blank" rel="noopener noreferrer">View Figma design ↗</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 04: Lila Aesthetics (Staggered Down) -->
+                    <div id="card-lila" class="works-glass-card lila-glow sg">
+                        <div class="node cn" style="left:0;top:50%"></div>
+                        <div class="st cn" style="left:calc(100% + 18px);top:calc(100% + 16px);--s:14px;--d:1.1s"></div>
+
+                        <div class="card-meta-header">
+                            <span>UI/UX · E-commerce</span>
+                            <span class="card-numeral">04</span>
+                        </div>
+
+                        <div class="fl laptop-main-display" style="--d:3.2s" onclick="openLaptopModal('./assets/Lilas.png', 'https://www.figma.com/design/VvyCshQZakqz96Tgdx350z/Lila-Aesthetic?node-id=0-1&t=SffJbBudIL5PrkH5-1')">
+                            <img src="./assets/laptop_lia.png" alt="Lila Aesthetics" class="laptop-static-img">
+                            <div class="hover-overlay">
+                                <span>Click to preview ↗</span>
+                            </div>
+                        </div>
+
+                        <div class="card-content-wrap">
+                            <h3 class="works-card-title">Lila Aesthetics</h3>
+                            <p class="works-card-desc">E-commerce concept for the beauty industry.</p>
+                            <div class="tag-row">
+                                <span class="tag">Figma</span>
+                                <span class="tag">E-commerce</span>
+                            </div>
+                            <div class="btn-row">
+                                <a class="works-btn fill" href="https://www.figma.com/design/VvyCshQZakqz96Tgdx350z/Lila-Aesthetic?node-id=0-1&t=SffJbBudIL5PrkH5-1" target="_blank" rel="noopener noreferrer">View Figma design ↗</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Wave Transition Divider -->
+            <svg class="works-wave-divider" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M0,70 C240,10 480,120 720,66 C960,12 1200,120 1440,60 L1440,121 L0,121Z" fill="#f6ecdd"></path>
+                <path d="M0,70 C240,10 480,120 720,66 C960,12 1200,120 1440,60" fill="none" stroke="#e3b572" stroke-opacity=".6"></path>
+            </svg>
+        </div>
+
+        <!-- 2. WARM CREAM PARCHMENT REGION -->
+        <div class="project-cream-section">
+            <div class="st" style="left:8%;top:60px;--s:18px"></div>
+            <div class="st" style="left:90%;top:140px;--s:22px;--d:1s"></div>
+            <div class="st" style="left:46%;top:640px;--s:14px;--d:1.8s"></div>
+            <div class="st" style="left:5%;top:900px;--s:16px;--d:.6s"></div>
+            <div class="st" style="left:94%;top:1000px;--s:14px;--d:2.2s"></div>
+            <div class="st" style="left:50%;top:1300px;--s:20px;--d:1.2s"></div>
+
+            <!-- Mobile Showcase -->
+            <div id="mobile-section" class="works-wrap">
+                <div class="mobile-showcase-row">
+                    <div class="mobile-info-col">
+                        <div class="works-eyebrow">✦ Mobile</div>
+                        <h3 class="serif mobile-main-heading">Designed to<br><i class="gold">tap and use</i></h3>
+                        <p class="mobile-desc-text">House Cafe is a fully working Flutter app with gesture navigation and real-time state. Heavenly Bites is a Figma prototype built around one-tap checkout.</p>
+                        <div class="live-pulse-badge">
+                            <span class="pulse-dot"></span>
+                            Live app may take a few seconds to wake up.
+                        </div>
+                        <div class="btn-row">
+                            <a class="works-btn fill" href="https://sprightly-arithmetic-4f6917.netlify.app" target="_blank" rel="noopener noreferrer">Open House Cafe ↗</a>
+                            <a class="works-btn" href="https://www.figma.com/design/aAR9HdSy0lmmMXgFrRiyxy/Bakery?node-id=0-1&t=S1R1GRmHzA6obL6e-1" target="_blank" rel="noopener noreferrer">Figma prototype</a>
+                        </div>
+                    </div>
+
+                    <div class="mobile-devices-col">
+                        <div class="fl phone-main-display phone-tilt-left" onclick="openPhoneModal('live', 'https://peppy-gnome-62ee78.netlify.app')">
+                            <img src="./assets/Coffee-Photoroom.png" alt="House Cafe App" class="phone-static-img">
+                            <div class="hover-overlay-mobile">
+                                <span>Click to preview ↗</span>
+                            </div>
+                        </div>
+                        <div class="fl phone-main-display phone-tilt-right" style="--d:1.5s" onclick="openPhoneModal('static', './assets/Bakery_Home.png')">
+                            <img src="./assets/bakery-Photoroom.png" alt="Heavenly Bites App" class="phone-static-img">
+                            <div class="hover-overlay-mobile">
+                                <span>Click to preview ↗</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-    
-            <div class="category-header reveal" style="margin-top: 80px;">
-                <div class="cat-left">
-                    <span class="cat-ghost-num">03</span>
-                    <div class="cat-title-stack">
-                        <span class="cat-label">MOBILE ENGINEERING</span>
-                        <h3 class="cat-main-title">Mobile Interface Design</h3>
+
+            <!-- Graphics & 3D Poster Showcase (All 4 Posters) -->
+            <div id="graphics-section" class="works-wrap posters-showcase-wrap">
+                <div class="posters-header-row">
+                    <div>
+                        <div class="works-eyebrow">✦ Graphics</div>
+                        <h3 class="serif posters-main-heading">Posters and <i class="gold">branding</i></h3>
+                    </div>
+                    <div class="poster-nav-controls">
+                        <span id="posterCounter" class="poster-counter-pill">01 / 04</span>
+                        <button class="nav-arrow-pill" id="prevBtn" aria-label="Previous Poster">‹</button>
+                        <button class="nav-arrow-pill" id="nextBtn" aria-label="Next Poster">›</button>
                     </div>
                 </div>
-                <div class="cat-right-line">
-                    <div class="line-inner"></div>
-                </div>
-            </div>
-    
-            <div class="project-grid">
-                <div class="project-card">
-                    <h3 class="project-card-title">Heavenly Bites</h3>
-                    <div class="phone-main-display" onclick="openPhoneModal('static', './assets/Bakery_Home.png')">
-                        <img src="./assets/bakery-Photoroom.png" alt="Heavenly Bites" class="phone-static-img">
-                        <div class="hover-overlay-mobile"><span>Click to view properly</span></div>
-                    </div>
-                    <p class="project-desc project-desc-accent">
-                        <strong>Experience-first design</strong> was the priority for this boutique bakery concept. By blending 
-                        appetite-appealing visuals with a streamlined 1-click checkout flow, I created a high-fidelity 
-                        mobile prototype that turns casual browsing into a seamless shopping journey.
-                    </p>
-                    <a href="https://www.figma.com/design/aAR9HdSy0lmmMXgFrRiyxy/Bakery?node-id=0-1&t=S1R1GRmHzA6obL6e-1" target="_blank" class="about-cta">VIEW FIGMA PROTOTYPE</a>
-                </div>
-    
-                <div class="project-card">
-                    <h3 class="project-card-title">House Cafe</h3>
-                    <div class="phone-main-display" onclick="openPhoneModal('live', 'https://peppy-gnome-62ee78.netlify.app')">
-                        <img src="./assets/Coffee-Photoroom.png" alt="House Cafe" class="phone-static-img">
-                        <div class="hover-overlay-mobile"><span>Click to view properly</span></div>
-                    </div>
-                    <p class="project-desc project-desc-accent">
-                        Developed as a deep dive into <strong>Cross-Platform Engineering</strong>, this Flutter application 
-                        demonstrates high-performance state management. The architecture supports real-time menu 
-                        interactions and smooth, gesture-based navigation tailored for modern mobile users. 
-                        <strong>(Please allow a few moments for the live link to initialize all assets.)</strong>
-                    </p>
-                    <a href="https://sprightly-arithmetic-4f6917.netlify.app" target="_blank" class="about-cta">VISIT LIVE APP</a>
-                </div>
-            </div>
-    
-            <div class="category-header reveal" style="margin-top: 100px;">
-                <div class="cat-left">
-                    <span class="cat-ghost-num">04</span>
-                    <div class="cat-title-stack">
-                        <span class="cat-label">GRAPHIC ARTS</span>
-                        <h3 class="cat-main-title">Visual Branding & Beyond</h3>
-                    </div>
-                </div>
-                <div class="cat-right-line">
-                    <div class="line-inner"></div>
-                </div>
-            </div>
-    
-            <div class="brand-poster-section">
-                <div class="brand-offer-header">
-                    <span class="service-tag">CREATIVE SERVICES</span>
-                    <h2>Visual Branding & Poster Design</h2>
-                    <p>High-impact visual identity and graphic design for professional brand storytelling.</p>
-                </div>
-            
-                <div class="slider-controls">
-                    <button id="prevBtn" aria-label="Previous Poster">❮</button>
-                    <button id="nextBtn" aria-label="Next Poster">❯</button>
-                </div>
-                
-                <div class="poster-slider-wrapper">
-                    <div class="poster-card-container">
-                        <div class="poster-card">
-                            <img src="./assets/posters/Burger.png" class="poster-img" alt="Burger Branding Poster">
+
+                <div class="brand-poster-container">
+                    <div class="poster-slider-wrapper">
+                        <!-- Poster 01: Burger (Buy 1 Get 1) -->
+                        <div class="poster-card-container active" data-index="0">
+                            <div class="poster-card" onclick="openPosterModal('./assets/posters/Burger.png')">
+                                <img src="./assets/posters/Burger.png" class="poster-img" alt="Burger Branding Poster">
+                                <div class="poster-hover-tag"><span>Tap to Enlarge ↗</span></div>
+                            </div>
+                        </div>
+                        <!-- Poster 02: Matcha Drink -->
+                        <div class="poster-card-container next" data-index="1">
+                            <div class="poster-card" onclick="openPosterModal('./assets/posters/Matcha Drink.png')">
+                                <img src="./assets/posters/Matcha Drink.png" class="poster-img" alt="Matcha Drink Poster">
+                                <div class="poster-hover-tag"><span>Tap to Enlarge ↗</span></div>
+                            </div>
+                        </div>
+                        <!-- Poster 03: Products Showcase -->
+                        <div class="poster-card-container hidden" data-index="2">
+                            <div class="poster-card" onclick="openPosterModal('./assets/posters/products.png')">
+                                <img src="./assets/posters/products.png" class="poster-img" alt="Product Design Showcase">
+                                <div class="poster-hover-tag"><span>Tap to Enlarge ↗</span></div>
+                            </div>
+                        </div>
+                        <!-- Poster 04: Strawberry Cheesecake Promo -->
+                        <div class="poster-card-container prev" data-index="3">
+                            <div class="poster-card" onclick="openPosterModal('./assets/posters/Strawberry Cheesecake.png')">
+                                <img src="./assets/posters/Strawberry Cheesecake.png" class="poster-img" alt="Strawberry Cheesecake Poster">
+                                <div class="poster-hover-tag"><span>Tap to Enlarge ↗</span></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="poster-card-container">
-                        <div class="poster-card">
-                            <img src="./assets/posters/Matcha Drink.png" class="poster-img" alt="Matcha Drink Poster">
-                        </div>
-                    </div>
-                    <div class="poster-card-container">
-                        <div class="poster-card">
-                            <img src="./assets/posters/products.png" class="poster-img" alt="Product Design Showcase">
-                        </div>
-                    </div>
-                    <div class="poster-card-container">
-                        <div class="poster-card">
-                            <img src="./assets/posters/Strawberry Cheesecake.png" class="poster-img" alt="Cheesecake Ad Poster">
-                        </div>
-                    </div>
-                </div> 
-            
-                <div class="brand-caption">
-                    <p>Tap to enlarge • Swipe to explore</p>
+                    <div class="poster-swipe-hint">Swipe or click arrows to explore • Tap to zoom</div>
                 </div>
             </div>
         </div>
-    
-        <div id="laptopModal" class="laptop-modal-overlay">
-            <span class="close-laptop" onclick="closeLaptopModal()">&times;</span>
-            <div class="laptop-modal-content">
-                <div class="laptop-screen-window">
-                    <img id="modalScrollImg" src="" alt="Full Project View">
-                </div>
-            </div>
-        </div>
-    
-        <div id="posterModal" class="poster-modal-overlay">
-            <div class="poster-modal-content">
-                <span class="close-poster" onclick="closePosterModal()">&times;</span>
-                <img id="modalFullPosterImg" src="" alt="Full Poster View">
-            </div>
-        </div>
+
     </section>
    
-    <!--RESUME -->
+    <!-- RESUME SECTION (Warm Parchment & Burgundy Celestial Redesign) -->
     <section id="resume" class="resume-section">
-        <div class="container">
-            <div class="resume-hero-header">
-                <div class="creative-header-wrapper">
-                    <span class="header-watermark">RESUME</span>
-                    <div class="row align-items-center position-relative">
-                        <div class="col-md-8 reveal-left">
-                            <div class="brand-badge">PROFESSIONAL PROFILE</div>
-                            <h1 class="resume-main-title">Samified <span class="accent-red-creative">Resume</span></h1>
-                            <div class="header-line-animated"></div>
-                            <p class="resume-tagline">
-                                Crafting digital experiences through code and creative design thinking.
-                            </p>
+        <!-- Celestial Orbit Rings & Glow in Top-Right -->
+        <div class="resume-celestial-bg" aria-hidden="true">
+            <svg class="resume-orbit-rings" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="580" cy="20" r="240" stroke="#c8964d" stroke-opacity="0.32" stroke-width="1.2" stroke-dasharray="4 6"/>
+                <circle cx="580" cy="20" r="350" stroke="#c8964d" stroke-opacity="0.22" stroke-width="1"/>
+                <circle cx="580" cy="20" r="480" stroke="#c8964d" stroke-opacity="0.14" stroke-width="1"/>
+            </svg>
+            <div class="resume-ambient-glow"></div>
+            <span class="resume-bg-star star-top-left">✦</span>
+            <span class="resume-bg-star star-orbit-1">✦</span>
+            <span class="resume-bg-star star-orbit-2">✦</span>
+        </div>
+
+        <div class="container resume-inner-container">
+            <!-- 1. Header Block -->
+            <div class="resume-header-block reveal">
+                <div class="resume-eyebrow">RESUME</div>
+                <div class="resume-header-main">
+                    <div class="resume-title-wrap">
+                        <h1 class="resume-heading">Samantha <span class="resume-heading-italics">Gonzales</span></h1>
+                        <p class="resume-subheading">Crafting digital experiences through code and creative design thinking.</p>
+                    </div>
+                    <div class="resume-btn-wrap">
+                        <a href="./assets/Gonzales_Samantha.pdf" class="resume-download-btn" download="Samantha_Gonzales_Resume.pdf">
+                            DOWNLOAD RESUME
+                        </a>
+                    </div>
+                </div>
+                <div class="resume-header-rule"></div>
+            </div>
+
+            <!-- 2. Work Experience Block -->
+            <div class="resume-work-block">
+                <div class="resume-section-title-row reveal">
+                    <span class="resume-sparkle-star">✦</span>
+                    <h2 class="resume-section-title">Work experience</h2>
+                    <span class="resume-title-line"></span>
+                </div>
+
+                <div class="resume-work-list">
+                    <!-- Work Item 01: Circle Outsourcing -->
+                    <div class="resume-work-item reveal">
+                        <div class="resume-browser-mockup">
+                            <div class="browser-dots-bar">
+                                <span class="b-dot b-red"></span>
+                                <span class="b-dot b-yellow"></span>
+                                <span class="b-dot b-green"></span>
+                            </div>
+                            <div class="browser-screen-inner">
+                                <img src="./assets/Circle-Outsourcing.png" alt="Circle Outsourcing Solutions Website" class="browser-screen-img">
+                            </div>
                         </div>
-                        <div class="col-md-4 text-md-end reveal-right">
-                            <a href="./assets/Gonzales_Samantha.pdf" class="btn-download-cv" download="Samantha_Gonzales_Resume.pdf">
-                                <span>DOWNLOAD RESUME</span>
-                                <div class="btn-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
-                                </div>
+                        <div class="resume-item-details">
+                            <div class="resume-item-tag">JUN 2026 — PRESENT · INTERNSHIP</div>
+                            <h3 class="resume-item-role">Business Development Representative</h3>
+                            <p class="resume-item-company">Circle Outsourcing Solutions Inc.</p>
+                            <ul class="resume-item-bullets">
+                                <li>Compiled 667+ prospective B2B leads over 486 internship hours through outbound marketing and prospect research.</li>
+                                <li>Developed an SEO improvement and maintenance plan to strengthen search visibility.</li>
+                                <li>Point of contact for the intern team across web development, inbound, and outreach.</li>
+                            </ul>
+                            <a href="https://www.linkedin.com/in/sam-gonzales-33b35b34a" target="_blank" rel="noopener noreferrer" class="resume-pill-btn">
+                                VIEW ON LINKEDIN
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="resume-item-divider"></div>
+
+                    <!-- Work Item 02: Bossrich Photo -->
+                    <div class="resume-work-item reveal">
+                        <div class="resume-browser-mockup">
+                            <div class="browser-dots-bar">
+                                <span class="b-dot b-red"></span>
+                                <span class="b-dot b-yellow"></span>
+                                <span class="b-dot b-green"></span>
+                            </div>
+                            <div class="browser-screen-inner">
+                                <img src="./assets/SSAD_prog.png" alt="Bossrich Photo Project" class="browser-screen-img">
+                            </div>
+                        </div>
+                        <div class="resume-item-details">
+                            <div class="resume-item-tag">2024 · ACADEMIC PROJECT</div>
+                            <h3 class="resume-item-role">Project Manager & WordPress Developer</h3>
+                            <p class="resume-item-company">Web Systems & Engineering (WSEA), Bossrich Photo</p>
+                            <ul class="resume-item-bullets">
+                                <li>Turned theoretical System Analysis (SSAD) into a live Web Systems (WSEA) implementation.</li>
+                                <li>Deployed a fully functional business management and portfolio site using WordPress.</li>
+                                <li>Managed the full lifecycle, from documentation to final deployment.</li>
+                            </ul>
+                            <a href="https://bossrichphoto.pro" target="_blank" rel="noopener noreferrer" class="resume-pill-btn">
+                                VISIT LIVE WEBSITE
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
-    
-            <!--EDUCATION SECTION -->
-            <div class="section-header-wrap reveal">
-                <span class="bg-watermark">Learning</span>
-                <h2 class="fg-title">Education</h2>
-            </div>            <div class="row g-4 mb-5">
-                <div class="col-md-6 reveal">
-                    <div class="resume-card">
-                        <div class="card-dot"></div>
-                        <h5 class="card-degree">Bachelor of Science in Information Technology</h5>
-                        <p class="card-major">Major in Web Development</p>
-                        <h6 class="card-school">HOLY ANGEL UNIVERSITY</h6>
-                        <span class="card-date">2023 - Present</span>
-                    </div>
-                </div>
-                <div class="col-md-6 reveal">
-                    <div class="resume-card">
-                        <div class="card-dot"></div>
-                        <h5 class="card-degree">Senior High School</h5>
-                        <p class="card-major">STEM</p>
-                        <h6 class="card-school">HOLY ANGEL UNIVERSITY</h6>
-                        <span class="card-date">2021 - 2023</span>
-                    </div>
-                </div>
-            </div>
-        
 
-            <!-- WORK EXPEIRNCE -->
-            <div class="section-header-wrap reveal" style="margin-top: 80px;">
-                <span class="bg-watermark">Journey</span>
-                <h2 class="fg-title">Work Experience</h2>
-            </div>
-            <div class="experience-container">
-                <div class="experience-wide-card reveal">
-                    <div class="exp-visual">
-                        <img src="./assets/callista.png" alt="Callista Project">
-                    </div>
-                    <div class="exp-info">
-                        <div class="exp-tag">CLIENT PROJECT</div>
-                        <h4 class="exp-title">UI/UX & Front-End Developer</h4>
-                        <p class="exp-company">Art Portfolio & Commission Website (2023)</p>
-                        <ul class="exp-bullets">
-                            <li>Designed and engineered a custom digital gallery to showcase fine art and manage client commissions.</li>
-                            <li>Translated the artist's brand identity into a clean, minimalist UI using HTML5, CSS3, and JavaScript.</li>
-                            <li>Conducted stakeholder interviews to align the site’s functionality with the client's creative workflow.</li>
-                        </ul>
-                        <a href="https://sammyvie.github.io/Callistaa/" target="_blank" class="about-cta" style="text-decoration: none; display: inline-block;">
-                            VIEW LIVE WEBSITE 
-                        </a>
-                    </div>
+            <!-- 3. Education Block -->
+            <div class="resume-education-block">
+                <div class="resume-section-title-row resume-edu-header reveal">
+                    <span class="resume-sparkle-star">✦</span>
+                    <h2 class="resume-section-title">Education</h2>
+                    <span class="resume-title-line"></span>
                 </div>
-            
-                <div class="experience-wide-card reveal">
-                    <div class="exp-visual">
-                        <img src="./assets/SSAD_prog.png" alt="SSAD Project">
+
+                <div class="resume-edu-grid">
+                    <!-- Card 01: College (Dark Burgundy Card) -->
+                    <div class="resume-edu-card edu-card-dark reveal">
+                        <span class="edu-card-sparkle">✦</span>
+                        <div class="edu-card-year">2023 — Present</div>
+                        <h3 class="edu-card-degree">Bachelor of Science in Information Technology</h3>
+                        <p class="edu-card-sub">Major in Web Development</p>
+                        <p class="edu-card-school">Holy Angel University</p>
                     </div>
-                    <div class="exp-info">
-                        <div class="exp-tag">ACADEMIC PROJECT</div>
-                        <h4 class="exp-title">Project Manager & WordPress Developer</h4>
-                        <p class="exp-company">Web Systems & Engineering (WSEA) — Bossrich Photo (2024)</p>
-                        <ul class="exp-bullets">
-                            <li>Transitioned theoretical System Analysis (SSAD) into a live Web Systems (WSEA) implementation.</li>
-                            <li>Deployed a fully functional business management and portfolio site using <strong>WordPress</strong>.</li>
-                            <li>Managed the end-to-end lifecycle, from system documentation to final web deployment.</li>
-                        </ul>
-                        <a href="https://bossrichphoto.pro" target="_blank" class="about-cta" style="text-decoration: none; display: inline-block;">
-                            VISIT LIVE WEBSITE
-                        </a>
+
+                    <!-- Card 02: Senior High School (Ivory / White Card) -->
+                    <div class="resume-edu-card edu-card-light reveal">
+                        <span class="edu-card-sparkle">✦</span>
+                        <div class="edu-card-year">2021 — 2023</div>
+                        <h3 class="edu-card-degree">Senior High School</h3>
+                        <p class="edu-card-sub">STEM</p>
+                        <p class="edu-card-school">Holy Angel University</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <!-- ==========================================
+         1. CERTIFICATIONS SECTION (LUXURY GOLD FRAME)
+         ========================================== -->
     <section id="certificates" class="certificates-section">
-        <div class="container">
-            <div class="section-header-wrap reveal">
-                <span class="bg-watermark">ACHIEVEMENTS</span>
-                <h2 class="fg-title">Certifications</h2>
-            </div>
-    
-            <div id="certCarousel" class="carousel slide cert-modern-slider" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    
-                    <div class="carousel-item active">
-                        <div class="cert-modern-container">
-                            <div class="cert-visual-frame">
-                                <div class="cert-shine-layer"></div>
-                                <img src="./assets/certificates/Responsive Web Design.png" class="cert-img" alt="Responsive Web Design">
-                            </div>
-                            <div class="cert-content-frame">
-                                <span class="cert-badge">freeCodeCamp</span>
-                                <h4>Responsive Web Design</h4>
-                                <p>Architecting mobile-first layouts using HTML5 and modern CSS techniques like Flexbox and Grid for seamless cross-device experiences.</p>
-                                <a href="https://drive.google.com/file/d/1V0MWmoZiCl3IXdzZJDXAyxVlZewd6_ml/view?usp=sharing" target="_blank" class="cert-btn">View Certificate</a>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="carousel-item">
-                        <div class="cert-modern-container">
-                            <div class="cert-visual-frame">
-                                <div class="cert-shine-layer"></div>
-                                <img src="./assets/certificates/Intro to Graphic Design Basics UI_UX.png" class="cert-img" alt="Graphic Design">
-                            </div>
-                            <div class="cert-content-frame">
-                                <span class="cert-badge">Simply Learn</span>
-                                <h4>Intro to Graphic Design; UI/UX</h4>
-                                <p>Mastering the principles of visual communication and user-centered design to bridge the gap between aesthetics and usability.</p>
-                                <a href="https://drive.google.com/file/d/1JExIUJKHYITrQb21G-5zbhKfPGrNWMw8/view?usp=drive_link" target="_blank" class="cert-btn">View Certificate</a>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="carousel-item">
-                        <div class="cert-modern-container">
-                            <div class="cert-visual-frame">
-                                <div class="cert-shine-layer"></div>
-                                <img src="./assets/certificates/Introduction to Figma.png" class="cert-img" alt="Figma">
-                            </div>
-                            <div class="cert-content-frame">
-                                <span class="cert-badge">Simply Learn</span>
-                                <h4>Introduction to Figma</h4>
-                                <p>Prototyping high-fidelity interfaces and managing design systems using Figma's industry-standard collaborative tools.</p>
-                                <a href="https://drive.google.com/file/d/1Qv6hzlGFU1VJL8GNjajdWcD_sM4NjMCw/view?usp=sharing" target="_blank" class="cert-btn">View Certificate</a>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="carousel-item">
-                        <div class="cert-modern-container">
-                            <div class="cert-visual-frame">
-                                <div class="cert-shine-layer"></div>
-                                <img src="./assets/certificates/Design Thinking for Beginners.png" class="cert-img" alt="Design Thinking">
-                            </div>
-                            <div class="cert-content-frame">
-                                <span class="cert-badge">Simply Learn</span>
-                                <h4>Design Thinking</h4>
-                                <p>Applying empathy-based problem-solving frameworks to ideate, prototype, and iterate on user-focused digital solutions.</p>
-                                <a href="https://drive.google.com/file/d/1ehHZFS0nltzPnEySF7tPSpyjLNSdKb8o/view?usp=drive_link" target="_blank" class="cert-btn">View Certificate</a>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="carousel-item">
-                        <div class="cert-modern-container">
-                            <div class="cert-visual-frame">
-                                <div class="cert-shine-layer"></div>
-                                <img src="./assets/certificates/Digital Marketing.png" class="cert-img" alt="Marketing">
-                            </div>
-                            <div class="cert-content-frame">
-                                <span class="cert-badge">HubSpot Academy</span>
-                                <h4>Digital Marketing Certified</h4>
-                                <p>Strategizing content marketing, SEO integration, and social media engagement to drive brand awareness and conversion.</p>
-                                <a href="https://drive.google.com/file/d/1SmhBRd8OYYRfv0r1e9q2rRwlru1Vv-AW/view?usp=sharing" target="_blank" class="cert-btn">View Certificate</a>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="carousel-item">
-                        <div class="cert-modern-container">
-                            <div class="cert-visual-frame">
-                                <div class="cert-shine-layer"></div>
-                                <img src="./assets/certificates/Digital Advertising Certification.png" class="cert-img" alt="Advertising">
-                            </div>
-                            <div class="cert-content-frame">
-                                <span class="cert-badge">HubSpot Academy</span>
-                                <h4>Digital Advertising Certified</h4>
-                                <p>Developing targeted advertising campaigns, managing budgets, and optimizing multi-channel performance tracking.</p>
-                                <a href="https://drive.google.com/file/d/1HJpoUvR-TLlH7IiqpDLdxByYD-BLNiX-/view?usp=drive_link" target="_btn" class="cert-btn">View Certificate</a>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="carousel-item">
-                        <div class="cert-modern-container">
-                            <div class="cert-visual-frame">
-                                <div class="cert-shine-layer"></div>
-                                <img src="./assets/certificates/SEO_CERTIFIED.PNG" class="cert-img" alt="SEO">
-                            </div>
-                            <div class="cert-content-frame">
-                                <span class="cert-badge">HubSpot Academy</span>
-                                <h4>SEO Certified</h4>
-                                <p>Mastery of search engine optimization fundamentals, including keyword research, on-page SEO, and enhancing site authority.</p>
-                                <a href="https://drive.google.com/file/d/1dXkGP-mWOhBUHlS0uLwhE52GS8wwfrAK/view?usp=drive_link" target="_blank" class="cert-btn">View Certificate</a>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="carousel-item">
-                        <div class="cert-modern-container">
-                            <div class="cert-visual-frame">
-                                <div class="cert-shine-layer"></div>
-                                <img src="./assets/certificates/Hubspot_SEO_II.PNG" class="cert-img" alt="SEO II">
-                            </div>
-                            <div class="cert-content-frame">
-                                <span class="cert-badge">HubSpot Academy</span>
-                                <h4>SEO II Certified</h4>
-                                <p>Advanced implementation of technical SEO tactics, focusing on website optimization, backlink strategies, and data-driven growth.</p>
-                                <a href="https://drive.google.com/file/d/1zQ02WSpQicApMDQOqf7apvJxmwoVxTJp/view?usp=drive_link" target="_blank" class="cert-btn">View Certificate</a>
-                            </div>
-                        </div>
-                    </div>
-    
-                </div>
-    
-                <div class="cert-nav-wrapper">
-                    <button class="cert-nav-btn" type="button" data-bs-target="#certCarousel" data-bs-slide="prev">
-                        <span>&#8592;</span>
-                    </button>
-                    <button class="cert-nav-btn" type="button" data-bs-target="#certCarousel" data-bs-slide="next">
-                        <span>&#8594;</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
+        <span class="cert-bg-star star-c-left">✦</span>
+        <span class="cert-bg-star star-c-right">✦</span>
 
-    <!--TESTIMONIALS -->
-    <section id="testimonials" class="testimonials-section">
-        <div class="container">
-            <div class="section-header-wrap reveal">
-                <span class="bg-watermark">Feedback</span>
-                <h2 class="fg-title">Testimonials</h2>
+        <div class="container cert-container reveal">
+            <!-- Section Header -->
+            <div class="cert-header-block text-center">
+                <div class="cert-eyebrow">✦ CERTIFICATIONS</div>
+                <h2 class="cert-main-heading">Learning, on the <span class="gold-italic">record</span></h2>
             </div>
-    
-            <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    
-                    <div class="carousel-item active">
-                        <div class="testimonial-card">
-                            <div class="quote-icon">“</div>
-                            <p class="testi-text">
-                                Working with Sam for the <strong>Calista Art</strong> project was amazing. 
-                                She took my messy vision and turned it into a sleek, professional site that I'm actually 
-                                proud to show off. She has a serious eye for detail!
-                            </p>
-                            <div class="testi-author">
-                                <div class="author-avatar">CG</div>
-                                <div class="author-info">
-                                    <h5>CAIZEL JADE GONZALES</h5>
-                                    <span class="client-tag">Project: Calista Art & Commission</span>
-                                </div>
-                            </div>
+
+            <!-- Cert Showcase Stage -->
+            <div class="cert-stage-wrapper">
+                <button class="cert-arrow-btn" id="certPrevBtn" aria-label="Previous Certificate">
+                    <span>‹</span>
+                </button>
+
+                <div class="cert-frame-outer">
+                    <div class="cert-frame-gold">
+                        <div class="cert-frame-inner">
+                            <img id="certActiveImg" src="./assets/certificates/Intro to Graphic Design Basics UI_UX.png" alt="Intro to Graphic Design: UI/UX" class="cert-display-img">
                         </div>
                     </div>
-    
-                    <div class="carousel-item">
-                        <div class="testimonial-card">
-                            <div class="quote-icon">“</div>
-                            <p class="testi-text">
-                                Handling the backend is much easier when you have a UI/UX lead like Sam. She provides clean, organized layouts that make integration seamless. She makes complex data structures look intuitive.
-                            </p>
-                            <div class="testi-author">
-                                <div class="author-avatar">AP</div>
-                                <div class="author-info">
-                                    <h5>AIMEE PANGAN</h5>
-                                    <span class="client-tag">Backend Developer & Collaborator</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="carousel-item">
-                        <div class="testimonial-card">
-                            <div class="quote-icon">“</div>
-                            <p class="testi-text">
-                                Her designs aren't just aesthetically pleasing; they are technically sound and fully responsive. She bridges the gap between creative vision and functional code perfectly.
-                            </p>
-                            <div class="testi-author">
-                                <div class="author-avatar">JM</div>
-                                <div class="author-info">
-                                    <h5>JOYZE MAGAT</h5>
-                                    <span class="client-tag">Frontend Developer & Peer</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="carousel-item">
-                        <div class="testimonial-card">
-                            <div class="quote-icon">“</div>
-                            <p class="testi-text">
-                                Sam is a powerhouse when it comes to UI/UX and Frontend. She leads the creative direction of our projects with clarity and precision. Her ability to craft unique user experiences is impressive.
-                            </p>
-                            <div class="testi-author">
-                                <div class="author-avatar">MC</div>
-                                <div class="author-info">
-                                    <h5>MARC CANLAS</h5>
-                                    <span class="client-tag">Frontend Developer & Collaborator</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-    
                 </div>
+
+                <button class="cert-arrow-btn" id="certNextBtn" aria-label="Next Certificate">
+                    <span>›</span>
+                </button>
+            </div>
+
+            <!-- Cert Meta & Details -->
+            <div class="cert-info-block text-center">
+                <div id="certIssuer" class="cert-issuer-tag">SIMPLILEARN SKILLUP</div>
+                <h3 id="certTitle" class="cert-title">Intro to Graphic Design: UI/UX</h3>
+                <p id="certDesc" class="cert-desc">Mastering the principles of visual communication and user-centered design to bridge the gap between aesthetics and usability.</p>
                 
-                <div class="carousel-indicators-custom">
-                    <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                <div class="cert-action-row">
+                    <a id="certLink" href="https://drive.google.com/file/d/1JExIUJKHYITrQb21G-5zbhKfPGrNWMw8/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="cert-pill-btn">
+                        VIEW CERTIFICATE ↗
+                    </a>
+                    <div id="certDashes" class="cert-dashes-row">
+                        <!-- Populated dynamically by script.js -->
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <div class="section-header-wrap reveal">
-                <span class="bg-watermark">Hello</span>
-                <h2 class="fg-title">Get In Touch</h2>
-                <p class="section-subtitle">Send a message and let's create something meaningful.</p>
-            </div>
-    
-            <div class="contact-wrapper reveal">
-                <div class="row g-0">
-                    
-                    <div class="col-lg-5 contact-info-panel">
-                        <div class="info-content">
-                            <h3>Contact Information</h3>
-                            <p>Developed as a deep dive into <strong>Cross-Platform Engineering</strong>.</p>
-                            
-                            <p style="margin-top: 15px; border-left: 2px solid #8b0000; padding-left: 15px; font-size: 0.9rem;">
-                                <i class="fas fa-info-circle" style="color: #8b0000; margin-right: 5px;"></i>
-                                <em>Note: Please allow 5-10 seconds for live project links to initialize environmental assets.</em>
-                            </p>
-                            
-                            <div class="info-links">
-                                <a href="https://www.linkedin.com/in/sam-gonzales-33b35b34a" target="_blank" class="info-item">                                    <i class="fab fa-linkedin"></i>
-                                    <div>
-                                        <span>LinkedIn</span>
-                                        <strong>Sam Gonzales</strong>
-                                    </div>
-                                </a>
-                                <a href="https://github.com/sammyvie" target="_blank" class="info-item">
-                                    <i class="fab fa-github"></i>
-                                    <div>
-                                        <span>GitHub</span>
-                                        <strong>@sammyvie</strong>
-                                    </div>
-                                </a>
-                                <a href="mailto:gonzalessamdt@gmail.com" class="info-item">
-                                    <i class="fas fa-envelope"></i>
-                                    <div>
-                                        <span>Email</span>
-                                        <strong>gonzalessamdt@gmail.com</strong>
-                                    </div>
-                                </a>
-                            </div>
+    <!-- ==========================================
+         2. TESTIMONIALS SECTION (BURGUNDY GALAXY & DOME CAPSULE)
+         ========================================== -->
+    <section id="testimonials" class="testimonials-galaxy-section">
+        <span class="testi-bg-star star-t-left">✦</span>
+        <span class="testi-bg-star star-t-center">✦</span>
+
+        <div class="container testi-container reveal">
+            <div class="testi-grid-layout">
+                <!-- Left Column: Quote & Controls -->
+                <div class="testi-left-col">
+                    <div class="testi-eyebrow">✦ TESTIMONIALS</div>
+                    <div class="testi-gold-quote">“</div>
+                    <div class="testi-quote-wrapper">
+                        <p id="testiQuoteText" class="testi-quote-paragraph">
+                            Handling the backend is much easier when you have a UI/UX lead like Sam. She provides clean, organized layouts that make integration seamless. She makes complex data structures look intuitive.
+                        </p>
+                    </div>
+
+                    <div class="testi-controls-row">
+                        <div class="testi-nav-arrows">
+                            <button class="testi-arrow-btn" id="testiPrevBtn" aria-label="Previous Testimonial">
+                                <span>←</span>
+                            </button>
+                            <button class="testi-arrow-btn" id="testiNextBtn" aria-label="Next Testimonial">
+                                <span>→</span>
+                            </button>
+                        </div>
+                        <div id="testiDashes" class="testi-dashes-row">
+                            <!-- Populated dynamically by script.js -->
                         </div>
                     </div>
-    
-                    <div class="col-lg-7 contact-form-panel">
-                        <form action="https://formspree.io/f/meerroyo" method="POST" id="contactForm" class="p-4 p-md-5">                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" name="name" class="form-control" id="fullName" placeholder="Full Name" required>
-                                        <label for="fullName">FULL NAME</label>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-6">
-                                    <div class="form-floating mb-3">
-                                        <input type="email" name="email" class="form-control" id="emailAddr" placeholder="Email Address" required>
-                                        <label for="emailAddr">EMAIL ADDRESS</label>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-12">
-                                    <div class="form-floating mb-3">
-                                        <select class="form-select" name="service" id="projectType">
-                                            <option selected disabled>Select Service</option>
-                                            <option value="web-design">Web Design</option>
-                                            <option value="web-dev">Front-End Development</option>
-                                            <option value="ui-ux">UI/UX Design</option>
-                                            <option value="Graphic Design">Graphic Design</option>
-                                            <option value="others">Others</option>
-                                        </select>
-                                        <label for="projectType">PROJECT TYPE</label>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-12">
-                                    <div class="form-floating mb-4">
-                                        <textarea class="form-control" name="message" placeholder="Leave a message here" id="message" style="height: 150px" required></textarea>
-                                        <label for="message">MESSAGE</label>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-12">
-                                    <button type="submit" class="send-btn">
-                                        <span>SEND MESSAGE</span>
-                                        <i class="fas fa-paper-plane"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                </div>
+
+                <!-- Right Column: Arched Dome Capsule Card -->
+                <div class="testi-right-col">
+                    <div class="testi-dome-card">
+                        <div class="testi-medallion-avatar">
+                            <span id="testiAvatarText" class="testi-avatar-initials">AP</span>
+                        </div>
+                        <h4 id="testiAuthorName" class="testi-author-name">Aimee Pangan</h4>
+                        <div id="testiAuthorRole" class="testi-author-role">
+                            Backend Developer<br>& Collaborator
+                        </div>
+                        <div id="testiCounter" class="testi-counter-badge">01 / 04</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-<div id="phoneModal" class="phone-modal-overlay">
-    <span class="close-phone" onclick="closePhoneModal()">&times;</span>
-    
-    <div class="phone-modal-content">
-        <div id="phoneImgWrapper" class="phone-screen-window">
-            <img id="phoneScrollImg" src="" alt="Mobile Preview">
-        </div>
-        
-        <div id="simulatorContainer" style="width:100%; height:100%; display:none;"></div>
-    </div>
-</div>
-        
-<div id="laptopModal" class="laptop-modal-overlay">
-    <span class="close-laptop" onclick="closeLaptopModal()">&times;</span>
-    <div class="laptop-modal-content">
-        <div class="laptop-screen-window">
-            <img id="modalScrollImg" src="" alt="Full Project View">
-        </div>
-    </div>
-</div>
+    <!-- ==========================================
+         3. CONTACT SECTION (WARM PARCHMENT & WHITE CARD)
+         ========================================== -->
+    <section id="contact" class="contact-section">
+        <span class="contact-bg-star star-cnt-left">✦</span>
+        <span class="contact-bg-star star-cnt-right">✦</span>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
-    <footer class="footer-section">
-        <div class="project-container"> 
-            <div class="footer-main-content">
-                <div class="footer-statement">
-                    <h2 class="footer-big-text">LET'S <span class="neon-text">CONNECT</span></h2>
-                    <p class="footer-email">gonzalessamdt@gmail.com</p>
+        <div class="container contact-container reveal">
+            <!-- Header Block -->
+            <div class="contact-header-block text-center">
+                <div class="contact-eyebrow">✦ GET IN TOUCH</div>
+                <h2 class="contact-main-heading">Let's create something <span class="gold-italic">meaningful</span></h2>
+                <p class="contact-subtitle">
+                    Send a message and I'll get back to you. Live project links can take 5 to 10 seconds to start up, so please allow a moment.
+                </p>
+
+                <!-- Quick Contact Pills -->
+                <div class="contact-pills-row">
+                    <a href="https://www.linkedin.com/in/sam-gonzales-33b35b34a" target="_blank" rel="noopener noreferrer" class="contact-pill-item">
+                        <span class="pill-icon-circle"><i class="fab fa-linkedin-in"></i></span>
+                        <span class="pill-label">Sam Gonzales</span>
+                    </a>
+                    <a href="https://github.com/sammyvie" target="_blank" rel="noopener noreferrer" class="contact-pill-item">
+                        <span class="pill-icon-circle"><i class="fas fa-code"></i></span>
+                        <span class="pill-label">@sammyvie</span>
+                    </a>
+                    <a href="mailto:gonzalessamdt@gmail.com" class="contact-pill-item">
+                        <span class="pill-icon-circle"><i class="fas fa-envelope"></i></span>
+                        <span class="pill-label">gonzalessamdt@gmail.com</span>
+                    </a>
                 </div>
-    
-                <div class="footer-grid">
-                    <div class="footer-col">
-                        <h4 class="footer-label">Explore</h4>
-                        <ul class="footer-links">
+            </div>
+
+            <!-- Clean White Form Card -->
+            <div class="contact-form-card">
+                <form action="https://formspree.io/f/meerroyo" method="POST" id="contactForm" class="contact-form-inner">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-field-group">
+                                <label for="fullName" class="contact-form-label">FULL NAME</label>
+                                <input type="text" name="name" class="contact-input" id="fullName" placeholder="Your name" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-field-group">
+                                <label for="emailAddr" class="contact-form-label">EMAIL ADDRESS</label>
+                                <input type="email" name="email" class="contact-input" id="emailAddr" placeholder="you@email.com" required>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-field-group">
+                                <label for="projectType" class="contact-form-label">PROJECT TYPE</label>
+                                <div class="contact-select-wrap">
+                                    <select class="contact-select" name="service" id="projectType">
+                                        <option selected disabled>Select service</option>
+                                        <option value="web-design">Web Design</option>
+                                        <option value="web-dev">Front-End Development</option>
+                                        <option value="ui-ux">UI/UX Design</option>
+                                        <option value="Graphic Design">Graphic Design</option>
+                                        <option value="others">Others</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-field-group">
+                                <label for="message" class="contact-form-label">MESSAGE</label>
+                                <textarea class="contact-textarea" name="message" id="message" placeholder="Tell me about your project" required></textarea>
+                            </div>
+                        </div>
+                        <div class="col-12 d-flex justify-content-end">
+                            <button type="submit" class="contact-submit-btn">
+                                <span>SEND MESSAGE</span>
+                                <span class="submit-arrow">↗</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         4. LUXURY BURGUNDY FOOTER
+         ========================================== -->
+    <footer class="luxury-footer-section">
+        <span class="footer-bg-star star-f-topleft">✦</span>
+        <span class="footer-bg-star star-f-topmid">✦</span>
+        <span class="footer-bg-star star-f-midright">✦</span>
+        <span class="footer-bg-star star-f-botmid">✦</span>
+
+        <div class="container footer-container">
+            <div class="footer-main-layout">
+                <!-- Brand / Heading Column -->
+                <div class="footer-brand-col">
+                    <h2 class="footer-heading">Let's <span class="gold-italic">connect</span></h2>
+                    <p class="footer-tagline">Have a project in mind or just want to say hi? My inbox is open.</p>
+                    <div class="footer-email-wrap">
+                        <a href="mailto:gonzalessamdt@gmail.com" class="footer-email-link">
+                            <span>gonzalessamdt@gmail.com</span>
+                            <span class="email-arrow">↗</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Explore & Social Links Columns -->
+                <div class="footer-nav-groups">
+                    <div class="footer-nav-col">
+                        <h4 class="footer-nav-title">EXPLORE</h4>
+                        <ul class="footer-nav-list">
                             <li><a href="#home">Home</a></li>
                             <li><a href="#about">About</a></li>
                             <li><a href="#project">Portfolio</a></li>
                             <li><a href="#resume">Resume</a></li>
                         </ul>
                     </div>
-    
-                    <div class="footer-col">
-                        <h4 class="footer-label">Social</h4>
-                        <ul class="footer-links">
-                            <li><a href="https://www.linkedin.com/in/sam-gonzales-33b35b34a" target="_blank">LinkedIn</a></li>
-                            <li><a href="https://github.com/sammyvie" target="_blank">GitHub</a></li>
-                            <li><a href="mailto:gonzalessamdt@gmail.com">Email Me</a></li>
+
+                    <div class="footer-nav-col">
+                        <h4 class="footer-nav-title">SOCIAL</h4>
+                        <ul class="footer-nav-list">
+                            <li><a href="https://www.linkedin.com/in/sam-gonzales-33b35b34a" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                            <li><a href="https://github.com/sammyvie" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                            <li><a href="mailto:gonzalessamdt@gmail.com">Email me</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
-    
-            <div class="footer-bottom-bar">
-                <div class="footer-logo-box">
-                    <img src="./assets/Logo.png" alt="Logo" class="footer-mini-logo">
+
+            <!-- Sleek Rounded Bottom Bar -->
+            <div class="footer-capsule-bar">
+                <div class="footer-logo-wrap">
+                    <img src="./assets/Logo.png" alt="Samified Designs Logo" class="footer-seal-logo">
                 </div>
-                <p class="copyright">© 2026 SAMANTHA GONZALES • ARCHIVING CREATIVITY</p>
-                <a href="#home" class="back-to-top">BACK TO TOP ↑</a>
+                <p class="footer-copy-text">© 2026 SAMANTHA GONZALES • ARCHIVING CREATIVITY</p>
+                <a href="#home" class="footer-top-btn">
+                    <span>BACK TO TOP</span>
+                    <span class="top-arrow">↑</span>
+                </a>
             </div>
         </div>
     </footer>
 
+    <!-- ==========================================
+         INTERACTIVE GLOBAL MODALS (ROOT STACKING CONTEXT)
+         ========================================== -->
+    <!-- Laptop Mini Website View Modal -->
+    <div id="laptopModal" class="laptop-modal-overlay">
+        <span class="close-laptop" onclick="closeLaptopModal()">&times;</span>
+        <div class="laptop-modal-content">
+            <!-- Mini Website / Laptop Browser Bar -->
+            <div class="laptop-browser-bar">
+                <div class="mac-traffic-dots">
+                    <span class="mac-dot dot-close" onclick="closeLaptopModal()" title="Close"></span>
+                    <span class="mac-dot dot-min"></span>
+                    <span class="mac-dot dot-max"></span>
+                </div>
+                <div class="browser-address-field">
+                    <i class="fas fa-lock lock-icon"></i>
+                    <span id="laptopModalUrl">https://paya-street-website.vercel.app</span>
+                </div>
+                <a id="laptopModalExtLink" href="#" target="_blank" rel="noopener noreferrer" class="browser-ext-link">
+                    <span>Visit Live</span>
+                    <i class="fas fa-arrow-up-right-from-square"></i>
+                </a>
+            </div>
+            <div class="laptop-screen-window" id="laptopScreenWindow">
+                <img id="modalScrollImg" src="" alt="Full Project View">
+                <div class="modal-scroll-indicator" id="laptopScrollIndicator">
+                    <span>Scroll to explore ↓</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Phone Mobile Framing Modal -->
+    <div id="phoneModal" class="phone-modal-overlay">
+        <span class="close-phone" onclick="closePhoneModal()">&times;</span>
+        <div class="phone-modal-content">
+            <!-- Phone Dynamic Island & Camera -->
+            <div class="phone-dynamic-island">
+                <span class="island-camera"></span>
+                <span class="island-sensor"></span>
+            </div>
+            
+            <div id="phoneImgWrapper" class="phone-screen-window">
+                <img id="phoneScrollImg" src="" alt="Mobile Preview">
+                <div class="modal-scroll-indicator" id="phoneScrollIndicator">
+                    <span>Scroll to explore ↓</span>
+                </div>
+            </div>
+            
+            <div id="simulatorContainer" style="width:100%; height:100%; display:none;"></div>
+
+            <!-- Phone Home Indicator Bar -->
+            <div class="phone-home-indicator"></div>
+        </div>
+    </div>
+
+    <!-- Poster Zoom Modal -->
+    <div id="posterModal" class="poster-modal-overlay">
+        <div class="poster-modal-content">
+            <span class="close-poster" onclick="closePosterModal()">&times;</span>
+            <img id="modalFullPosterImg" src="" alt="Full Poster View">
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./js/constellation-intro.js"></script>
+    <script src="script.js"></script>
 </body>
-
-
 
 </html>

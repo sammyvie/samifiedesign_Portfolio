@@ -1,0 +1,759 @@
+/* ==========================================================================
+   SAMIFIEDESIGN — INTERACTIVE CONSTELLATION INTRO (HIGH-PERFORMANCE 60FPS)
+   Engineered for silky smooth GPU rendering without layout thrashing
+   ========================================================================== */
+
+/* Prevent scroll while intro is active */
+body.intro-active {
+    overflow: hidden !important;
+    height: 100vh !important;
+}
+
+/* 1. FULL-VIEWPORT INTRO CONTAINER (GPU Layer Promoted) */
+.constellation-intro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(ellipse 110% 100% at 50% 50%, #200409 0%, #120104 42%, #080102 78%, #030001 100%);
+    overflow-y: auto !important;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    padding: 16px 0;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    transition: opacity 0.85s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                visibility 0.85s;
+    will-change: opacity, transform;
+}
+
+/* Final dissolve & reveal transition */
+.constellation-intro.intro-fade-out {
+    opacity: 0;
+    transform: scale(1.03);
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.constellation-intro.intro-fade-out .constellation-line {
+    opacity: 0.2;
+    transition: opacity 0.8s ease;
+}
+
+.constellation-intro.intro-fade-out .constellation-line-halo {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.constellation-intro.intro-fade-out .intro-stage {
+    transform: scale(1.02);
+    transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.constellation-intro.intro-fade-out .intro-ambient-nebula {
+    opacity: 0;
+    transition: opacity 0.85s ease;
+}
+
+/* Champagne gold light sweep overlay during final transition */
+.intro-light-sweep {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 238, 200, 0.35) 0%, rgba(226, 180, 116, 0.12) 35%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.65s ease;
+    z-index: 5;
+    transform: translateZ(0);
+}
+
+.constellation-intro.intro-fade-out .intro-light-sweep {
+    opacity: 1;
+}
+
+/* 2. ATMOSPHERIC CRIMSON NEBULA BLOOM (Lightweight radial gradient without CPU blur) */
+.intro-ambient-nebula {
+    position: absolute;
+    width: 680px;
+    height: 680px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(142, 24, 38, 0.28) 0%, rgba(68, 8, 16, 0.12) 38%, rgba(20, 2, 5, 0.04) 58%, transparent 72%);
+    pointer-events: none;
+    z-index: 1;
+    transform: translateZ(0);
+}
+
+/* 3. SUBTLE TWINKLING STARDUST BACKGROUND (GPU Composited Opacity & Transform Only) */
+.intro-starfield {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+    transform: translateZ(0);
+}
+
+.intro-bg-star {
+    position: absolute;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 0 4px rgba(255, 238, 200, 0.7);
+    opacity: 0.3;
+    animation: introStarTwinkle var(--t, 4.5s) infinite ease-in-out var(--d, 0s);
+    will-change: transform, opacity;
+    transform: translateZ(0);
+}
+
+@keyframes introStarTwinkle {
+    0%, 100% {
+        opacity: 0.18;
+        transform: translate3d(0, 0, 0) scale(0.85);
+    }
+    50% {
+        opacity: 0.85;
+        transform: translate3d(1px, -2px, 0) scale(1.15);
+    }
+}
+
+/* Canvas for interactive particle burst */
+#introParticleCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+    transform: translateZ(0);
+}
+
+/* 4. MINIMAL 'SKIP INTRO' BUTTON */
+.intro-skip-btn {
+    position: absolute;
+    top: 30px;
+    right: 36px;
+    z-index: 25;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(226, 180, 116, 0.28);
+    color: rgba(255, 248, 234, 0.72);
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    padding: 9px 22px;
+    border-radius: 100px;
+    cursor: pointer;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    outline: none;
+    transform: translateZ(0);
+}
+
+.intro-skip-btn span {
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
+
+.intro-skip-btn:hover {
+    background: rgba(226, 180, 116, 0.14);
+    border-color: rgba(226, 180, 116, 0.6);
+    color: #ffffff;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 16px rgba(226, 180, 116, 0.3);
+}
+
+.intro-skip-btn:hover span {
+    transform: translateX(3px);
+}
+
+.intro-skip-btn:focus-visible {
+    outline: 2px solid rgba(226, 180, 116, 0.8);
+    outline-offset: 4px;
+}
+
+/* 5. CONSTELLATION STAGE */
+.intro-stage {
+    position: relative;
+    width: min(86vw, calc((100dvh - 90px) * 0.785), 420px);
+    height: min(76vh, calc(100dvh - 90px), 520px);
+    max-height: calc(100dvh - 70px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    transform: translateZ(0);
+    will-change: transform;
+    margin: auto;
+    flex-shrink: 0;
+}
+
+.constellation-svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: visible;
+    pointer-events: none;
+    transform: translateZ(0);
+}
+
+/* 6. CONSTELLATION LINES (Pure GPU Layer, Zero CPU Filters) */
+.constellation-line {
+    fill: none;
+    stroke: url(#goldLineGrad);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    pathLength: 1;
+    opacity: 0.95;
+    will-change: stroke-dashoffset;
+    transform: translateZ(0);
+}
+
+/* Secondary outer halo for constellation lines */
+.constellation-line-halo {
+    fill: none;
+    stroke: rgba(255, 235, 195, 0.35);
+    stroke-width: 5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    pathLength: 1;
+    opacity: 0.75;
+    will-change: stroke-dashoffset;
+    transform: translateZ(0);
+}
+
+/* 7. LEADING TRAVELING SPARKS */
+.traveling-spark-head {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    will-change: transform, opacity;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+.traveling-spark-head.active {
+    opacity: 1;
+}
+
+/* 8. STAR VERTICES (THE "S" STAR NODES) */
+.star-node {
+    opacity: 0;
+    transform: scale(0.2);
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: opacity 0.4s ease-out, 
+                transform 0.45s cubic-bezier(0.34, 1.35, 0.64, 1);
+    will-change: opacity, transform;
+}
+
+.star-node.lit {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Completed Constellation gentle breath */
+.constellation-svg.completed {
+    animation: constellationGlowBreath 3.5s infinite ease-in-out;
+}
+
+@keyframes constellationGlowBreath {
+    0%, 100% {
+        opacity: 0.92;
+    }
+    50% {
+        opacity: 1;
+        filter: drop-shadow(0 0 10px rgba(226, 180, 116, 0.45));
+    }
+}
+
+/* 9. CENTRAL STAR INTERACTIVE TRIGGER BUTTON */
+.central-star-trigger {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 88px;
+    height: 88px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.central-star-trigger:focus-visible {
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px rgba(226, 180, 116, 0.85), 0 0 20px rgba(226, 180, 116, 0.6);
+}
+
+.central-star-wrapper {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), filter 0.45s ease;
+    animation: starPulseIdle 3.6s infinite ease-in-out;
+    transform: translateZ(0);
+}
+
+.central-star-trigger:hover .central-star-wrapper {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 14px rgba(255, 238, 200, 0.95)) drop-shadow(0 0 26px rgba(226, 180, 116, 0.7));
+}
+
+@keyframes starPulseIdle {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 8px rgba(226, 180, 116, 0.5));
+    }
+    50% {
+        transform: scale(1.06);
+        filter: drop-shadow(0 0 15px rgba(255, 238, 200, 0.85)) drop-shadow(0 0 26px rgba(226, 180, 116, 0.6));
+    }
+}
+
+/* Organic breath & bloom on click */
+.central-star-wrapper.activated {
+    animation: starActivatedSoftPulse 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes starActivatedSoftPulse {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 10px rgba(255, 238, 200, 0.7));
+    }
+    32% {
+        transform: scale(0.9);
+        filter: drop-shadow(0 0 6px rgba(255, 238, 200, 0.45));
+    }
+    75% {
+        transform: scale(1.24);
+        filter: drop-shadow(0 0 22px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 36px rgba(226, 180, 116, 0.75));
+    }
+    100% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 16px rgba(255, 238, 200, 0.8)) drop-shadow(0 0 26px rgba(226, 180, 116, 0.6));
+    }
+}
+
+/* 10. INSTRUCTION TEXT */
+.intro-instruction {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.34em;
+    color: rgba(255, 248, 234, 0.78);
+    text-transform: uppercase;
+    text-align: center;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: introTextBreath 3.4s infinite ease-in-out;
+    transform: translateZ(0);
+}
+
+@keyframes introTextBreath {
+    0%, 100% {
+        opacity: 0.55;
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        opacity: 0.95;
+        transform: translateX(-50%) translateY(-2px);
+    }
+}
+
+.intro-instruction.fade-out {
+    opacity: 0;
+    transform: translateX(-50%) translateY(8px);
+}
+
+/* 11. COMPLETED SIGNATURE MONOGRAM LABEL */
+.intro-signature-label {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    color: #f7daaa;
+    text-transform: uppercase;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), 
+                letter-spacing 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    text-shadow: 0 0 10px rgba(226, 180, 116, 0.5);
+    transform: translateZ(0);
+}
+
+.intro-signature-label.visible {
+    opacity: 0.95;
+    letter-spacing: 0.38em;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ==========================================================================
+   12. TRANSITION SHOOTING STARS (GPU Composited Meteor Streaks)
+   ========================================================================== */
+.intro-shooting-stars-field {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 12;
+    transform: translateZ(0);
+}
+
+.intro-meteor {
+    position: absolute;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #ffffff 0%, #fff4db 18%, #e2b474 48%, rgba(186, 34, 48, 0.2) 75%, transparent 100%);
+    box-shadow: 0 0 8px rgba(255, 238, 200, 0.85);
+    opacity: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+}
+
+/* Radiant white star core at leading tip (left side) */
+.intro-meteor::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 4.5px;
+    height: 4.5px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 0 6px #ffffff, 0 0 14px rgba(255, 238, 200, 0.95);
+}
+
+/* Diamond sparkle flare at tip */
+.intro-meteor::after {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(255, 238, 200, 0.9);
+    line-height: 1;
+}
+
+/* Meteor 1: High sky streak */
+.meteor-1 {
+    width: 240px;
+    top: 12%;
+    left: 95%;
+    transform: rotate(-32deg);
+}
+.constellation-intro.transition-shooting .meteor-1 {
+    animation: shootPass1 0.85s cubic-bezier(0.2, 0.9, 0.3, 1) forwards 0.04s;
+}
+
+/* Meteor 2: Fast companion streak passing near center */
+.meteor-2 {
+    width: 280px;
+    height: 2.5px;
+    top: 28%;
+    left: 98%;
+    transform: rotate(-35deg);
+}
+.constellation-intro.transition-shooting .meteor-2 {
+    animation: shootPass2 0.82s cubic-bezier(0.2, 0.9, 0.3, 1) forwards 0.14s;
+}
+
+/* Meteor 3: Sweeping lower-mid sky */
+.meteor-3 {
+    width: 210px;
+    top: 48%;
+    left: 92%;
+    transform: rotate(-30deg);
+}
+.constellation-intro.transition-shooting .meteor-3 {
+    animation: shootPass3 0.78s cubic-bezier(0.2, 0.9, 0.3, 1) forwards 0.25s;
+}
+
+/* Meteor 4: Fast distant micro-meteor */
+.meteor-4 {
+    width: 150px;
+    height: 1.5px;
+    top: 7%;
+    left: 78%;
+    transform: rotate(-33deg);
+}
+.constellation-intro.transition-shooting .meteor-4 {
+    animation: shootPass4 0.68s cubic-bezier(0.2, 0.9, 0.3, 1) forwards 0.08s;
+}
+
+/* Meteor 5: Lower sky trail */
+.meteor-5 {
+    width: 180px;
+    top: 65%;
+    left: 88%;
+    transform: rotate(-28deg);
+}
+.constellation-intro.transition-shooting .meteor-5 {
+    animation: shootPass5 0.82s cubic-bezier(0.2, 0.9, 0.3, 1) forwards 0.34s;
+}
+
+@keyframes shootPass1 {
+    0% {
+        opacity: 0;
+        transform: rotate(-32deg) translate3d(0, 0, 0);
+    }
+    10% {
+        opacity: 1;
+    }
+    85% {
+        opacity: 0.95;
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(-32deg) translate3d(-120vw, 0, 0);
+    }
+}
+
+@keyframes shootPass2 {
+    0% {
+        opacity: 0;
+        transform: rotate(-35deg) translate3d(0, 0, 0);
+    }
+    10% {
+        opacity: 1;
+    }
+    85% {
+        opacity: 0.95;
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(-35deg) translate3d(-130vw, 0, 0);
+    }
+}
+
+@keyframes shootPass3 {
+    0% {
+        opacity: 0;
+        transform: rotate(-30deg) translate3d(0, 0, 0);
+    }
+    12% {
+        opacity: 1;
+    }
+    85% {
+        opacity: 0.9;
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(-30deg) translate3d(-115vw, 0, 0);
+    }
+}
+
+@keyframes shootPass4 {
+    0% {
+        opacity: 0;
+        transform: rotate(-33deg) translate3d(0, 0, 0);
+    }
+    15% {
+        opacity: 0.9;
+    }
+    80% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(-33deg) translate3d(-90vw, 0, 0);
+    }
+}
+
+@keyframes shootPass5 {
+    0% {
+        opacity: 0;
+        transform: rotate(-28deg) translate3d(0, 0, 0);
+    }
+    12% {
+        opacity: 1;
+    }
+    85% {
+        opacity: 0.85;
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(-28deg) translate3d(-110vw, 0, 0);
+    }
+}
+
+/* 13. RESPONSIVE OPTIMIZATIONS (EXPLICITLY SIZED FOR IPAD MINI & MOBILE) */
+/* iPad Mini & Tablets (up to 1024px) */
+@media (max-width: 1024px) {
+    .constellation-intro {
+        padding: 14px 0;
+    }
+    .intro-stage {
+        width: min(72vw, 280px);
+        height: min(48vh, 370px);
+        max-height: calc(100dvh - 56px);
+        margin: auto;
+    }
+    .central-star-trigger {
+        width: 68px;
+        height: 68px;
+    }
+    .intro-skip-btn {
+        top: 16px;
+        right: 18px;
+        font-size: 10px;
+        padding: 7px 16px;
+    }
+    .intro-instruction {
+        bottom: 6px;
+        font-size: 9.5px;
+        letter-spacing: 0.22em;
+    }
+    .intro-signature-label {
+        font-size: 9.5px;
+        letter-spacing: 0.22em;
+        bottom: -4px;
+    }
+}
+
+/* Mobile Phones (iPhones & Android <= 600px) */
+@media (max-width: 600px) {
+    .constellation-intro {
+        padding: 12px 0;
+    }
+    .intro-stage {
+        width: min(78vw, 240px);
+        height: min(52vh, 320px);
+        max-height: calc(100dvh - 40px);
+        margin: auto;
+    }
+    .central-star-trigger {
+        width: 58px;
+        height: 58px;
+    }
+    .central-star-wrapper {
+        width: 44px;
+        height: 44px;
+    }
+    .intro-skip-btn {
+        top: 12px;
+        right: 12px;
+        padding: 6px 13px;
+        font-size: 9px;
+        letter-spacing: 0.16em;
+    }
+    .intro-instruction {
+        font-size: 8.5px;
+        letter-spacing: 0.18em;
+        bottom: 4px;
+    }
+    .intro-signature-label {
+        font-size: 8.5px;
+        letter-spacing: 0.18em;
+        bottom: -4px;
+    }
+    .intro-ambient-nebula {
+        width: 280px;
+        height: 280px;
+    }
+}
+
+/* Short Viewports (Landscape tablets / small mobile screens) */
+@media (max-height: 650px) {
+    .intro-stage {
+        height: min(55vh, 290px);
+        width: min(70vw, 230px);
+        max-height: calc(100dvh - 32px);
+        margin: auto;
+    }
+    .central-star-trigger {
+        width: 54px;
+        height: 54px;
+    }
+    .intro-instruction {
+        bottom: 2px;
+        font-size: 8px;
+    }
+    .intro-skip-btn {
+        top: 10px;
+        right: 12px;
+        padding: 5px 11px;
+    }
+}
+
+/* 14. ACCESSIBILITY: REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+    .constellation-intro {
+        transition: opacity 0.35s ease !important;
+    }
+    .constellation-intro.intro-fade-out {
+        transform: none !important;
+        filter: none !important;
+    }
+    .constellation-line,
+    .constellation-line-halo {
+        transition: none !important;
+        stroke-dashoffset: 0 !important;
+    }
+    .star-node {
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    .central-star-wrapper {
+        animation: none !important;
+    }
+    .intro-ambient-nebula,
+    .intro-bg-star,
+    .intro-instruction {
+        animation: none !important;
+    }
+    .traveling-spark-head,
+    .intro-shooting-stars-field {
+        display: none !important;
+    }
+}

@@ -1,15 +1,28 @@
 /* ==========================================
    1. GLOBAL STYLES & BUTTONS
    ========================================== */
-   html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
+html {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
     overflow-x: hidden;
     position: relative;
-    background-color: #1a0101;
+    background-color: #080102;
     scroll-behavior: smooth;
     box-sizing: border-box;
+}
+
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: clip;
+    position: relative;
+    background-color: #080102;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
 }
 
 *, *::before, *::after {
