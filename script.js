@@ -593,18 +593,190 @@ revealElements.forEach(el => observer.observe(el));
         });
     }
 
+    /* --- 10.5 NAVIGATION ACTIVE STATE, SLIDING INDICATOR & SCROLLSPY --- */
+    const navLinksList = document.querySelector('.nav-links');
+    const navItems = document.querySelectorAll('.nav-links a');
+    let slidingLine = document.querySelector('.nav-sliding-line');
+
+    if (navLinksList) {
+        if (!slidingLine) {
+            slidingLine = document.createElement('span');
+            slidingLine.className = 'nav-sliding-line';
+            navLinksList.appendChild(slidingLine);
+        }
+        navLinksList.classList.add('has-sliding-line');
+    }
+
+    const setSlidingLinePosition = (linkEl, animate = true) => {
+        if (!slidingLine || !linkEl || !navLinksList) return;
+        if (window.innerWidth <= 992) {
+            slidingLine.style.opacity = '0';
+            return;
+        }
+
+        const listRect = navLinksList.getBoundingClientRect();
+        const linkRect = linkEl.getBoundingClientRect();
+        
+        // Refined gold indicator line centered under text
+        const lineWidth = 24;
+        const targetLeft = (linkRect.left - listRect.left) + (linkRect.width - lineWidth) / 2;
+
+        if (!animate) {
+            slidingLine.style.transition = 'none';
+        } else {
+            slidingLine.style.transition = 'left 0.38s cubic-bezier(0.22, 1, 0.36, 1), width 0.38s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease';
+        }
+
+        slidingLine.style.left = `${Math.round(targetLeft)}px`;
+        slidingLine.style.width = `${lineWidth}px`;
+        slidingLine.style.opacity = '1';
+
+        if (!animate) {
+            slidingLine.offsetHeight; // force reflow
+            slidingLine.style.transition = '';
+        }
+    };
+
+    const setActiveNavLink = (targetId, updateSliding = true) => {
+        const cleanId = (targetId || '').replace('#', '');
+        let matchedLink = null;
+
+        navItems.forEach(link => {
+            const href = link.getAttribute('href')?.replace('#', '');
+            if (href === cleanId) {
+                link.classList.add('active');
+                matchedLink = link;
+            } else {
+                link.classList.remove('active');
+            }
+        });
+
+        if (matchedLink && updateSliding) {
+            setSlidingLinePosition(matchedLink, true);
+        }
+    };
+
+    // Hover effect on desktop: line glides to hovered item, returns to active on mouseleave
+    if (navLinksList) {
+        navItems.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                if (window.innerWidth > 992) {
+                    setSlidingLinePosition(link, true);
+                }
+            });
+        });
+
+        navLinksList.addEventListener('mouseleave', () => {
+            if (window.innerWidth > 992) {
+                const active = navLinksList.querySelector('a.active') || navItems[0];
+                if (active) {
+                    setSlidingLinePosition(active, true);
+                }
+            }
+        });
+    }
+
+    // Window resize recalculation
+    window.addEventListener('resize', () => {
+        const active = document.querySelector('.nav-links a.active') || navItems[0];
+        if (active) {
+            setSlidingLinePosition(active, false);
+        }
+    });
+
+    // Smooth scroll for all hash links + update active nav link
+    let isClickNavigating = false;
+    let clickNavTimeout = null;
+
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const href = this.getAttribute('href');
+            if (!href || href === '#') return;
+
+            const target = document.querySelector(href);
             if (target) {
+                e.preventDefault();
+                const targetId = href.replace('#', '');
+
+                isClickNavigating = true;
+                clearTimeout(clickNavTimeout);
+                setActiveNavLink(targetId, true);
+
                 target.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
                 });
+
+                // Release click lock after smooth scroll finishes
+                clickNavTimeout = setTimeout(() => {
+                    isClickNavigating = false;
+                    checkScrollSpy();
+                }, 850);
             }
         });
     });
+
+    // ScrollSpy: highlight section as user scrolls
+    const trackedSectionIds = ['home', 'about', 'project', 'resume', 'contact'];
+    const trackedSections = trackedSectionIds
+        .map(id => document.getElementById(id))
+        .filter(Boolean);
+
+    function checkScrollSpy() {
+        if (isClickNavigating || trackedSections.length === 0) return;
+
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const docHeight = document.documentElement.scrollHeight;
+
+        // If at top of page
+        if (scrollY < 120) {
+            setActiveNavLink('home', true);
+            return;
+        }
+
+        // If at bottom of page, activate contact
+        if (scrollY + windowHeight >= docHeight - 80) {
+            setActiveNavLink('contact', true);
+            return;
+        }
+
+        // Find active section based on checkpoint
+        let currentId = 'home';
+        const checkpoint = scrollY + 220;
+
+        for (let i = 0; i < trackedSections.length; i++) {
+            const section = trackedSections[i];
+            const top = section.offsetTop;
+            const height = section.offsetHeight;
+
+            if (checkpoint >= top && checkpoint < top + height) {
+                currentId = section.id;
+                break;
+            } else if (checkpoint >= top) {
+                currentId = section.id;
+            }
+        }
+
+        setActiveNavLink(currentId, true);
+    }
+
+    let scrollRaf = null;
+    window.addEventListener('scroll', () => {
+        if (!scrollRaf) {
+            scrollRaf = requestAnimationFrame(() => {
+                checkScrollSpy();
+                scrollRaf = null;
+            });
+        }
+    }, { passive: true });
+
+    // Initial setup on load
+    const initialActive = document.querySelector('.nav-links a.active') || navItems[0];
+    if (initialActive) {
+        setTimeout(() => setSlidingLinePosition(initialActive, false), 60);
+    }
+    setTimeout(checkScrollSpy, 250);
 
 /* --- 11. LUXURY CERTIFICATE SHOWCASE SLIDER --- */
 const certificatesData = [
