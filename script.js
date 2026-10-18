@@ -609,11 +609,11 @@ revealElements.forEach(el => observer.observe(el));
 /* --- 11. LUXURY CERTIFICATE SHOWCASE SLIDER --- */
 const certificatesData = [
     {
-        title: "Intro to Graphic Design: UI/UX",
-        issuer: "SIMPLILEARN SKILLUP",
-        desc: "Mastering the principles of visual communication and user-centered design to bridge the gap between aesthetics and usability.",
-        img: "./assets/certificates/Intro to Graphic Design Basics UI_UX.png",
-        link: "https://drive.google.com/file/d/1JExIUJKHYITrQb21G-5zbhKfPGrNWMw8/view?usp=drive_link"
+        title: "Front-End Development Libraries",
+        issuer: "FREECODECAMP",
+        desc: "Building responsive, dynamic user interfaces using modern front-end libraries and frameworks including React, Redux, Bootstrap, jQuery, and SASS.",
+        img: "./assets/certificates/Front-End Development Libraries.png",
+        link: "https://www.freecodecamp.org/certification/samgonzales/front-end-development-libraries-v9"
     },
     {
         title: "Responsive Web Design",
@@ -623,6 +623,13 @@ const certificatesData = [
         link: "https://drive.google.com/file/d/1V0MWmoZiCl3IXdzZJDXAyxVlZewd6_ml/view?usp=sharing"
     },
     {
+        title: "Data Analysis with Python",
+        issuer: "FREECODECAMP",
+        desc: "Analyzing and visualizing complex data sets using Python, NumPy, Pandas, Matplotlib, and Seaborn for data-driven design and decision making.",
+        img: "./assets/certificates/Data Analysis with Python.png",
+        link: "https://www.freecodecamp.org/certification/samgonzales/data-analysis-with-python-v7"
+    },
+    {
         title: "Introduction to Figma",
         issuer: "SIMPLILEARN SKILLUP",
         desc: "Prototyping high-fidelity interfaces and managing design systems using Figma's industry-standard collaborative tools.",
@@ -630,25 +637,18 @@ const certificatesData = [
         link: "https://drive.google.com/file/d/1Qv6hzlGFU1VJL8GNjajdWcD_sM4NjMCw/view?usp=sharing"
     },
     {
-        title: "Design Thinking for Beginners",
-        issuer: "SIMPLILEARN SKILLUP",
-        desc: "Applying empathy-based problem-solving frameworks to ideate, prototype, and iterate on user-focused digital solutions.",
-        img: "./assets/certificates/Design Thinking for Beginners.png",
-        link: "https://drive.google.com/file/d/1ehHZFS0nltzPnEySF7tPSpyjLNSdKb8o/view?usp=drive_link"
-    },
-    {
         title: "Digital Marketing Certified",
         issuer: "HUBSPOT ACADEMY",
         desc: "Strategizing content marketing, SEO integration, and social media engagement to drive brand awareness and conversion.",
         img: "./assets/certificates/Digital Marketing.png",
-        link: "https://drive.google.com/file/d/1SmhBRd8OYYRfv0r1e9q2rRwlru1Vv-AW/view?usp=sharing"
+        link: "https://app-na2.hubspot.com/academy/achievements/3mzw9fxy/en/1/samantha-gonzales/digital-marketing-certified"
     },
     {
         title: "Digital Advertising Certified",
         issuer: "HUBSPOT ACADEMY",
         desc: "Developing targeted advertising campaigns, managing budgets, and optimizing multi-channel performance tracking.",
         img: "./assets/certificates/Digital Advertising Certification.png",
-        link: "https://drive.google.com/file/d/1HJpoUvR-TLlH7IiqpDLdxByYD-BLNiX-/view?usp=drive_link"
+        link: "https://app-na2.hubspot.com/academy/achievements/s54rph1g/en/1/samantha-gonzales/digital-advertising-certified"
     },
     {
         title: "SEO Certified",
